@@ -34,3 +34,30 @@ Command-line arguments:  -os win32 -ws win32 -arch x86_64 -data C:\GitRepos\Priv
 
 !ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-01 09:54:56.358
 !MESSAGE Deleted Shared Daemon Version File: C:\Users\lsk\.uc\cli\mainstudio.running.version
+!SESSION 2022-03-01 10:17:20.901 -----------------------------------------------
+eclipse.buildId=unknown
+java.version=11.0.5
+java.vendor=Amazon.com Inc.
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=en_US
+Command-line arguments:  -os win32 -ws win32 -arch x86_64
+
+!ENTRY com.silabs.ss.platform.jetty.server 1 0 2022-03-01 10:17:22.389
+!MESSAGE ContentServer started at: 127.0.0.1, 54607
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-01 10:17:22.398
+!MESSAGE com.silabs.ss.tool.launcher.product found! Writing main studio shared file
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-01 10:17:31.940
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.tool.installer.core 2 0 2022-03-01 10:17:35.705
+!MESSAGE Problem getting package resources: changelog
+
+!ENTRY com.silabs.ss.platform.content.core 4 0 2022-03-01 10:17:37.387
+!MESSAGE Local timestamp file does not exist: C:\SiliconLabs\SimplicityStudio\v5\offline\common\Simplicity_Studio_Terms_of_Use_and_Privacy_Statement.timestamp
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-01 10:20:32.328
+!MESSAGE Deleted Shared Daemon File: C:\Users\lsk\.uc\cli\mainstudio.running
+
+!ENTRY com.silabs.ss.platform.rcp.core 1 0 2022-03-01 10:20:32.329
+!MESSAGE Deleted Shared Daemon Version File: C:\Users\lsk\.uc\cli\mainstudio.running.version
