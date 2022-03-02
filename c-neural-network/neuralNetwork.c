@@ -90,7 +90,7 @@ void sigmoidArray(const double *input, const int length, double * output) {
     }
 }
 
-void sigmoidMatrix(const double** matrix, int rows, int columns, double** outputMatrix){
+void sigmoidMatrix(double** matrix, int rows, int columns, double** outputMatrix){
     for (int i = 0; i < rows; i++)
     {
         sigmoidArray(matrix[i], columns, outputMatrix[i]);
@@ -125,15 +125,14 @@ void printMatrix(double** matrix, int rows, int columns){
     }
 }
 
-void matrixDotProduct(double x[4][3], double weights[3][4], double** outputMatrix) {
-    int m = 4, p = 3, q = 4, c, d, k;
+void matrixDotProduct(double** matrix1, double** matrix2, int matrix1Rows, int matrixSharedDimension, int matrix2Columns, double** outputMatrix) {
+    int c, d, k;
     double sum = 0;
     
-
-    for (c = 0; c < m; c++) {
-      for (d = 0; d < q; d++) {
-        for (k = 0; k < p; k++) {
-          sum = sum + x[c][k]*weights[k][d];
+    for (c = 0; c < matrix1Rows; c++) {
+      for (d = 0; d < matrix2Columns; d++) {
+        for (k = 0; k < matrixSharedDimension; k++) {
+          sum = sum + matrix1[c][k]*matrix2[k][d];
         }
  
         outputMatrix[c][d] = sum;
@@ -143,14 +142,32 @@ void matrixDotProduct(double x[4][3], double weights[3][4], double** outputMatri
 }
 
 
+double randDouble(){
+    return (rand() % 101) * 0.01;
+}
+
 int main()
 {
-    double x[ROWS][COLUMNS] = {
-        {0, 0, 1},
-        {0, 1, 1},
-        {1, 0, 1},
-        {1, 1, 1}
-    };
+    srand(42);
+
+    
+    double** x = mallocMatrix(ROWS, COLUMNS, sizeof(double));
+    x[0][0] = randDouble();
+    x[0][1] = randDouble();
+    x[0][2] = randDouble();
+
+    x[1][0] = randDouble();
+    x[1][1] = randDouble();
+    x[1][2] = randDouble();
+    
+    x[2][0] = randDouble();
+    x[2][1] = randDouble();
+    x[2][2] = randDouble();
+    
+    x[3][0] = randDouble();
+    x[3][1] = randDouble();
+    x[3][2] = randDouble();
+
     // double y[ROWS][1] = {
     //     {0},
     //     {1},
@@ -158,23 +175,47 @@ int main()
     //     {0}
     // };
 
-    double weights1[WEIGHT_ROWS][WEIGHT_COLUMNS] = {
-        {0.1, 0.1, 0.1, 0.1},
-        {0.2, 0.2, 0.2, 0.2},
-        {0.3, 0.3, 0.3, 0.3},
-    };
+
+    double** weights1 = mallocMatrix(ROWS, ROWS, sizeof(double));
+    
+    weights1[0][0] = randDouble();
+    weights1[0][1] = randDouble();
+    weights1[0][2] = randDouble();
+    weights1[0][3] = randDouble();
+    
+    weights1[2][0] = randDouble();
+    weights1[2][1] = randDouble();
+    weights1[2][2] = randDouble();
+    weights1[2][3] = randDouble();
+    
+    weights1[3][0] = randDouble();
+    weights1[3][1] = randDouble();
+    weights1[3][2] = randDouble();
+    weights1[3][3] = randDouble();
+
+
+    double** weights2 = mallocMatrix(WEIGHT_COLUMNS, 1, sizeof(double));
+    weights2[0][0] = randDouble();
+    weights2[1][0] = randDouble();
+    weights2[2][0] = randDouble();
+    weights2[3][0] = randDouble();
 
 
     double** matrixResult = mallocMatrix(4, 4, sizeof(double));
-    matrixDotProduct(x, weights1, matrixResult);
+    matrixDotProduct(x, weights1, ROWS, COLUMNS, WEIGHT_COLUMNS, matrixResult);
 
     double** sigmoidedMatrix = mallocMatrix(4, 4, sizeof(double));    
     sigmoidMatrix(matrixResult, 4, 4, sigmoidedMatrix);
     freeMatrix(matrixResult);
-    printMatrix(sigmoidedMatrix, 4, 4);
+    double** outputLayerMatrix = mallocMatrix(4, 1, sizeof(double));    
+    matrixDotProduct(sigmoidedMatrix, weights2, 4, 4, 1, outputLayerMatrix);
+    freeMatrix(sigmoidedMatrix);
+    double** output = mallocMatrix(4, 1, sizeof(double));
+    sigmoidMatrix(outputLayerMatrix, 4, 1, output);
+    freeMatrix(outputLayerMatrix);
+    printMatrix(output, 4, 1);
 
-    //sigmoidMatrix(matrixResult, ROWS, WEIGHT_COLUMNS);
-    
+    //sigmoidMatrix(matrixResult, ROWS, WEIGHT_COLUMNS);    
 
     for(int i = 0; i < TRAINING_TIME; i++) {
 
