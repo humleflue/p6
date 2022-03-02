@@ -38,7 +38,7 @@ void *mallocArr(const int size)
  * @param [in] length The length of the string.
  * @return Returns *arr The space allocated.
  */
-double **mallocMatrix(const int rows, const int columns, const int sizeOfColumnEntry)
+double **mallocMatrix(const int rows, const int columns)
 {
     int rows_freeable = rows + 1, /* +1 to be able to free the array again */
         i;
@@ -46,7 +46,7 @@ double **mallocMatrix(const int rows, const int columns, const int sizeOfColumnE
 
     for (i = 0; i < rows; i++)
     {
-        arr[i] = mallocArr(columns * sizeOfColumnEntry);
+        arr[i] = mallocArr(columns * sizeof(double));
     }
     /* Readies array to get freed */
     arr[i] = mallocArr(1);
@@ -105,9 +105,17 @@ void dotProduct(double *input1, double *input2, int length, double *output) {
 
 }
 
-void feedForward(double **x, double **y, double** output) {
-
-
+void feedForward(double **x, double** output) {
+    double** firstLayerDotProductResult = mallocMatrix(4, 4);
+    matrixDotProduct(x, weights1, ROWS, COLUMNS, WEIGHT_COLUMNS, firstLayerDotProductResult);
+    double** sigmoidedMatrix = mallocMatrix(4, 4);    
+    sigmoidMatrix(firstLayerDotProductResult, 4, 4, sigmoidedMatrix);
+    freeMatrix(firstLayerDotProductResult);
+    double** outputLayerMatrix = mallocMatrix(4, 1);    
+    matrixDotProduct(sigmoidedMatrix, weights2, 4, 4, 1, outputLayerMatrix);
+    freeMatrix(sigmoidedMatrix);
+    sigmoidMatrix(outputLayerMatrix, 4, 1, output);
+    freeMatrix(outputLayerMatrix);
 }
 
 void backPropagate(double **x, double **y) {
@@ -146,28 +154,42 @@ double randDouble(){
     return (rand() % 101) * 0.01;
 }
 
+void fillMatrixWithRandomDoubles(int rows, int columns, double** matrix){
+    for(int i = 0; i < rows; i++){
+        for(int j = 0; j < columns; j++){
+            matrix[i][j] = randDouble();
+        }
+    }
+}
+
 int main()
 {
     srand(42);
+    // Initializing weights
+    double** weights1 = mallocMatrix(4, 4);
+    fillMatrixWithRandomDoubles(4, 4, weights1);
+    double** weights2 = mallocMatrix(4, 1);
+    fillMatrixWithRandomDoubles(4, 1, weights2);
 
-    
-    double** x = mallocMatrix(ROWS, COLUMNS, sizeof(double));
-    x[0][0] = randDouble();
-    x[0][1] = randDouble();
-    x[0][2] = randDouble();
+    // Initializing input values
+    double** x = mallocMatrix(ROWS, COLUMNS);
+    x[0][0] = 0;
+    x[0][1] = 0;
+    x[0][2] = 1;
 
-    x[1][0] = randDouble();
-    x[1][1] = randDouble();
-    x[1][2] = randDouble();
+    x[1][0] = 0;
+    x[1][1] = 1;
+    x[1][2] = 1;
     
-    x[2][0] = randDouble();
-    x[2][1] = randDouble();
-    x[2][2] = randDouble();
+    x[2][0] = 1;
+    x[2][1] = 0;
+    x[2][2] = 1;
     
-    x[3][0] = randDouble();
-    x[3][1] = randDouble();
-    x[3][2] = randDouble();
+    x[3][0] = 1;
+    x[3][1] = 1;
+    x[3][2] = 1;
 
+    // Initializing output values
     // double y[ROWS][1] = {
     //     {0},
     //     {1},
@@ -175,44 +197,13 @@ int main()
     //     {0}
     // };
 
-
-    double** weights1 = mallocMatrix(ROWS, ROWS, sizeof(double));
     
-    weights1[0][0] = randDouble();
-    weights1[0][1] = randDouble();
-    weights1[0][2] = randDouble();
-    weights1[0][3] = randDouble();
+    double** output = mallocMatrix(4, 1);
+    feedForward(output);
+
     
-    weights1[2][0] = randDouble();
-    weights1[2][1] = randDouble();
-    weights1[2][2] = randDouble();
-    weights1[2][3] = randDouble();
     
-    weights1[3][0] = randDouble();
-    weights1[3][1] = randDouble();
-    weights1[3][2] = randDouble();
-    weights1[3][3] = randDouble();
-
-
-    double** weights2 = mallocMatrix(WEIGHT_COLUMNS, 1, sizeof(double));
-    weights2[0][0] = randDouble();
-    weights2[1][0] = randDouble();
-    weights2[2][0] = randDouble();
-    weights2[3][0] = randDouble();
-
-
-    double** matrixResult = mallocMatrix(4, 4, sizeof(double));
-    matrixDotProduct(x, weights1, ROWS, COLUMNS, WEIGHT_COLUMNS, matrixResult);
-
-    double** sigmoidedMatrix = mallocMatrix(4, 4, sizeof(double));    
-    sigmoidMatrix(matrixResult, 4, 4, sigmoidedMatrix);
-    freeMatrix(matrixResult);
-    double** outputLayerMatrix = mallocMatrix(4, 1, sizeof(double));    
-    matrixDotProduct(sigmoidedMatrix, weights2, 4, 4, 1, outputLayerMatrix);
-    freeMatrix(sigmoidedMatrix);
-    double** output = mallocMatrix(4, 1, sizeof(double));
-    sigmoidMatrix(outputLayerMatrix, 4, 1, output);
-    freeMatrix(outputLayerMatrix);
+    
     printMatrix(output, 4, 1);
 
     //sigmoidMatrix(matrixResult, ROWS, WEIGHT_COLUMNS);    
