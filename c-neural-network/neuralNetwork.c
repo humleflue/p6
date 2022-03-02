@@ -164,22 +164,9 @@ int main()
         {0.3, 0.3, 0.3, 0.3},
     };
 
-    // double ** foo = mallocMatrix(2, 2, sizeof(double));
-    // foo[0][0] = 1.0;
-    // printf("%lf\n", foo[0][0]);
-    // printMatrix(foo, 2, 2);
 
-
-    // printMatrix((char**)weights1, 3, 4);
     double** matrixResult = mallocMatrix(4, 4, sizeof(double));
     matrixDotProduct(x, weights1, matrixResult);
-    // int c, d, m = 4, q = 4;
-    //     for (c = 0; c < m; c++) {
-    //     for (d = 0; d < q; d++)
-    //         printf("%lf\t", matrixResult[c][d]);
-    
-    //     printf("\n");
-    //     }
 
     double** sigmoidedMatrix = mallocMatrix(4, 4, sizeof(double));    
     sigmoidMatrix(matrixResult, 4, 4, sigmoidedMatrix);
