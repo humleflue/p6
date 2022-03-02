@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include<math.h>
+#include <math.h>
 #include <stdlib.h>
 
 #define EULER 2.71828
@@ -59,7 +59,7 @@ double **mallocMatrix(const int rows, const int columns, const int sizeOfColumnE
 /** Frees the amount of space allocated with calloc
  * @param [in] arr The array that must be free'd.
  */
-void freeMatrix(char **arr)
+void freeMatrix(double **arr)
 {
     int i = 0, done = FALSE;
 
@@ -90,10 +90,10 @@ void sigmoidArray(const double *input, const int length, double * output) {
     }
 }
 
-void sigmoidMatrix(double** matrix, int rows, int columns){
+void sigmoidMatrix(const double** matrix, int rows, int columns, double** outputMatrix){
     for (int i = 0; i < rows; i++)
     {
-        sigmoidArray(matrix[i], columns, matrix[i]);
+        sigmoidArray(matrix[i], columns, outputMatrix[i]);
     }
 }
 
@@ -125,10 +125,10 @@ void printMatrix(double** matrix, int rows, int columns){
     }
 }
 
-double** matrixDotProduct(double x[4][3], double weights[3][4]) {
+void matrixDotProduct(double x[4][3], double weights[3][4], double** outputMatrix) {
     int m = 4, p = 3, q = 4, c, d, k;
     double sum = 0;
-    double** result = mallocMatrix(4, 4, sizeof(double));
+    
 
     for (c = 0; c < m; c++) {
       for (d = 0; d < q; d++) {
@@ -136,11 +136,10 @@ double** matrixDotProduct(double x[4][3], double weights[3][4]) {
           sum = sum + x[c][k]*weights[k][d];
         }
  
-        result[c][d] = sum;
+        outputMatrix[c][d] = sum;
         sum = 0;
       }
     }
-    return result;
 }
 
 
@@ -152,12 +151,12 @@ int main()
         {1, 0, 1},
         {1, 1, 1}
     };
-    double y[ROWS][1] = {
-        {0},
-        {1},
-        {1},
-        {0}
-    };
+    // double y[ROWS][1] = {
+    //     {0},
+    //     {1},
+    //     {1},
+    //     {0}
+    // };
 
     double weights1[WEIGHT_ROWS][WEIGHT_COLUMNS] = {
         {0.1, 0.1, 0.1, 0.1},
@@ -172,8 +171,8 @@ int main()
 
 
     // printMatrix((char**)weights1, 3, 4);
-
-    double** matrixResult = matrixDotProduct(x, weights1);
+    double** matrixResult = mallocMatrix(4, 4, sizeof(double));
+    matrixDotProduct(x, weights1, matrixResult);
     // int c, d, m = 4, q = 4;
     //     for (c = 0; c < m; c++) {
     //     for (d = 0; d < q; d++)
@@ -182,7 +181,10 @@ int main()
     //     printf("\n");
     //     }
 
-    printMatrix(matrixResult, 4, 4);
+    double** sigmoidedMatrix = mallocMatrix(4, 4, sizeof(double));    
+    sigmoidMatrix(matrixResult, 4, 4, sigmoidedMatrix);
+    freeMatrix(matrixResult);
+    printMatrix(sigmoidedMatrix, 4, 4);
 
     //sigmoidMatrix(matrixResult, ROWS, WEIGHT_COLUMNS);
     
