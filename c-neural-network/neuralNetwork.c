@@ -5,13 +5,6 @@
 #include "matrixmemlib.h"
 #include "matrixmath.h"
 
-#define ROWS 4
-#define COLUMNS 3
-#define WEIGHT_ROWS 3
-#define WEIGHT_COLUMNS 4
-#define FALSE 0
-#define TRUE 1
-
 #define TRAINING_TIME 1500
 
 void feedForward(Matrix x, Matrix weights1, Matrix weights2, Matrix output)
