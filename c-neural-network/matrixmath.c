@@ -5,11 +5,6 @@ double sigmoid(double input)
     return 1 / (1 + pow(EULER, input * -1.0));
 }
 
-double sigmoidDeriviate(double input)
-{
-    return input * (1 - input);
-}
-
 void sigmoidArray(const double *input, const int length, double *output)
 {
     for (int i = 0; i < length; i++)
@@ -28,6 +23,25 @@ void sigmoidMatrix(Matrix m, const Matrix *output)
     }
 }
 
+double sigmoidDeriviate(double input)
+{
+    return input * (1 - input);
+}
+
+void sigmoidDeriviateMatrix(Matrix in, const Matrix *out)
+{
+    assert(in.rows == out->rows && in.columns == out->columns);
+
+    int i, j;
+    for (i = 0; i < in.rows; i++)
+    {
+        for (j = 0; j < in.columns; j++)
+        {
+            out->matrix[i][j] = sigmoidDeriviate(in.matrix[i][j]);
+        }
+    }
+}
+
 void dotProduct(double *input1, double *input2, int length, double *output)
 {
     for (int i = 0; i < length; i++)
@@ -43,6 +57,7 @@ void matrixDotProduct(Matrix m1, Matrix m2, const Matrix *output)
 
     // printf("%d, %d\n", m1.columns, m2.rows); // DEBUG
     assert(m1.columns == m2.rows);
+    assert(m1.rows == output->rows && m2.columns == output->columns);
 
     for (c = 0; c < m1.rows; c++)
     {
@@ -55,6 +70,23 @@ void matrixDotProduct(Matrix m1, Matrix m2, const Matrix *output)
 
             output->matrix[c][d] = sum;
             sum = 0;
+        }
+    }
+}
+
+/* Element wise multiplication */
+void hadamardProduct(Matrix m1, Matrix m2, const Matrix *output)
+{
+    int i, j;
+
+    assert(m1.rows == m2.rows && m1.columns == m2.columns);
+    assert(m1.rows == output->rows && m1.columns == output->columns);
+
+    for (i = 0; i < m1.rows; i++)
+    {
+        for (j = 0; i < m1.columns; j++)
+        {
+            output->matrix[i][j] = m1.matrix[i][j] * m2.matrix[i][j];
         }
     }
 }
