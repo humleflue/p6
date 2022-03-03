@@ -18,13 +18,13 @@ void sigmoidArray(const double *input, const int length, double *output)
     }
 }
 
-void sigmoidMatrix(Matrix m, Matrix output)
+void sigmoidMatrix(Matrix m, const Matrix *output)
 {
-    assert(m.columns == output.columns && m.rows == output.rows);
+    assert(m.columns == output->columns && m.rows == output->rows);
 
     for (int i = 0; i < m.rows; i++)
     {
-        sigmoidArray(m.matrix[i], m.columns, output.matrix[i]);
+        sigmoidArray(m.matrix[i], m.columns, output->matrix[i]);
     }
 }
 
@@ -36,7 +36,7 @@ void dotProduct(double *input1, double *input2, int length, double *output)
     }
 }
 
-void matrixDotProduct(Matrix m1, Matrix m2, Matrix output)
+void matrixDotProduct(Matrix m1, Matrix m2, const Matrix *output)
 {
     int c, d, k;
     double sum = 0;
@@ -53,8 +53,22 @@ void matrixDotProduct(Matrix m1, Matrix m2, Matrix output)
                 sum = sum + m1.matrix[c][k] * m2.matrix[k][d];
             }
 
-            output.matrix[c][d] = sum;
+            output->matrix[c][d] = sum;
             sum = 0;
+        }
+    }
+}
+
+void transpose(Matrix in, const Matrix *transposed)
+{
+    int i, j;
+    assert(in.rows == transposed->columns && in.columns == transposed->rows);
+
+    for (i = 0; i < in.rows; i++)
+    {
+        for (j = 0; j < in.columns; j++)
+        {
+            transposed->matrix[j][i] = in.matrix[i][j];
         }
     }
 }

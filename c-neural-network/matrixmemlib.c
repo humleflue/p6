@@ -46,18 +46,18 @@ Matrix mallocMatrix(const int rows, const int columns)
 /** Frees the amount of space allocated with malloc
  * @param [in] m The matrix that must be freed.
  */
-void freeMatrix(Matrix m)
+void freeMatrix(Matrix *m)
 {
     int i = 0, done = 0;
 
     while (!done)
     {
-        if (m.matrix[i][0] == END_OF_ARR)
+        if (m->matrix[i][0] == END_OF_ARR)
         {
             done = 1;
         }
-        free(m.matrix[i]);
+        free(m->matrix[i]);
         i++;
     }
-    free(m.matrix);
+    free(m->matrix);
 }

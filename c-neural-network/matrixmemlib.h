@@ -9,6 +9,6 @@
 
 void *mallocArr(const int size);
 Matrix mallocMatrix(const int rows, const int columns);
-void freeMatrix(Matrix m);
+void freeMatrix(Matrix *m);
 
 #endif /* Ends MATRIXMEMLIB_H */
