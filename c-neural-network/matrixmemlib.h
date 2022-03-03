@@ -3,15 +3,9 @@
 
 #include <stdlib.h>
 #include <stdio.h>
+#include "matrixlib.h"
 
 #define END_OF_ARR '\b'
-
-typedef struct Matrix
-{
-    double **matrix;
-    int rows;
-    int columns;
-} Matrix;
 
 void *mallocArr(const int size);
 Matrix mallocMatrix(const int rows, const int columns);
