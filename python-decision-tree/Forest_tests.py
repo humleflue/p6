@@ -5,12 +5,12 @@ from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
 import Retrieve_data as rd
 
-path = "../Data"
+path = "../../Data"
 
 
 ### ALL DATA TEST ###
 
-all_data = rd.CombineAllDataFrames(path)
+#all_data = rd.CombineAllDataFrames(path)
 
 def TrainAndPrintTree(data):
     X = data.iloc[:,0:3].values
@@ -40,9 +40,12 @@ def TrainAndPrintTree(data):
 
 
 ### ONLY DRILL ### 
-
-stationary = rd.GetCSVFilesByFolderAndReturnDataFrame(path, "Stationary", "stationary")
-using = pd.read_csv(path + "/Hand tools/Dataset drill and screw electric.csv", sep=";", index_col=None, header=0)
+data = []
+data.append(rd.GetStationaryData(path))
+data.append(pd.read_csv(path + "/Hand tools/Dataset drill and screw electric.csv", sep=";", index_col=None, header=0))
+data.append(rd.GetMovingData(path))
+df = pd.concat(data, axis=0, ignore_index=True)
+print(df)
 # moving = 
 
 

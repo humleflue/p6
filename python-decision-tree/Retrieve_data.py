@@ -12,17 +12,28 @@ def GetCSVFilesByFolderAndReturnDataFrame(path, folder_name, status_value):
     return pd.concat(li, axis=0, ignore_index=True)
 
 def CombineAllDataFrames(path):
+    data_list = []
+    data_list.append(GetMovingData(path))
+    data_list.append(GetUsingData(path))
+    data_list.append(GetStationaryData(path))
+
+    return pd.concat(data_list, axis=0,ignore_index=True)
+
+def GetMovingData(path):
     moving = "moving"
     driving_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Driving", moving)
     high_vibration_df = GetCSVFilesByFolderAndReturnDataFrame(path, "High vibration", moving)
     walking_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Walking", moving)
+    return pd.concat([driving_df, high_vibration_df, walking_df], axis=0, ignore_index=True)
 
+
+def GetUsingData(path):
     using = "using"
     hand_tools_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Hand tools", using)
     industrial_tools_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Industrial equipment", using)
+    return pd.concat([hand_tools_df, industrial_tools_df])
 
+def GetStationaryData(path):
     stationary = "stationary"
     stationary_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Stationary", stationary)
-
-    all_data_list = [driving_df, high_vibration_df, walking_df, hand_tools_df, industrial_tools_df, stationary_df]
-    return pd.concat(all_data_list, axis=0,ignore_index=True)
+    return stationary_df
