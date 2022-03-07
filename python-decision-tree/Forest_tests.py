@@ -18,7 +18,6 @@ def TrainModel(data):
     X_train = sc.fit_transform(X_train)
     X_test = sc.fit_transform(X_test)
     return X_train, X_test, Y_train, Y_test
-    # return {"X_train": X_train, "X_test": X_test, "Y_train": Y_train, "Y_test": Y_test}
 
 def TrainAndPrintRandomForest(data):
     X_train, X_test, Y_train, Y_test = TrainModel(data)
