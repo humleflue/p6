@@ -2,7 +2,7 @@
 #include "matrixmemlib.h"
 #include "matrixmath.h"
 
-#define TRAINING_TIME 150000
+#define LABEL_DIMENSION 1
 
 void feedForward(Matrix x, Matrix weights1, Matrix weights2, Matrix *layer1, Matrix *output)
 {
@@ -28,7 +28,7 @@ void backPropagate(Matrix weights2, Matrix weights1, Matrix y, Matrix x, Matrix 
            layer1Transposed = mallocMatrix(layer1.columns, layer1.rows),
            xTransposed = mallocMatrix(x.columns, x.rows),
            weights2Transposed = mallocMatrix(weights2.columns, weights2.rows),
-           errorValueMultSigmoidDerivativeOutput = mallocMatrix(errorValues.rows, 1),
+           errorValueMultSigmoidDerivativeOutput = mallocMatrix(errorValues.rows, errorValues.columns),
            deltaWeights1IntermediateResult = mallocMatrix(errorValueMultSigmoidDerivativeOutput.rows, weights2Transposed.columns),
            deltaWeights1IntermediateResult2 = mallocMatrix(sigmoidDeriviateLayer1.rows, sigmoidDeriviateLayer1.columns),
            deltaWeights2 = mallocMatrix(weights2.rows, weights2.columns),
@@ -93,35 +93,48 @@ void fillMatrixWithRandomDoubles(Matrix m)
     }
 }
 
-void trainNeuralNetwork(Matrix input, Matrix label, int epochs, Matrix *output)
+void startTraining(Matrix input, Matrix label, int epochs, Matrix *output)
 {
     /* Initializing weights */
     Matrix weights1 = mallocMatrix(input.columns, input.rows),
-           weights2 = mallocMatrix(input.rows, 1),
+           weights2 = mallocMatrix(input.rows, output->columns),
            layer1 = mallocMatrix(input.rows, input.rows);
-    clock_t start, end;
-    double cpu_time_used;
     int i;
 
     srand(42);
     fillMatrixWithRandomDoubles(weights1);
     fillMatrixWithRandomDoubles(weights2);
 
-    puts("Starting training.");
-    start = clock();
     for (i = 0; i < epochs; i++)
     {
         feedForward(input, weights1, weights2, &layer1, output);
         backPropagate(weights2, weights1, label, input, layer1, *output, &weights1, &weights2);
     }
-    end = clock();
-
-    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("Training done.\nTime used: %f seconds.\n\n", cpu_time_used);
 
     freeMatrix(&weights1);
     freeMatrix(&weights2);
     freeMatrix(&layer1);
+}
+
+void trainNeuralNetwork(Matrix input, Matrix label, int epochs, int loggingEnabled, Matrix *output)
+{
+    clock_t start, end;
+    double cpu_time_used;
+
+    if (loggingEnabled)
+    {
+        puts("Starting training.");
+        start = clock();
+    }
+
+    startTraining(input, label, epochs, output);
+
+    if (loggingEnabled)
+    {
+        end = clock();
+        cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+        printf("Training done.\nTime used: %f seconds.\n\n", cpu_time_used);
+    }
 }
 
 int main(void)
@@ -162,13 +175,14 @@ int main(void)
     x.matrix[4][3] = 1;
     x.matrix[4][4] = 1;
 
-    /* Initializing output values */
+    /* Initializing label values */
     y.matrix[0][0] = 0;
     y.matrix[1][0] = 1;
     y.matrix[2][0] = 1;
     y.matrix[3][0] = 0;
+    y.matrix[4][0] = 1;
 
-    trainNeuralNetwork(x, y, TRAINING_TIME, &output);
+    trainNeuralNetwork(x, y, 1500000, 0, &output);
     printMatrix(output);
 
     return EXIT_SUCCESS;
