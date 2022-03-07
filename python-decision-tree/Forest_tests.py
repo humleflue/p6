@@ -10,13 +10,18 @@ import math
 
 path = "../../Data"
 
-def TrainAndPrintRandomForest(data):
+def TrainModel(data):
     X = data.iloc[:,0:3].values
     Y = data.iloc[:,3].values
     X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = 0.2, random_state = 0)
     sc = StandardScaler()
     X_train = sc.fit_transform(X_train)
     X_test = sc.fit_transform(X_test)
+    return X_train, X_test, Y_train, Y_test
+    # return {"X_train": X_train, "X_test": X_test, "Y_train": Y_train, "Y_test": Y_test}
+
+def TrainAndPrintRandomForest(data):
+    X_train, X_test, Y_train, Y_test = TrainModel(data)
 
     trees_arr = []
     accuracy_arr = []
@@ -32,9 +37,9 @@ def TrainAndPrintRandomForest(data):
         print(confusion_matrix(Y_test,y_pred))
         plt.show()
         precision = classification_report(Y_test,y_pred)
+        print(precision)
         # precision,recall,fscore,support=score(Y_test,y_pred,average=None)
         # print(f"precision: {precision}")
-        print(precision)
         accuracyScore = accuracy_score(Y_test, y_pred)
         print(accuracyScore)
 
@@ -50,10 +55,50 @@ def TrainAndPrintRandomForest(data):
     # plt.show()
 
 
+### TEST ON SINGLE DATA SOURCE ###
+def TestSingleDataSource(data, status, test_data):
+    X_train, X_test, Y_train, Y_test = TrainModel(data)
+
+    trees_arr = []
+    accuracy_arr = []
+    precision_arr = []
+        
+    for i in range(3):
+        classifier = RandomForestClassifier(n_estimators=1*10**i,random_state=0)
+        trees = 10*10**i
+        print(f"----------------------- {trees} trees -----------------------")
+        classifier.fit(X_train, Y_train)
+        test_df = pd.read_csv(path + test_data, sep=";", index_col=None, header=0)
+        test_df["Status"] = status
+        test_data = test_df.iloc[:,0:3].to_numpy()
+        test_data_class = test_df.iloc[:,3].to_numpy()
+        y_pred = classifier.predict(test_data)
+        ConfusionMatrixDisplay.from_predictions(test_data_class, y_pred)
+        print(confusion_matrix(test_data_class,y_pred))
+        plt.show()
+        precision = classification_report(test_data_class,y_pred)
+        print(precision)
+        # precision,recall,fscore,support=score(test_data_class,y_pred,average=None)
+        # print(f"precision: {precision}")
+        accuracyScore = accuracy_score(test_data_class, y_pred)
+        print(accuracyScore)
+        trees_arr.append(trees)
+        accuracy_arr.append(accuracyScore)
+
+        print()
+        print()
+
+    plt.plot(trees_arr, accuracy_arr, marker='o')
+    plt.xlim(0, trees + 1)
+    # plt.ylim(0, 1)
+    # plt.show()
+##################################
+
 
 ### ALL DATA TEST ###
 def AllDataRandomForest(path):
     all_data = rd.CombineAllDataFrames(path)
+    # TestSingleDataSource(all_data, "using", "/Hand tools/Dataset drill and screw electric.csv")
     TrainAndPrintRandomForest(all_data)
 # AllDataRandomForest(path)
 #####################
@@ -71,3 +116,5 @@ def OnlyDrillRandomForest(path):
     TrainAndPrintRandomForest(df)
 OnlyDrillRandomForest(path)
 #####################
+
+
