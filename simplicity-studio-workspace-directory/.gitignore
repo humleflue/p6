@@ -5,3 +5,6 @@
 *.lnp
 *.m51
 *.omf
+.browser
+.metadata
+outgoing
