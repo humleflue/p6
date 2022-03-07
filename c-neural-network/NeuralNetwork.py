@@ -50,8 +50,10 @@ X = np.array([
 Y = np.array([[0], [1], [1], [0]])
 
 neural_network = NeuralNetwork(X, Y)
-for i in range(1500):
+delta1 = datetime.now()
+for i in range(1500000):
     neural_network.feedforward()
     neural_network.backpropagate()
-
+delta2 = datetime.now()
+print(delta2-delta1)
 print(neural_network.output)
