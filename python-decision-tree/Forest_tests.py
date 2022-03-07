@@ -24,16 +24,17 @@ def TrainAndPrintRandomForest(data):
         
     for i in range(3):
         classifier = RandomForestClassifier(n_estimators=1*10**i,random_state=0)
-        trees = 1*10**i
+        trees = 10*10**i
         print(f"----------------------- {trees} trees -----------------------")
         classifier.fit(X_train, Y_train)
         y_pred = classifier.predict(X_test)
         ConfusionMatrixDisplay.from_predictions(Y_test, y_pred)
         print(confusion_matrix(Y_test,y_pred))
-        # plt.show()
+        plt.show()
         precision = classification_report(Y_test,y_pred)
-        precision,recall,fscore,support=score(Y_test,y_pred,average=None)
-        print(f"precision: {precision}")
+        # precision,recall,fscore,support=score(Y_test,y_pred,average=None)
+        # print(f"precision: {precision}")
+        print(precision)
         accuracyScore = accuracy_score(Y_test, y_pred)
         print(accuracyScore)
 
