@@ -7,7 +7,9 @@ double sigmoid(double input)
 
 void sigmoidArray(const double *input, const int length, double *output)
 {
-    for (int i = 0; i < length; i++)
+    int i;
+
+    for (i = 0; i < length; i++)
     {
         output[i] = sigmoid(input[i]);
     }
@@ -15,9 +17,11 @@ void sigmoidArray(const double *input, const int length, double *output)
 
 void sigmoidMatrix(Matrix m, const Matrix *output)
 {
+    int i;
+
     assert(m.columns == output->columns && m.rows == output->rows);
 
-    for (int i = 0; i < m.rows; i++)
+    for (i = 0; i < m.rows; i++)
     {
         sigmoidArray(m.matrix[i], m.columns, output->matrix[i]);
     }
@@ -30,9 +34,10 @@ double sigmoidDeriviate(double input)
 
 void sigmoidDeriviateMatrix(Matrix in, const Matrix *out)
 {
+    int i, j;
+
     assert(in.rows == out->rows && in.columns == out->columns);
 
-    int i, j;
     for (i = 0; i < in.rows; i++)
     {
         for (j = 0; j < in.columns; j++)
@@ -44,7 +49,9 @@ void sigmoidDeriviateMatrix(Matrix in, const Matrix *out)
 
 void dotProduct(double *input1, double *input2, int length, double *output)
 {
-    for (int i = 0; i < length; i++)
+    int i;
+
+    for (i = 0; i < length; i++)
     {
         output[i] = input1[i] * input2[i];
     }
@@ -55,7 +62,7 @@ void matrixDotProduct(Matrix m1, Matrix m2, const Matrix *output)
     int c, d, k;
     double sum = 0;
 
-    // printf("%d, %d\n", m1.columns, m2.rows); // DEBUG
+    /* printf("%d, %d\n", m1.columns, m2.rows); // DEBUG */
     assert(m1.columns == m2.rows);
     assert(m1.rows == output->rows && m2.columns == output->columns);
 
@@ -79,12 +86,14 @@ void hadamardProduct(Matrix m1, Matrix m2, const Matrix *output)
 {
     int i, j;
 
-    assert(m1.rows == m2.rows && m1.columns == m2.columns);
-    assert(m1.rows == output->rows && m1.columns == output->columns);
+    assert(m1.rows == m2.rows);
+    assert(m1.columns == m2.columns);
+    assert(m1.rows == output->rows);
+    assert(m1.columns == output->columns);
 
     for (i = 0; i < m1.rows; i++)
     {
-        for (j = 0; i < m1.columns; j++)
+        for (j = 0; j < m1.columns; j++)
         {
             output->matrix[i][j] = m1.matrix[i][j] * m2.matrix[i][j];
         }
@@ -94,6 +103,7 @@ void hadamardProduct(Matrix m1, Matrix m2, const Matrix *output)
 void transpose(Matrix in, const Matrix *transposed)
 {
     int i, j;
+
     assert(in.rows == transposed->columns && in.columns == transposed->rows);
 
     for (i = 0; i < in.rows; i++)
@@ -101,6 +111,22 @@ void transpose(Matrix in, const Matrix *transposed)
         for (j = 0; j < in.columns; j++)
         {
             transposed->matrix[j][i] = in.matrix[i][j];
+        }
+    }
+}
+
+void add(Matrix m1, Matrix m2, const Matrix *out)
+{
+    int i, j;
+
+    assert(m1.rows == m2.rows);
+    assert(m1.columns == m2.columns);
+
+    for (i = 0; i < m1.rows; i++)
+    {
+        for (j = 0; j < m1.columns; j++)
+        {
+            out->matrix[i][j] = m1.matrix[i][j] + m2.matrix[i][j];
         }
     }
 }
