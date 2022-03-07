@@ -21,3 +21,4 @@ $(ODIR)/%.o: %.c
 
 clean:
 	$(RM) $(ODIR)/*.o *.exe *.out
+	
