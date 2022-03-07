@@ -62,9 +62,9 @@ void matrixDotProduct(Matrix m1, Matrix m2, const Matrix *output)
     int c, d, k;
     double sum = 0;
 
-    /* printf("%d, %d\n", m1.columns, m2.rows); // DEBUG */
     assert(m1.columns == m2.rows);
-    assert(m1.rows == output->rows && m2.columns == output->columns);
+    assert(m1.rows == output->rows);
+    assert(m2.columns == output->columns);
 
     for (c = 0; c < m1.rows; c++)
     {

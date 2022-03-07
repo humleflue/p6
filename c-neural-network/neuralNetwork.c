@@ -6,8 +6,8 @@
 
 void feedForward(Matrix x, Matrix weights1, Matrix weights2, Matrix *layer1, Matrix *output)
 {
-    Matrix dotProductOutput = mallocMatrix(4, 4),
-           outputLayerMatrix = mallocMatrix(4, 1);
+    Matrix dotProductOutput = mallocMatrix(x.rows, weights1.columns),
+           outputLayerMatrix = mallocMatrix(layer1->rows, weights2.columns);
 
     matrixDotProduct(x, weights1, &dotProductOutput);
     sigmoidMatrix(dotProductOutput, layer1);
@@ -126,26 +126,41 @@ void trainNeuralNetwork(Matrix input, Matrix label, int epochs, Matrix *output)
 
 int main(void)
 {
-    Matrix x = mallocMatrix(4, 3),
-           y = mallocMatrix(4, 1),
-           output = mallocMatrix(x.rows, 1);
+    int rows = 5;
+    Matrix x = mallocMatrix(rows, 5),
+           y = mallocMatrix(rows, 1),
+           output = mallocMatrix(rows, 1);
 
     /* Initializing input values */
     x.matrix[0][0] = 0;
     x.matrix[0][1] = 0;
     x.matrix[0][2] = 1;
+    x.matrix[0][3] = 1;
+    x.matrix[0][4] = 1;
 
     x.matrix[1][0] = 0;
     x.matrix[1][1] = 1;
     x.matrix[1][2] = 1;
+    x.matrix[1][3] = 1;
+    x.matrix[1][4] = 1;
 
     x.matrix[2][0] = 1;
     x.matrix[2][1] = 0;
     x.matrix[2][2] = 1;
+    x.matrix[2][3] = 1;
+    x.matrix[2][4] = 1;
 
     x.matrix[3][0] = 1;
     x.matrix[3][1] = 1;
     x.matrix[3][2] = 1;
+    x.matrix[3][3] = 1;
+    x.matrix[3][4] = 1;
+
+    x.matrix[4][0] = 1;
+    x.matrix[4][1] = 1;
+    x.matrix[4][2] = 1;
+    x.matrix[4][3] = 1;
+    x.matrix[4][4] = 1;
 
     /* Initializing output values */
     y.matrix[0][0] = 0;
