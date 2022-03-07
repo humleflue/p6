@@ -16,5 +16,6 @@ void dotProduct(double *input1, double *input2, int length, double *output);
 void matrixDotProduct(Matrix m1, Matrix m2, const Matrix *output);
 void hadamardProduct(Matrix m1, Matrix m2, const Matrix *output);
 void transpose(Matrix in, const Matrix *transposed);
+void add(Matrix m1, Matrix m2, const Matrix *out);
 
 #endif /* END OF MATRIXMATH_H */

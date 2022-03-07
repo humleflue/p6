@@ -29,7 +29,11 @@ Matrix mallocMatrix(const int rows, const int columns)
 {
     int rows_freeable = rows + 1, /* +1 to be able to free the array again */
         i;
-    Matrix m = {mallocArr(rows_freeable * sizeof(double *)), rows, columns};
+    Matrix m;
+
+    m.matrix = mallocArr(rows_freeable * sizeof(double *));
+    m.rows = rows;
+    m.columns = columns;
 
     for (i = 0; i < rows; i++)
     {

@@ -6,7 +6,7 @@ void printMatrix(Matrix matrix)
     for (c = 0; c < m; c++)
     {
         for (d = 0; d < q; d++)
-            printf("%lf\t", matrix.matrix[c][d]);
+            printf("%f\t", matrix.matrix[c][d]);
 
         printf("\n");
     }
