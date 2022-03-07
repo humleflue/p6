@@ -2,7 +2,7 @@
 #include "matrixmemlib.h"
 #include "matrixmath.h"
 
-#define TRAINING_TIME 15000000
+#define TRAINING_TIME 150000
 
 void feedForward(Matrix x, Matrix weights1, Matrix weights2, Matrix *layer1, Matrix *output)
 {
@@ -93,15 +93,12 @@ void fillMatrixWithRandomDoubles(Matrix m)
     }
 }
 
-int main()
+void trainNeuralNetwork(Matrix input, Matrix label, int epochs, Matrix *output)
 {
     /* Initializing weights */
-    Matrix weights1 = mallocMatrix(3, 4),
-           weights2 = mallocMatrix(4, 1),
-           output = mallocMatrix(4, 1),
-           layer1 = mallocMatrix(4, 4),
-           x = mallocMatrix(4, 3),
-           y = mallocMatrix(4, 1);
+    Matrix weights1 = mallocMatrix(input.columns, input.rows),
+           weights2 = mallocMatrix(input.rows, 1),
+           layer1 = mallocMatrix(input.rows, input.rows);
     clock_t start, end;
     double cpu_time_used;
     int i;
@@ -109,6 +106,29 @@ int main()
     srand(42);
     fillMatrixWithRandomDoubles(weights1);
     fillMatrixWithRandomDoubles(weights2);
+
+    puts("Starting training.");
+    start = clock();
+    for (i = 0; i < epochs; i++)
+    {
+        feedForward(input, weights1, weights2, &layer1, output);
+        backPropagate(weights2, weights1, label, input, layer1, *output, &weights1, &weights2);
+    }
+    end = clock();
+
+    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
+    printf("Training done.\nTime used: %f seconds.\n\n", cpu_time_used);
+
+    freeMatrix(&weights1);
+    freeMatrix(&weights2);
+    freeMatrix(&layer1);
+}
+
+int main(void)
+{
+    Matrix x = mallocMatrix(4, 3),
+           y = mallocMatrix(4, 1),
+           output = mallocMatrix(x.rows, 1);
 
     /* Initializing input values */
     x.matrix[0][0] = 0;
@@ -133,16 +153,8 @@ int main()
     y.matrix[2][0] = 1;
     y.matrix[3][0] = 0;
 
-    start = clock();
-    for (i = 0; i < TRAINING_TIME; i++)
-    {
-        feedForward(x, weights1, weights2, &layer1, &output);
-        backPropagate(weights2, weights1, y, x, layer1, output, &weights1, &weights2);
-    }
-    end = clock();
-    cpu_time_used = ((double)(end - start)) / CLOCKS_PER_SEC;
-    printf("Time used: %f seconds.\n\n", cpu_time_used);
+    trainNeuralNetwork(x, y, TRAINING_TIME, &output);
     printMatrix(output);
 
-    return 0;
+    return EXIT_SUCCESS;
 }
