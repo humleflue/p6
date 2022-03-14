@@ -32,18 +32,25 @@ double sigmoidDeriviate(double input)
     return input * (1 - input);
 }
 
+void sigmoidDeriviateArray(const double *in, const int length, const double *out)
+{
+    int i;
+
+    for (i = 0; i < length; i++)
+    {
+        output[i] = sigmoidDeriviate(input[i]);
+    }
+}
+
 void sigmoidDeriviateMatrix(Matrix in, const Matrix *out)
 {
-    int i, j;
+    int i;
 
     assert(in.rows == out->rows && in.columns == out->columns);
 
     for (i = 0; i < in.rows; i++)
     {
-        for (j = 0; j < in.columns; j++)
-        {
-            out->matrix[i][j] = sigmoidDeriviate(in.matrix[i][j]);
-        }
+        sigmoidDeriviateArray(in.matrix[i], in.columns, out->matrix[i]);
     }
 }
 
