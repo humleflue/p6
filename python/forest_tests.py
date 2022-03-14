@@ -1,5 +1,6 @@
 import pandas as pd
 import matplotlib.pyplot as plt
+from sklearn import tree
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
@@ -9,7 +10,7 @@ import os
 
 data_path = 'datasets'
 
-def TrainModel(data):
+def train_model(data):
     X = data.iloc[:,0:3].values
     Y = data.iloc[:,3].values
     X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = 0.2, random_state = 0)
@@ -19,102 +20,79 @@ def TrainModel(data):
 
     return X_train, X_test, Y_train, Y_test
 
-def TrainAndPrintRandomForest(data):
-    X_train, X_test, Y_train, Y_test = TrainModel(data)
+def predict(X_train, Y_train, X_test, n_of_trees):
+    classifier = RandomForestClassifier(n_estimators=n_of_trees,random_state=0)
+    classifier.fit(X_train, Y_train)
+    Y_pred = classifier.predict(X_test)
+    return Y_pred
 
-    trees_arr = []
-    accuracy_arr = []
-        
-    for i in range(3):
-        classifier = RandomForestClassifier(n_estimators=1*10**i,random_state=0)
-        trees = 10*10**i
-        print(f"----------------------- {trees} trees -----------------------")
-        classifier.fit(X_train, Y_train)
-        y_pred = classifier.predict(X_test)
-        ConfusionMatrixDisplay.from_predictions(Y_test, y_pred)
-        print(confusion_matrix(Y_test,y_pred))
-        plt.show()
-        precision = classification_report(Y_test,y_pred)
-        print(precision)
-        # precision,recall,fscore,support=score(Y_test,y_pred,average=None)
-        # print(f"precision: {precision}")
-        accuracyScore = accuracy_score(Y_test, y_pred)
-        print(accuracyScore)
-
-        trees_arr.append(trees)
-        accuracy_arr.append(accuracyScore)
-
-        print()
-        print()
-
-    plt.plot(trees_arr, accuracy_arr, marker='o')
-    plt.xlim(0, trees + 1)
-    # plt.ylim(0, 1)
+def print_prediction_results(Y_test, Y_pred, n_of_trees):
+    print(f"----------------------- {n_of_trees} trees -----------------------")
+    ConfusionMatrixDisplay.from_predictions(Y_test, Y_pred)
+    print(confusion_matrix(Y_test,Y_pred))
+    # Uncomment if visualisation of confusion matrix is wanted
     # plt.show()
+    precision = classification_report(Y_test,Y_pred)
+    print(precision)
 
+    # Uncomment if you want results seperated by type
+    # precision,recall,fscore,support=score(Y_test,Y_pred,average=None)
+    
+    accuracyScore = accuracy_score(Y_test, Y_pred)
+    print(accuracyScore)
+    print()
+    print()
+
+def add_status_to_df(df, status):
+    df["Status"] = status
+    return df
+
+def split_df_in_readings_and_class(df):
+    return df.iloc[:,0:3].to_numpy(), df.iloc[:,3].to_numpy()
+
+def run_model(X_train, Y_train, X_test, Y_test):
+    for i in range(3):
+        n_of_trees = 1*10**i
+        Y_pred = predict(X_train, Y_train, X_test, n_of_trees)
+        print_prediction_results(Y_test, Y_pred, n_of_trees)
+
+def train_and_run_model(data):
+    X_train, X_test, Y_train, Y_test = train_model(data)
+    run_model(X_train, Y_train, X_test, Y_test)
 
 ### TEST ON SINGLE DATA SOURCE ###
-def TestSingleDataSource(data, status, test_data):
-    X_train, X_test, Y_train, Y_test = TrainModel(data)
+def test_single_data_source(data, status, test_data):
+    X_train, X_test, Y_train, Y_test = train_model(data)
 
-    trees_arr = []
-    accuracy_arr = []
-    precision_arr = []
-        
-    for i in range(3):
-        classifier = RandomForestClassifier(n_estimators=1*10**i,random_state=0)
-        trees = 10*10**i
-        print(f"----------------------- {trees} trees -----------------------")
-        classifier.fit(X_train, Y_train)
-        test_df = pd.read_csv(data_path + test_data, sep=";", index_col=None, header=0)
-        test_df["Status"] = status
-        test_data = test_df.iloc[:,0:3].to_numpy()
-        test_data_class = test_df.iloc[:,3].to_numpy()
-        y_pred = classifier.predict(test_data)
-        ConfusionMatrixDisplay.from_predictions(test_data_class, y_pred)
-        print(confusion_matrix(test_data_class,y_pred))
-        plt.show()
-        precision = classification_report(test_data_class,y_pred)
-        print(precision)
-        # precision,recall,fscore,support=score(test_data_class,y_pred,average=None)
-        # print(f"precision: {precision}")
-        accuracyScore = accuracy_score(test_data_class, y_pred)
-        print(accuracyScore)
-        trees_arr.append(trees)
-        accuracy_arr.append(accuracyScore)
+    test_df = rd.get_file_by_path_and_name(data_path, test_data)
+    test_df = add_status_to_df(test_df, status)
+    test_data, test_data_class = split_df_in_readings_and_class(test_df)
 
-        print()
-        print()
-
-    plt.plot(trees_arr, accuracy_arr, marker='o')
-    plt.xlim(0, trees + 1)
-    # plt.ylim(0, 1)
-    # plt.show()
+    run_model(X_train, Y_train, test_data, test_data_class)
+    
 ##################################
 
 
 ### ALL DATA TEST ###
-def AllDataRandomForest(data_path):
-    all_data = rd.CombineAllDataFrames(data_path)
-    # TestSingleDataSource(all_data, "using", "/Hand tools/Dataset drill and screw electric.csv")
-    TrainAndPrintRandomForest(all_data)
+def all_data_random_forest(data_path):
+    all_data = rd.combine_all_data_frames(data_path)
+    train_and_run_model(all_data)
 #####################
 
 ### ONLY DRILL ######
-def OnlyDrillRandomForest(data_path):
+def only_drill_random_forest(data_path):
     data_li = []
-    data_li.append(rd.GetStationaryData(data_path))
-    # data_li.append(rd.GetUsingData(data_path))
-    using = pd.read_csv(data_path + "/Hand tools/Dataset drill and screw electric.csv", sep=";", index_col=None, header=0)
-    using["Status"] = "using"
+    data_li.append(rd.get_stationary_data(data_path))
+    using = rd.get_file_by_path_and_name(os.path.join(data_path,'Hand tools'), 'Dataset drill and screw electric.csv')
+    using = add_status_to_df(using, 'using')
     data_li.append(using)
-    data_li.append(rd.GetMovingData(data_path))
+    data_li.append(rd.get_moving_data(data_path))
     df = pd.concat(data_li, axis=0, ignore_index=True)
-    TrainAndPrintRandomForest(df)
+    train_and_run_model(df)
 #####################
 
 def main():
-    AllDataRandomForest(data_path)
+    all_data_random_forest(data_path)
 
 if __name__ == '__main__':
     main()
