@@ -11,34 +11,34 @@ import os
 data_path = 'datasets'
 
 def train_model(data):
-    X = data.iloc[:,0:3].values
-    Y = data.iloc[:,3].values
-    X_train, X_test, Y_train, Y_test = train_test_split(X,Y, test_size = 0.2, random_state = 0)
+    x = data.iloc[:,0:3].values
+    y = data.iloc[:,3].values
+    x_train, x_test, y_train, y_test = train_test_split(x,y, test_size = 0.2, random_state = 0)
     sc = StandardScaler()
-    X_train = sc.fit_transform(X_train)
-    X_test = sc.fit_transform(X_test)
+    x_train = sc.fit_transform(x_train)
+    x_test = sc.fit_transform(x_test)
 
-    return X_train, X_test, Y_train, Y_test
+    return x_train, x_test, y_train, y_test
 
-def predict(X_train, Y_train, X_test, n_of_trees):
+def predict(x_train, y_train, x_test, n_of_trees):
     classifier = RandomForestClassifier(n_estimators=n_of_trees,random_state=0)
-    classifier.fit(X_train, Y_train)
-    Y_pred = classifier.predict(X_test)
+    classifier.fit(x_train, y_train)
+    Y_pred = classifier.predict(x_test)
     return Y_pred
 
-def print_prediction_results(Y_test, Y_pred, n_of_trees):
+def print_prediction_results(y_test, Y_pred, n_of_trees):
     print(f"----------------------- {n_of_trees} trees -----------------------")
-    ConfusionMatrixDisplay.from_predictions(Y_test, Y_pred)
-    print(confusion_matrix(Y_test,Y_pred))
+    ConfusionMatrixDisplay.from_predictions(y_test, Y_pred)
+    print(confusion_matrix(y_test,Y_pred))
     # Uncomment if visualisation of confusion matrix is wanted
     # plt.show()
-    precision = classification_report(Y_test,Y_pred)
+    precision = classification_report(y_test,Y_pred)
     print(precision)
 
     # Uncomment if you want results seperated by type
-    # precision,recall,fscore,support=score(Y_test,Y_pred,average=None)
+    # precision,recall,fscore,support=score(y_test,Y_pred,average=None)
     
-    accuracyScore = accuracy_score(Y_test, Y_pred)
+    accuracyScore = accuracy_score(y_test, Y_pred)
     print(accuracyScore)
     print()
     print()
@@ -50,25 +50,25 @@ def add_status_to_df(df, status):
 def split_df_in_readings_and_class(df):
     return df.iloc[:,0:3].to_numpy(), df.iloc[:,3].to_numpy()
 
-def run_model(X_train, Y_train, X_test, Y_test):
+def run_model(x_train, y_train, x_test, y_test):
     for i in range(3):
         n_of_trees = 1*10**i
-        Y_pred = predict(X_train, Y_train, X_test, n_of_trees)
-        print_prediction_results(Y_test, Y_pred, n_of_trees)
+        Y_pred = predict(x_train, y_train, x_test, n_of_trees)
+        print_prediction_results(y_test, Y_pred, n_of_trees)
 
 def train_and_run_model(data):
-    X_train, X_test, Y_train, Y_test = train_model(data)
-    run_model(X_train, Y_train, X_test, Y_test)
+    x_train, x_test, y_train, y_test = train_model(data)
+    run_model(x_train, y_train, x_test, y_test)
 
 ### TEST ON SINGLE DATA SOURCE ###
 def test_single_data_source(data, status, test_data):
-    X_train, X_test, Y_train, Y_test = train_model(data)
+    x_train, x_test, y_train, y_test = train_model(data)
 
     test_df = rd.get_file_by_path_and_name(data_path, test_data)
     test_df = add_status_to_df(test_df, status)
     test_data, test_data_class = split_df_in_readings_and_class(test_df)
 
-    run_model(X_train, Y_train, test_data, test_data_class)
+    run_model(x_train, y_train, test_data, test_data_class)
     
 ##################################
 
