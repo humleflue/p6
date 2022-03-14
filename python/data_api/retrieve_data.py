@@ -1,10 +1,14 @@
 import pandas as pd
 import glob as glob
+import os
 
+
+def GetAllFilesInFolder(path, folder_name, extension):
+    return glob.glob(os.path.join(path,folder_name, extension))
 
 def GetCSVFilesByFolderAndReturnDataFrame(path, folder_name, status_value):
     li = []
-    all_files = glob.glob(path + "/" + folder_name + "/*.csv")
+    all_files = GetAllFilesInFolder(path, folder_name, '*.csv')
     for filename in all_files:
         df = pd.read_csv(filename, sep=";", index_col=None, header=0)
         df["Status"] = status_value
@@ -37,3 +41,15 @@ def GetStationaryData(path):
     stationary = "stationary"
     stationary_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Stationary", stationary)
     return stationary_df
+
+def GetFileByPathAndName(path, name):
+    df = pd.read_csv(os.path.join(path, name), sep=";", index_col=None, header=0)
+    return df
+
+
+
+def main():
+    print("running")
+
+if __name__ == '__main__':
+    main()
