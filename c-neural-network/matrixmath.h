@@ -11,7 +11,7 @@ double sigmoid(double input);
 void sigmoidArray(const double *input, const int length, double *output);
 void sigmoidMatrix(Matrix m, const Matrix *output);
 double sigmoidDeriviate(double input);
-void sigmoidDeriviateArray(const double *in, const int length, const double *out);
+void sigmoidDeriviateArray(const double *in, const int length, double *out);
 void sigmoidDeriviateMatrix(Matrix in, const Matrix *out);
 void dotProduct(double *input1, double *input2, int length, double *output);
 void matrixDotProduct(Matrix m1, Matrix m2, const Matrix *output);

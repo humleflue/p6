@@ -32,7 +32,7 @@ double sigmoidDeriviate(double input)
     return input * (1 - input);
 }
 
-void sigmoidDeriviateArray(const double *in, const int length, const double *out)
+void sigmoidDeriviateArray(const double *input, const int length, double *output)
 {
     int i;
 
