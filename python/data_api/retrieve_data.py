@@ -3,46 +3,47 @@ import glob as glob
 import os
 
 
-def GetAllFilesInFolder(path, folder_name, extension):
+def get_all_files_in_folder(path, folder_name, extension):
     return glob.glob(os.path.join(path,folder_name, extension))
 
-def GetCSVFilesByFolderAndReturnDataFrame(path, folder_name, status_value):
+def get_csv_files_by_folder_and_return_data_frame(path, folder_name, status_value):
     li = []
-    all_files = GetAllFilesInFolder(path, folder_name, '*.csv')
+    all_files = get_all_files_in_folder(path, folder_name, '*.csv')
     for filename in all_files:
         df = pd.read_csv(filename, sep=";", index_col=None, header=0)
         df["Status"] = status_value
         li.append(df)
     return pd.concat(li, axis=0, ignore_index=True)
 
-def CombineAllDataFrames(path):
+def combine_all_data_frames(path):
     data_list = []
-    data_list.append(GetMovingData(path))
-    data_list.append(GetUsingData(path))
-    data_list.append(GetStationaryData(path))
+    data_list.append(get_moving_data(path))
+    data_list.append(get_using_data(path))
+    data_list.append(get_stationary_data(path))
 
     return pd.concat(data_list, axis=0,ignore_index=True)
 
-def GetMovingData(path):
+def get_moving_data(path):
     moving = "moving"
-    driving_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Driving", moving)
-    high_vibration_df = GetCSVFilesByFolderAndReturnDataFrame(path, "High vibration", moving)
-    walking_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Walking", moving)
+    driving_df = get_csv_files_by_folder_and_return_data_frame(path, "Driving", moving)
+    high_vibration_df = get_csv_files_by_folder_and_return_data_frame(path, "High vibration", moving)
+    walking_df = get_csv_files_by_folder_and_return_data_frame(path, "Walking", moving)
     return pd.concat([driving_df, high_vibration_df, walking_df], axis=0, ignore_index=True)
 
 
-def GetUsingData(path):
+def get_using_data(path):
     using = "using"
-    hand_tools_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Hand tools", using)
-    industrial_tools_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Industrial equipment", using)
+    hand_tools_df = get_csv_files_by_folder_and_return_data_frame(path, "Hand tools", using)
+    industrial_tools_df = get_csv_files_by_folder_and_return_data_frame(path, "Industrial equipment", using)
     return pd.concat([hand_tools_df, industrial_tools_df])
 
-def GetStationaryData(path):
+def get_stationary_data(path):
     stationary = "stationary"
-    stationary_df = GetCSVFilesByFolderAndReturnDataFrame(path, "Stationary", stationary)
+    stationary_df = get_csv_files_by_folder_and_return_data_frame(path, "Stationary", stationary)
     return stationary_df
 
-def GetFileByPathAndName(path, name):
+def get_file_by_path_and_name(path, name):
+    print(os.path.abspath(os.path.join(path, name)))
     df = pd.read_csv(os.path.join(path, name), sep=";", index_col=None, header=0)
     return df
 
