@@ -12,7 +12,7 @@ void *mallocArr(const int size)
     arr = malloc(size);
     if (arr == NULL)
     {
-        puts("FATAL ERROR! mallocArr could not alllocate the requested memory.\nThe program will now exit.");
+        puts("FATAL ERROR! mallocArr could not allocate the requested memory.\nThe program will now exit.");
         exit(0);
     }
 
