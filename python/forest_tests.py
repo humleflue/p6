@@ -23,23 +23,24 @@ def train_model(data):
 def predict(x_train, y_train, x_test, n_of_trees):
     classifier = RandomForestClassifier(n_estimators=n_of_trees,random_state=0)
     classifier.fit(x_train, y_train)
-    Y_pred = classifier.predict(x_test)
-    return Y_pred
+    y_pred = classifier.predict(x_test)
+    return y_pred
 
-def print_prediction_results(y_test, Y_pred, n_of_trees):
+def print_prediction_results(y_test, y_pred, n_of_trees):
     print(f"----------------------- {n_of_trees} trees -----------------------")
-    ConfusionMatrixDisplay.from_predictions(y_test, Y_pred)
-    print(confusion_matrix(y_test,Y_pred))
+    ConfusionMatrixDisplay.from_predictions(y_test, y_pred)
+    conf_matrix = confusion_matrix(y_test,y_pred)
+    print(conf_matrix)
     # Uncomment if visualisation of confusion matrix is wanted
     # plt.show()
-    precision = classification_report(y_test,Y_pred)
+    precision = classification_report(y_test,y_pred)
     print(precision)
 
     # Uncomment if you want results seperated by type
-    # precision,recall,fscore,support=score(y_test,Y_pred,average=None)
+    # precision,recall,fscore,support=score(y_test,y_pred,average=None)
     
-    accuracyScore = accuracy_score(y_test, Y_pred)
-    print(accuracyScore)
+    acc_score = accuracy_score(y_test, y_pred)
+    print(acc_score)
     print()
     print()
 
@@ -53,8 +54,8 @@ def split_df_in_readings_and_class(df):
 def run_model(x_train, y_train, x_test, y_test):
     for i in range(3):
         n_of_trees = 1*10**i
-        Y_pred = predict(x_train, y_train, x_test, n_of_trees)
-        print_prediction_results(y_test, Y_pred, n_of_trees)
+        y_pred = predict(x_train, y_train, x_test, n_of_trees)
+        print_prediction_results(y_test, y_pred, n_of_trees)
 
 def train_and_run_model(data):
     x_train, x_test, y_train, y_test = train_model(data)

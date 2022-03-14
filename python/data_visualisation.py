@@ -5,7 +5,7 @@ import os
 import data_api.retrieve_data as rd
 
 data_path = 'datasets'
-Directories = ["Driving", "High vibration", "Walking", "Hand tools", "Industrial equipment", "Stationary"]
+directories = ["Driving", "High vibration", "Walking", "Hand tools", "Industrial equipment", "Stationary"]
 
 def get_file_name_from_path(file):
     # Removes parent directories
@@ -29,7 +29,7 @@ def save_all_plots(path, folder_name, sampling):
         save_plot(filepath, title)
 
 def main():
-    for element in Directories:
+    for element in directories:
         save_all_plots(data_path, element, "None")
 
 if __name__ == '__main__':
