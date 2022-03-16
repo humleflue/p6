@@ -11,6 +11,12 @@ class DataFrameContainer:
     def sample_every_n_elements(self, n: int):
         return DataFrameContainer(self.df.iloc[::n], self.caption)
 
+    def vector_length_df(self):
+        length_li = []
+        for index, row in self.df.iterrows():
+            length_li.append(row["X"] ** 2 + row["Y"] ** 2 + row["Z"] ** 2)
+        return DataFrameContainer(pd.DataFrame(length_li, columns=['Length']), self.caption)
+
 
 def get_file_name_from_path(file_path):
     # Removes parent directories
