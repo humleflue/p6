@@ -27,15 +27,6 @@ def sample_every_n_elements_list(data_frames: list[rd.DataFrameContainer], n: in
 
     return result
 
-# def vector_length(data_frames: list[rd.DataFrameContainer]):
-#     result = []
-#
-#     for dfc in data_frames:
-#          = math.sqrt(dfc.df["X"]**2+dfc.df["Y"]**2+dfc.df["Z"]**2)
-#         result.append(sampled_dfc)
-#     print(result[0])
-
-
 
 if __name__ == '__main__':
     main()
