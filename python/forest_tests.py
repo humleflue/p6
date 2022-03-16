@@ -77,6 +77,7 @@ def test_single_data_source(data, status, test_data):
 ### ALL DATA TEST ###
 def all_data_random_forest(data_path):
     all_data = rd.combine_all_data_frames(data_path)
+    all_data = pd.concat(all_data, axis=0, ignore_index=True)
     train_and_run_model(all_data)
 #####################
 
