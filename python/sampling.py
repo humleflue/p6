@@ -9,11 +9,14 @@ data_path = 'datasets'
 def main():
     moving_data = rd.get_moving_data(os.path.join(base_dir_path, data_path))
 
-    sample_sizes = [1, 50, 200, 500]
-    for sample_size in sample_sizes:
-        sampled_moving_data = sample_every_n_elements_list(moving_data, sample_size)
-        visualise.save_all_plots(sampled_moving_data, f'{sample_size}')
-
+    # sample_sizes = [1, 50, 200, 500]
+    # for sample_size in sample_sizes:
+    #     sampled_moving_data = sample_every_n_elements_list(moving_data, sample_size)
+    #     visualise.save_all_plots(sampled_moving_data, f'{sample_size}')
+    # print(moving_data)
+    for dataframe in moving_data:
+        sampled_data = dataframe.vector_length_df()
+        visualise.save_plot(sampled_data, "vector length")
 
 def sample_every_n_elements_list(data_frames: list[rd.DataFrameContainer], n: int) -> list[rd.DataFrameContainer]:
     result = []
@@ -23,6 +26,15 @@ def sample_every_n_elements_list(data_frames: list[rd.DataFrameContainer], n: in
         result.append(sampled_dfc)
 
     return result
+
+# def vector_length(data_frames: list[rd.DataFrameContainer]):
+#     result = []
+#
+#     for dfc in data_frames:
+#          = math.sqrt(dfc.df["X"]**2+dfc.df["Y"]**2+dfc.df["Z"]**2)
+#         result.append(sampled_dfc)
+#     print(result[0])
+
 
 
 if __name__ == '__main__':
