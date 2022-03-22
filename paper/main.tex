@@ -1,0 +1,32 @@
+\input{Setup/preamble}
+\input{Setup/macros}
+
+\begin{document}
+% Adds page numbers (hides on first page)
+\thispagestyle{plain}
+\pagestyle{plain}
+
+
+\input{Setup/Sections/front_page_header}
+\maketitle
+
+% INTRODUCTION
+\input{Paper/1.Introduction/_index}
+
+
+% REFERENCES
+\bibliographystyle{IEEEtran}
+\nocite{*}
+\bibliography{Setup/Sections/mybib}
+
+\vfill
+\newpage
+\vspace{10cm}
+
+\newpage
+
+% APPENDICES
+%\begin{landscape}
+\input{Paper/Appendices/_index}
+%\end{landscape}
+\end{document}
