@@ -11,7 +11,7 @@ class DataFrameContainer:
         self.caption = caption
 
     def sample_every_n_elements(self, n: int):
-        return DataFrameContainer(self.df.iloc[:n], self.caption)
+        return DataFrameContainer(self.df.iloc[::n], self.caption)
 
     def vector_length_df(self):
         length_li = []
