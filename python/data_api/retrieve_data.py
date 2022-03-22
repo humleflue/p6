@@ -1,3 +1,5 @@
+import math
+
 import pandas as pd
 import glob as glob
 import os
@@ -9,12 +11,12 @@ class DataFrameContainer:
         self.caption = caption
 
     def sample_every_n_elements(self, n: int):
-        return DataFrameContainer(self.df.iloc[::n], self.caption)
+        return DataFrameContainer(self.df.iloc[0:700:n], self.caption)
 
     def vector_length_df(self):
         length_li = []
         for index, row in self.df.iterrows():
-            length_li.append(row["X"] ** 2 + row["Y"] ** 2 + row["Z"] ** 2)
+            length_li.append(math.sqrt(row["X"] ** 2 + row["Y"] ** 2 + row["Z"] ** 2))
         return DataFrameContainer(pd.DataFrame(length_li, columns=['Length']), self.caption)
 
 
