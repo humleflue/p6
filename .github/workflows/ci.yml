@@ -6,9 +6,6 @@ on:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: ./paper
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
@@ -16,6 +13,7 @@ jobs:
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
         with:
+          working_directory: paper
           root_file: main.tex
 
       - name: Create Release
@@ -35,7 +33,8 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
+          working_directory: paper
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./DeepNeuralNetworksOnLowConsumptionDevices.pdf
+          asset_path: ./paper/DeepNeuralNetworksOnLowConsumptionDevices.pdf
           asset_name: DeepNeuralNetworksOnLowConsumptionDevices.pdf
           asset_content_type: pdf
