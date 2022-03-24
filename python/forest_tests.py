@@ -8,7 +8,7 @@ from sklearn.metrics import classification_report, confusion_matrix, ConfusionMa
 import data_api.retrieve_data as rd
 import os
 
-data_path = 'datasets'
+data_path = '../datasets'
 
 def train_model(data):
     x = data.iloc[:,0:3].values
@@ -45,7 +45,7 @@ def print_prediction_results(y_test, y_pred, n_of_trees):
     print()
 
 def add_status_to_df(df, status):
-    df["Status"] = status
+    df.df["Status"] = status
     return df
 
 def split_df_in_readings_and_class(df):
@@ -67,7 +67,7 @@ def test_single_data_source(data, status, test_data):
 
     test_df = rd.get_file_by_path_and_name(data_path, test_data)
     test_df = add_status_to_df(test_df, status)
-    test_data, test_data_class = split_df_in_readings_and_class(test_df)
+    test_data, test_data_class = split_df_in_readings_and_class(test_df.df)
 
     run_model(x_train, y_train, test_data, test_data_class)
     
@@ -76,8 +76,11 @@ def test_single_data_source(data, status, test_data):
 
 ### ALL DATA TEST ###
 def all_data_random_forest(data_path):
-    all_data = rd.combine_all_data_frames(data_path)
-    all_data = pd.concat(all_data, axis=0, ignore_index=True)
+    all_data = rd.combine_all_data_frames(data_path, "moving", "using", "stationary")
+    all_data_df = []
+    for df in all_data:
+        all_data_df.append(df.df)
+    all_data = pd.concat(all_data_df, axis=0, ignore_index=True)
     train_and_run_model(all_data)
 #####################
 
