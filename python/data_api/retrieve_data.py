@@ -1,3 +1,5 @@
+import math
+
 import pandas as pd
 import glob as glob
 import os
@@ -10,6 +12,12 @@ class DataFrameContainer:
 
     def sample_every_n_elements(self, n: int):
         return DataFrameContainer(self.df.iloc[::n], self.caption)
+
+    def vector_length_df(self):
+        length_li = []
+        for index, row in self.df.iterrows():
+            length_li.append(math.sqrt(row["X"] ** 2 + row["Y"] ** 2 + row["Z"] ** 2))
+        return DataFrameContainer(pd.DataFrame(length_li, columns=['Length']), self.caption)
 
 
 def get_file_name_from_path(file_path):
@@ -30,14 +38,18 @@ def get_csv_files_by_folder_and_return_data_frame(dataset_base_dir_path, folder_
     for file_path in all_file_paths:
         df = get_file_by_path_and_name(file_path)
         if status_value is not None:
-            df["Status"] = status_value
+            df.df["Status"] = status_value
         li.append(df)
-
     return li
 
 
 def combine_all_data_frames(path):
-    return [get_moving_data(path), get_using_data(path), get_stationary_data(path)]
+    return get_moving_data(path) + get_using_data(path) + get_stationary_data(path)
+
+
+def combine_all_data_frames(path, moving_label, using_label, stationary_label):
+    return get_moving_data(path, moving_label) + get_using_data(path, using_label) + get_stationary_data(path, stationary_label)
+
 
 
 def get_moving_data(path, status_value=None):

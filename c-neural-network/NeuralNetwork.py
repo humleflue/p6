@@ -2,6 +2,7 @@
 
 import numpy as np
 import pandas as pd
+from datetime import datetime
 
 
 def sigmoid(t):
@@ -26,10 +27,16 @@ class NeuralNetwork:
         self.output = sigmoid(np.dot(self.layer1, self.weights2))
 
     def backpropagate(self):
+        error_value = 2*(self.y - self.output)
+        sigmoid_d_output = sigmoid_deriviate(self.output)
+        sigmoid_d_layer1 = sigmoid_deriviate(self.layer1)
+        error_value_mult_sigmoid_d_output = error_value * sigmoid_d_output
+
         d_weights2 = np.dot(
-            self.layer1.T, (2*(self.y - self.output) * sigmoid_deriviate(self.output)))
-        d_weights1 = np.dot(self.input.T, (np.dot(2*(self.y - self.output) * sigmoid_deriviate(
-            self.output), self.weights2.T) * sigmoid_deriviate(self.layer1)))
+            self.layer1.T, error_value_mult_sigmoid_d_output)
+        d_weights1 = np.dot(
+            self.input.T,
+            (np.dot(error_value_mult_sigmoid_d_output, self.weights2.T) * sigmoid_d_layer1))
 
         # Updating the weights with the deriviate (slope) of the loss function
         self.weights1 += d_weights1
@@ -44,8 +51,10 @@ X = np.array([
 Y = np.array([[0], [1], [1], [0]])
 
 neural_network = NeuralNetwork(X, Y)
-for i in range(1500):
+delta1 = datetime.now()
+for i in range(1500000):
     neural_network.feedforward()
     neural_network.backpropagate()
-
+delta2 = datetime.now()
+print(delta2-delta1)
 print(neural_network.output)
