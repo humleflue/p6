@@ -38,14 +38,18 @@ def get_csv_files_by_folder_and_return_data_frame(dataset_base_dir_path, folder_
     for file_path in all_file_paths:
         df = get_file_by_path_and_name(file_path)
         if status_value is not None:
-            df["Status"] = status_value
+            df.df["Status"] = status_value
         li.append(df)
-
     return li
 
 
 def combine_all_data_frames(path):
-    return [get_moving_data(path), get_using_data(path), get_stationary_data(path)]
+    return get_moving_data(path) + get_using_data(path) + get_stationary_data(path)
+
+
+def combine_all_data_frames(path, moving, using, stationary):
+    return get_moving_data(path, moving) + get_using_data(path, using) + get_stationary_data(path, stationary)
+
 
 
 def get_moving_data(path, status_value=None):
