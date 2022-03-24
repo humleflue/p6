@@ -1,9 +1,9 @@
-name: Deploy Paper PDF
+name: Release Paper PDF
 
 on:
   workflow_run:
     workflows: Build Paper PDF # Reuse the name of your tests workflow
-    branches: main
+    branches: paper/github-actions
     types: completed
 
 jobs:
