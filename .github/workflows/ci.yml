@@ -35,6 +35,6 @@ jobs:
         with:
           working_directory: paper
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./paper/DeepNeuralNetworksOnLowConsumptionDevices.pdf
+          asset_path: ./DeepNeuralNetworksOnLowConsumptionDevices.pdf
           asset_name: DeepNeuralNetworksOnLowConsumptionDevices.pdf
           asset_content_type: pdf
