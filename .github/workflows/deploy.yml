@@ -2,7 +2,7 @@ name: Release Paper PDF
 on:
   push:
     branches:
-      - main # trigger branch
+      - paper/github-actions # trigger branch
 jobs:
   build_latex:
     runs-on: ubuntu-latest
