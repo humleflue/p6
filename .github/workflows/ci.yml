@@ -6,13 +6,15 @@ on:
 jobs:
   build_latex:
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: ./paper
     steps:
       - name: Set up Git repository
         uses: actions/checkout@v2
 
       - name: Compile LaTeX document
         uses: xu-cheng/latex-action@v2
-        working-directory: ./paper
         with:
           root_file: main.tex
 
@@ -30,7 +32,6 @@ jobs:
       - name: Upload Release Asset
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
-        working-directory: ./paper
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
