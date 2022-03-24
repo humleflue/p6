@@ -2,9 +2,9 @@ name: Release Paper PDF
 on:
   push:
     branches:
-      - paper/github-actions # trigger branch
+      - main # trigger branch
 jobs:
-  build_latex:
+  release_paper:
     runs-on: ubuntu-latest
     steps:
       - name: Set up Git repository
