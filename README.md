@@ -6,5 +6,5 @@ Our bachelor's project on Software at Aalborg University.
 
 Please name the branch according to the following convention:
 
-- If you are working with code: `<outer-dir-name>/<feature-or-bugfix>/<accurate-name>`
+- If you are working with code: `<outer-dir-name>/<feature|bugfix>/<accurate-name>`
 - If you are working with the paper: `<outer-dir-name>/<section-name>`
