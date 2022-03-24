@@ -47,8 +47,8 @@ def combine_all_data_frames(path):
     return get_moving_data(path) + get_using_data(path) + get_stationary_data(path)
 
 
-def combine_all_data_frames(path, moving, using, stationary):
-    return get_moving_data(path, moving) + get_using_data(path, using) + get_stationary_data(path, stationary)
+def combine_all_data_frames(path, moving_label, using_label, stationary_label):
+    return get_moving_data(path, moving_label) + get_using_data(path, using_label) + get_stationary_data(path, stationary_label)
 
 
 
