@@ -1,21 +1,16 @@
-name: Build Paper PDF
+name: Deploy Paper PDF
+
 on:
-  push:
-    branches:
-      - main # trigger branch
+  workflow_run:
+    workflows: Build Paper PDF # Reuse the name of your tests workflow
+    branches: main
+    types: completed
+
 jobs:
-  build_latex:
+  release_paper:
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
     runs-on: ubuntu-latest
     steps:
-      - name: Set up Git repository
-        uses: actions/checkout@v2
-
-      - name: Compile LaTeX document
-        uses: xu-cheng/latex-action@v2
-        with:
-          working_directory: paper
-          root_file: main.tex
-
       - name: Create Release
         id: create_release
         uses: actions/create-release@v1
