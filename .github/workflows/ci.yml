@@ -11,9 +11,10 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Compile LaTeX document
+        working-directory: ./paper
         uses: xu-cheng/latex-action@v2
         with:
-          root_file: paper/main.tex
+          root_file: main.tex
 
       - name: Create Release
         id: create_release
@@ -27,12 +28,13 @@ jobs:
           prerelease: false
 
       - name: Upload Release Asset
+        working-directory: ./paper
         id: upload-release-asset
         uses: actions/upload-release-asset@v1
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./paper/DeepNeuralNetworksOnLowConsumptionDevices.pdf
+          asset_path: ./DeepNeuralNetworksOnLowConsumptionDevices.pdf
           asset_name: DeepNeuralNetworksOnLowConsumptionDevices.pdf
           asset_content_type: pdf
