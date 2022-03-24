@@ -1,5 +1,11 @@
 name: Build Paper PDF
-on: "push"
+on:
+  push:
+    branches:
+      - "*" # matches every branch that doesn't contain a '/'
+      - "*/*" # matches every branch containing a single '/'
+      - "**" # matches every branch
+      - "!main" # excludes master
 
 jobs:
   build_latex:
