@@ -12,7 +12,7 @@ using_labels = ['Industrial equipment', 'High vibration', 'Hand tools']
 stationary_labels = ['Stationary']
 walking_labels = ['Walking']
 
-def get_data():
+def get_flattened_data():
     all_data = rd.get_file_by_path_and_name('all_data_noise_removed_3_second_series_flattened.csv', ',')
     return all_data
 
@@ -70,7 +70,7 @@ def print_prediction(y_test, y_pred, n_of_trees):
     print()
 
 def main():
-    all_data_class = get_data()
+    all_data_class = get_flattened_data()
     add_classification(all_data_class)
     x_train, x_test, y_train, y_test = transform_data(all_data_class)
     for i in range(1,10):
