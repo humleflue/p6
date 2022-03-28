@@ -1,10 +1,9 @@
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_recall_fscore_support as score
 import data_api.retrieve_data as rd
 import numpy as np
-
+import printing as prt
 
 data_path = '../datasets'
 driving_labels = ['Driving']
@@ -49,26 +48,6 @@ def predict(classifier, x_test):
     y_pred = classifier.predict(x_test)
     return y_pred
 
-# This is a 1:1 copy of the function in forest_test.py
-# Maybe we should have a different file for printing?
-def print_prediction(y_test, y_pred, n_of_trees):
-    print(f"----------------------- {n_of_trees} trees -----------------------")
-    ConfusionMatrixDisplay.from_predictions(y_test, y_pred)
-    conf_matrix = confusion_matrix(y_test,y_pred)
-    print(conf_matrix)
-    # Uncomment if visualisation of confusion matrix is wanted
-    # plt.show()
-    precision = classification_report(y_test,y_pred)
-    print(precision)
-
-    # Uncomment if you want results seperated by type
-    # precision,recall,fscore,support=score(y_test,y_pred,average=None)
-
-    acc_score = accuracy_score(y_test, y_pred)
-    print(acc_score)
-    print()
-    print()
-
 def main():
     all_data_class = get_flattened_data()
     add_classification(all_data_class)
@@ -78,7 +57,7 @@ def main():
         n_of_trees = i
         classifier = train_model(x_train, y_train, n_of_trees)
         y_pred = classifier. predict(x_test)
-        print_prediction(y_test, y_pred, n_of_trees)
+        prt.print_random_forest_predictions(y_test, y_pred, n_of_trees)
 
 
 if __name__ == '__main__':
