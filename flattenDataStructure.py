@@ -32,4 +32,4 @@ def create_all_file_paths(dirName="datasets"):
            all_file_paths.append(f"{dirName}/{subDir}/{fileName}")
     return all_file_paths
 
-flatten_datasets().to_csv("all_data_flattened.csv", index=False)
+flatten_datasets().to_csv("all_data_noise_removed_flattened.csv", index=False)
