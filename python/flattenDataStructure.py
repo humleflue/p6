@@ -7,7 +7,7 @@ shortest_file_length = 768
 shortest_file_name = "Dataset air wrench 1.csv"
 rows_per_time_series = 180 #15 seconds of measurements
 
-def flatten_datasets(dirName="datasets"):
+def flatten_datasets(dirName="../datasets"):
     all_datasets_flattened = []
     all_file_paths = create_all_file_paths(dirName)
 
@@ -25,7 +25,7 @@ def create_time_series_partition(partition, rows_per_time_series, dataFrame, lab
     time_series = time_series.assign(label=[label])
     return time_series.values.tolist()[0]
 
-def create_all_file_paths(dirName="datasets"):
+def create_all_file_paths(dirName="../datasets"):
     all_file_paths = []
     for subDir in listdir(dirName):
         for fileName in listdir(f"{dirName}/{subDir}"):
