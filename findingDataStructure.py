@@ -6,8 +6,6 @@ from numpy import savetxt
 from pandas import read_csv
 
 # return list of traces, and arrays for targets, groups and paths
-
-
 def load_dataset(prefix='MovementAll/'):
     grps_dir, data_dir = prefix+'groups/', prefix+'dataset/'
     # load mapping files
