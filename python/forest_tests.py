@@ -11,8 +11,6 @@ data_path = '../datasets'
 def train_model(data):
     x = data.iloc[:,0:3].values
     y = data.iloc[:,3].values
-    print("x", x)
-    print("y", y)
     x_train, x_test, y_train, y_test = train_test_split(x,y, test_size = 0.2, random_state = 0)
     sc = StandardScaler()
     x_train = sc.fit_transform(x_train)

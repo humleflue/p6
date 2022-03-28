@@ -31,8 +31,8 @@ def add_classification(dfc : rd.DataFrameContainer):
           dfc.df.iloc[index, -1] = "Walking"
 
 def transform_data(dfc : rd.DataFrameContainer):
-    x = dfc.df.iloc[:,:-2]
-    y = dfc.df.iloc[:,-1:]
+    x = dfc.df.iloc[:,:-2].values
+    y = dfc.df.iloc[:,-1:].values
     x_train, x_test, y_train, y_test = train_test_split(x,y, test_size = 0.2, random_state = 0)
     sc = StandardScaler()
     x_train = sc.fit_transform(x_train)
