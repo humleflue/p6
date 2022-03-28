@@ -14,7 +14,8 @@
       "*.fls": true,
       "*.log": true,
       "*.out": true,
-      "*.gz": true
+      "*.gz": true,
+      "*.lox": true
     }
   }
 }
