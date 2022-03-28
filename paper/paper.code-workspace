@@ -15,9 +15,13 @@
       "*.log": true,
       "*.out": true,
       "*.gz": true,
-      "*.lox": true
+      "*.lox": true,
+      "*.dvi": true
     },
-    "cSpell.enableFiletypes": ["tex"],
+    "cSpell.enableFiletypes": [
+      "!jsonc",
+      "tex"
+    ],
     "cSpell.words": ["FIXMES"]
   }
 }
