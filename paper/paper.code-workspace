@@ -18,8 +18,7 @@
       "*.gz": true,
       "*.lox": true
     },
-    "cSpell.enableFiletypes": [
-      "tex"
-    ]
+    "cSpell.enableFiletypes": ["tex"],
+    "cSpell.words": ["FIXMES"]
   }
 }
