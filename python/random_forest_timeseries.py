@@ -13,7 +13,7 @@ stationary_labels = ['Stationary']
 walking_labels = ['Walking']
 
 def get_data():
-    all_data = rd.get_file_by_path_and_name('all_data_flattened.csv', ',')
+    all_data = rd.get_file_by_path_and_name('all_data_noise_removed_3_second_series_flattened.csv', ',')
     return all_data
 
 def add_classification(dfc : rd.DataFrameContainer):
