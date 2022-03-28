@@ -1,0 +1,20 @@
+{
+  "folders": [
+    {
+      "path": "."
+    }
+  ],
+  "settings": {
+    // Exclude the following files from VS Code's file explorer
+    "files.exclude": {
+      "*.aux": true,
+      "*.bbl": true,
+      "*.blg": true,
+      "*.fdb_latexmk": true,
+      "*.fls": true,
+      "*.log": true,
+      "*.out": true,
+      "*.gz": true
+    }
+  }
+}
