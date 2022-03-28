@@ -1,12 +1,10 @@
 import pandas as pd
-import matplotlib.pyplot as plt
-from sklearn import tree
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
-from sklearn.metrics import classification_report, confusion_matrix, ConfusionMatrixDisplay, accuracy_score, precision_recall_fscore_support as score
 import data_api.retrieve_data as rd
 import os
+import printing as prt
 
 data_path = '../datasets'
 
@@ -26,24 +24,6 @@ def predict(x_train, y_train, x_test, n_of_trees):
     y_pred = classifier.predict(x_test)
     return y_pred
 
-def print_prediction_results(y_test, y_pred, n_of_trees):
-    print(f"----------------------- {n_of_trees} trees -----------------------")
-    ConfusionMatrixDisplay.from_predictions(y_test, y_pred)
-    conf_matrix = confusion_matrix(y_test,y_pred)
-    print(conf_matrix)
-    # Uncomment if visualisation of confusion matrix is wanted
-    # plt.show()
-    precision = classification_report(y_test,y_pred)
-    print(precision)
-
-    # Uncomment if you want results seperated by type
-    # precision,recall,fscore,support=score(y_test,y_pred,average=None)
-    
-    acc_score = accuracy_score(y_test, y_pred)
-    print(acc_score)
-    print()
-    print()
-
 def add_status_to_df(df, status):
     df.df["Status"] = status
     return df
@@ -55,7 +35,7 @@ def run_model(x_train, y_train, x_test, y_test):
     for i in range(3):
         n_of_trees = 1*10**i
         y_pred = predict(x_train, y_train, x_test, n_of_trees)
-        print_prediction_results(y_test, y_pred, n_of_trees)
+        prt.print_random_forest_predictions(y_test, y_pred, n_of_trees)
 
 def train_and_run_model(data):
     x_train, x_test, y_train, y_test = train_model(data)
