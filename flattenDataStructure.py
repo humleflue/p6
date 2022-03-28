@@ -20,8 +20,8 @@ def create_dataframe_with_flattened_datasets(dirName="datasets"):
     return pd.DataFrame(all_datasets_flattened)
 
 def create_time_series_partition(partition, rows_per_time_series, dataFrame, label):
-    time_series = dataFrame.iloc[partition*rows_per_time_series:(partition + 1 )*rows_per_time_series,:]
-    time_series = time_series.unstack().to_frame().sort_index(level=1).T
+    time_series = dataFrame.iloc[partition*rows_per_time_series:(partition + 1 )*rows_per_time_series:] # +1 because partition starts at 0, and we don't want the upper bound to be multiplied by 0
+    time_series = time_series.unstack().to_frame().sort_index(level=1).T #Flattens the dataframe putting all rows after each other in one row
     time_series = time_series.assign(label=[label])
     return time_series.values.tolist()[0]
 
