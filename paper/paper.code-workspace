@@ -17,6 +17,9 @@
       "*.out": true,
       "*.gz": true,
       "*.lox": true
-    }
+    },
+    "cSpell.enableFiletypes": [
+      "tex"
+    ]
   }
 }
