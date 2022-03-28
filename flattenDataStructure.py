@@ -7,7 +7,7 @@ shortest_file_length = 768
 shortest_file_name = "Dataset air wrench 1.csv"
 rows_per_time_series = 180 #15 seconds of measurements
 
-def flatten_datasets(dirName="datasets"):
+def create_dataframe_with_flattened_datasets(dirName="datasets"):
     all_datasets_flattened = []
     all_file_paths = create_all_file_paths(dirName)
 
@@ -32,4 +32,4 @@ def create_all_file_paths(dirName="datasets"):
            all_file_paths.append(f"{dirName}/{subDir}/{fileName}")
     return all_file_paths
 
-flatten_datasets().to_csv("all_data_noise_removed_flattened.csv", index=False)
+create_dataframe_with_flattened_datasets().to_csv("all_data_noise_removed_flattened.csv", index=False)
