@@ -1,0 +1,5 @@
+2022/03/01-10:36:12.110 1e60 Log #3: 2 ops saved to Table #4 OK
+2022/03/01-10:36:12.116 1e60 Archiving C:\Users\chris\6.Semester\Projekt\p6\simplicity-studio-workspace-directory\.browser\Default\Site Characteristics Database/000003.log: OK
+2022/03/01-10:36:12.117 1e60 Table #4: 2 entries OK
+2022/03/01-10:36:12.125 1e60 Archiving C:\Users\chris\6.Semester\Projekt\p6\simplicity-studio-workspace-directory\.browser\Default\Site Characteristics Database/MANIFEST-000001: OK
+2022/03/01-10:36:12.148 1e60 **** Repaired leveldb C:\Users\chris\6.Semester\Projekt\p6\simplicity-studio-workspace-directory\.browser\Default\Site Characteristics Database; recovered 1 files; 191 bytes. Some data may have been lost. ****
