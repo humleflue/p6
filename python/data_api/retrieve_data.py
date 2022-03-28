@@ -75,6 +75,11 @@ def get_file_by_path_and_name(path) -> DataFrameContainer:
     file_name_without_file_extension = get_file_name_from_path(path)
     return DataFrameContainer(df, file_name_without_file_extension)
 
+def get_file_by_path_and_name(path, sep = ';') -> DataFrameContainer:
+    df = pd.read_csv(path, sep=sep, index_col=None, header=0)
+    file_name_without_file_extension = get_file_name_from_path(path)
+    return DataFrameContainer(df, file_name_without_file_extension)
+
 
 def main():
     print("running")
