@@ -33,6 +33,9 @@
 #include "gatt_db.h"
 #include "app.h"
 
+// The advertising set handle allocated from Bluetooth stack.
+static uint8_t advertising_set_handle = 0xff;
+
 /**************************************************************************//**
  * Application Init.
  *****************************************************************************/
@@ -44,6 +47,10 @@ SL_WEAK void app_init(void)
   /////////////////////////////////////////////////////////////////////////////
 }
 
+
+const uint8_t foo[6]={0x02,0x01,0x06,0x02,0x09,0x3F};
+//uint8_t* pointerToFoo = &foo;
+
 /**************************************************************************//**
  * Application Process Action.
  *****************************************************************************/
@@ -54,21 +61,9 @@ SL_WEAK void app_process_action(void)
   // This is called infinitely.                                              //
   // Do not call blocking functions from here!                               //
   /////////////////////////////////////////////////////////////////////////////
-
+  //gecko_cmd_le_gap_set_advertise_timing(0, 160, 160, 0, 0);
+  //gecko_cmd_le_gap_start_advertising(0, 2, 0);
 }
-
-typedef struct {
-  int32_t duration;
-  uint8_t power;
-} ad_data_t __attribute__((packed));
-
-static ad_data_t ad_data = {
-  .duration = 0xFFFF,
-  .power = 0,
-};
-
-uint32_t advertising_set_handle = 0xFF;
-
 
 /**************************************************************************//**
  * Bluetooth stack event handler.
@@ -88,6 +83,7 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
     // This event indicates the device has started and the radio is ready.
     // Do not call any stack command before receiving this boot event!
     case sl_bt_evt_system_boot_id:
+
       // Extract unique ID from BT Address.
       sc = sl_bt_system_get_identity_address(&address, &address_type);
       app_assert_status(sc);
@@ -112,8 +108,10 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
       sc = sl_bt_advertiser_create_set(&advertising_set_handle);
       app_assert_status(sc);
 
-      sc = sl_bt_advertiser_set_data (advertising_set_handle, 0, sizeof(ad_data), &ad_data);
-      app_assert_status(sc);
+
+      //Jacob og Laurits
+      sl_bt_advertiser_set_channel_map(advertising_set_handle, 7);
+
 
       // Set advertising interval to 100ms.
       sc = sl_bt_advertiser_set_timing(
@@ -121,48 +119,35 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
         160, // min. adv. interval (milliseconds * 1.6)
         160, // max. adv. interval (milliseconds * 1.6)
         0,   // adv. duration
-        10);  // max. num. adv. events
+        0);  // max. num. adv. events
+      app_assert_status(sc);
+      // Start general advertising and enable connections.
+
+
+
+
+      sc = sl_bt_advertiser_set_data(
+          advertising_set_handle,
+          0,
+          sizeof(foo),
+          (const uint8_t*)&foo
+          );
+
 
       app_assert_status(sc);
 
-      // Start general advertising and enable connections.
-      sc = sl_bt_advertiser_start(advertising_set_handle,
-                                  sl_bt_advertiser_user_data,
-                                  sl_bt_advertiser_connectable_scannable);
+      sc = sl_bt_advertiser_start(
+        advertising_set_handle,
+        sl_bt_advertiser_user_data,
+        sl_bt_advertiser_connectable_scannable);
+
       app_assert_status(sc);
       break;
 
     // -------------------------------
     // This event indicates that a new connection was opened.
     case sl_bt_evt_connection_opened_id:
-    {
       break;
-    }
-
-
-    case sl_bt_evt_advertiser_timeout_id:
-    {
-      ad_data.power++;
-
-      sc = sl_bt_advertiser_set_data (advertising_set_handle, 0, sizeof(ad_data), &ad_data);
-      app_assert_status(sc);
-
-      /*
-      // Start general advertising and enable connections.
-      sc = sl_bt_advertiser_start(advertising_set_handle,
-                                  sl_bt_advertiser_general_discoverable,
-                                  sl_bt_advertiser_connectable_scannable)
-      */
-
-      // Start general advertising and enable connections.
-      sc = sl_bt_advertiser_start(advertising_set_handle,
-                                  sl_bt_advertiser_user_data,
-                                  sl_bt_advertiser_connectable_scannable);
-
-
-      app_assert_status(sc);
-      break;
-    }
 
     // -------------------------------
     // This event indicates that a connection was closed.
@@ -170,7 +155,7 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
       // Restart advertising after client has disconnected.
       sc = sl_bt_advertiser_start(
         advertising_set_handle,
-        sl_bt_advertiser_general_discoverable,
+        sl_bt_advertiser_user_data,
         sl_bt_advertiser_connectable_scannable);
       app_assert_status(sc);
       break;
