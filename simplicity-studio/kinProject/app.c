@@ -61,8 +61,6 @@ SL_WEAK void app_process_action(void)
   // This is called infinitely.                                              //
   // Do not call blocking functions from here!                               //
   /////////////////////////////////////////////////////////////////////////////
-  //gecko_cmd_le_gap_set_advertise_timing(0, 160, 160, 0, 0);
-  //gecko_cmd_le_gap_start_advertising(0, 2, 0);
 }
 
 /**************************************************************************//**
@@ -83,7 +81,6 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
     // This event indicates the device has started and the radio is ready.
     // Do not call any stack command before receiving this boot event!
     case sl_bt_evt_system_boot_id:
-
       // Extract unique ID from BT Address.
       sc = sl_bt_system_get_identity_address(&address, &address_type);
       app_assert_status(sc);
