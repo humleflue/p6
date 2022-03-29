@@ -4,7 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 import data_api.retrieve_data as rd
 import numpy as np
 import printing as prt
-import info
+import modules.info as info
 
 def get_flattened_data():
     all_data = rd.get_file_by_path_and_name('all_data_noise_removed_3_second_series_flattened.csv', ',')
