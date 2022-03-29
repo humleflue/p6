@@ -4,12 +4,7 @@ from sklearn.ensemble import RandomForestClassifier
 import data_api.retrieve_data as rd
 import numpy as np
 import printing as prt
-
-data_path = '../datasets'
-driving_labels = ['Driving']
-using_labels = ['Industrial equipment', 'High vibration', 'Hand tools']
-stationary_labels = ['Stationary']
-walking_labels = ['Walking']
+import info
 
 def get_flattened_data():
     all_data = rd.get_file_by_path_and_name('all_data_noise_removed_3_second_series_flattened.csv', ',')
@@ -20,13 +15,13 @@ def add_classification(dfc : rd.DataFrameContainer):
 
     for index, row in dfc.df.iterrows():
         dataset_name = row[-2].split("/")[2]
-        if dataset_name in driving_labels:
+        if dataset_name in info.driving_labels:
           dfc.df.iloc[index, -1] = "Driving"
-        elif dataset_name in using_labels:
+        elif dataset_name in info.using_labels:
           dfc.df.iloc[index, -1] = "Using"
-        elif dataset_name in stationary_labels:
+        elif dataset_name in info.stationary_labels:
           dfc.df.iloc[index, -1] = "Stationary"
-        elif dataset_name in walking_labels:
+        elif dataset_name in info.walking_labels:
           dfc.df.iloc[index, -1] = "Walking"
 
 def transform_data(dfc : rd.DataFrameContainer):
