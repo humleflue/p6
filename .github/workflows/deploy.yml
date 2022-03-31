@@ -1,6 +1,8 @@
 name: Release Paper PDF
 on:
   push:
+    paths:
+      - "paper"
     branches:
       - main # trigger branch
 jobs:
