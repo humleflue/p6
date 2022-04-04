@@ -55,7 +55,7 @@ def run_svm(X_train, X_test, Y_train, Y_test, conf: SVCConfiguration) -> SVCConf
 
 def main():
     # Setup
-    df = pd.read_csv("all_data_noise_removed_3_second_series_flattened.csv")
+    df = pd.read_csv("../datasetsModified/flattened_datasets/flattened_1sec_with_broad_category.csv")
     df["broad_category"] = "None" # This adds an extra column to the df
     df = info.add_classification_to_df(df)
     X_train, X_test, Y_train, Y_test = get_train_test_split(df)
