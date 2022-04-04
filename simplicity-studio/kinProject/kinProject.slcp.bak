@@ -16,10 +16,9 @@ include:
 - path: ''
   file_list:
   - {path: app.h}
-sdk: {id: gecko_sdk, version: 4.0.2}
+sdk: {id: gecko_sdk, version: 4.0.1}
 toolchain_settings: []
 component:
-- {id: emlib_i2c}
 - {id: EFR32BG22C224F512GM32}
 - {id: bluetooth_feature_connection}
 - {id: bluetooth_feature_gatt_server}

@@ -32,6 +32,10 @@
 #include "sl_bluetooth.h"
 #include "gatt_db.h"
 #include "app.h"
+#include "em_i2c.h"
+#include "em_cmu.h"
+#include "em_gpio.h"
+#include "pin_config.h"
 
 // The advertising set handle allocated from Bluetooth stack.
 static uint8_t advertising_set_handle = 0xff;
@@ -45,6 +49,40 @@ SL_WEAK void app_init(void)
   // Put your additional application init code here!                         //
   // This is called once during start-up.                                    //
   /////////////////////////////////////////////////////////////////////////////
+
+  CMU_ClockEnable(cmuClock_I2C0, true);
+  CMU_ClockEnable(cmuClock_GPIO, true);
+
+  GPIO_PinModeSet(I2C0_SCL_PORT, I2C0_SCL_PIN, gpioModeWiredAndAlternate, 1);
+  GPIO_PinModeSet(I2C0_SDA_PORT, I2C0_SCL_PIN, gpioModeWiredAndAlternate, 1);
+
+  I2C_Init_TypeDef i2c_init = I2C_INIT_DEFAULT;
+  I2C_Init(I2C0, &i2c_init);
+
+  uint8_t probe_write_buf[1] = { 0x0F };
+  uint8_t probe_read_buf[1];
+
+  I2C_TransferSeq_TypeDef probe_transfer_data =
+  {
+    .addr = 0b0011001,
+    .flags = I2C_FLAG_WRITE_READ,
+    .buf[0].data = probe_write_buf,
+    .buf[0].len = 1,
+    .buf[1].data = probe_read_buf,
+    .buf[1].len = 1,
+  };
+
+  I2C_TransferReturn_TypeDef ret = I2C_TransferInit (I2C0, &probe_transfer_data);
+  while (ret == i2cTransferInProgress)
+  {
+    ret = I2C_Transfer(I2C0);
+  }
+
+  if (probe_read_buf[0] == 0x44)
+  {
+    volatile uint8_t i = 0;
+    i++;
+  }
 }
 
 
