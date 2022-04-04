@@ -1,12 +1,14 @@
 import pandas as pd
 import math
+import numpy as np
 from os import listdir
+from typing import Final
 
 shortest_file_length = 768
 shortest_file_name = "Dataset air wrench 1.csv"
-rows_per_time_series = 36 #15 seconds of measurements
+ROWS_PER_TIMESERIES: Final = np.arange(1, 13, 1)
 
-def create_dataframe_with_flattened_datasets(dirName="../datasets"):
+def create_dataframe_with_flattened_datasets(rows_per_time_series, dirName="../datasetsTU"):
     all_datasets_flattened = []
     all_file_paths = create_all_file_paths(dirName)
 
@@ -24,11 +26,13 @@ def create_time_series_partition(partition, rows_per_time_series, dataFrame, lab
     time_series = time_series.assign(label=[label])
     return time_series.values.tolist()[0]
 
-def create_all_file_paths(dirName="../datasets"):
+def create_all_file_paths(dirName="../datasetsTU"):
     all_file_paths = []
     for subDir in listdir(dirName):
         for fileName in listdir(f"{dirName}/{subDir}"):
-           all_file_paths.append(f"{dirName}/{subDir}/{fileName}")
+            all_file_paths.append(f"{dirName}/{subDir}/{fileName}")
     return all_file_paths
 
-create_dataframe_with_flattened_datasets().to_csv("all_data_noise_removed_3_second_series_flattened.csv", index=False)
+for timeseries_size in ROWS_PER_TIMESERIES:
+    create_dataframe_with_flattened_datasets(timeseries_size).to_csv(f"all_data_noise_removed_small{timeseries_size}_points_series_flattened.csv", index=False)
+    print(timeseries_size, "done")
