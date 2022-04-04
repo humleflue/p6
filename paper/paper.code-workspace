@@ -5,6 +5,7 @@
     }
   ],
   "settings": {
+    "cSpell.words": ["cheng"],
     // Exclude the following files from VS Code's file explorer
     "files.exclude": {
       "*.aux": true,
