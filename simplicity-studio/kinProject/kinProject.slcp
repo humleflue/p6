@@ -1,6 +1,6 @@
 # Silicon Labs Project Configuration Tools: slcp, v0, Component selection file.
-project_name: test
-label: test
+project_name: kinProject
+label: kinProject
 description: |
   A minimal project structure, that serves as a starting point for custom Bluetooth applications. It contains a minimal GATT database that can be expanded to fit your application requirements. The application starts advertising after boot and restarts advertising after a connection is closed. It also supports Over-the-Air Device Firmware Upgrade (OTA DFU).
 category: Bluetooth Examples
@@ -16,9 +16,10 @@ include:
 - path: ''
   file_list:
   - {path: app.h}
-sdk: {id: gecko_sdk, version: 4.0.1}
+sdk: {id: gecko_sdk, version: 4.0.2}
 toolchain_settings: []
 component:
+- {id: emlib_i2c}
 - {id: EFR32BG22C224F512GM32}
 - {id: bluetooth_feature_connection}
 - {id: bluetooth_feature_gatt_server}
@@ -43,7 +44,6 @@ other_file:
 - {path: readme_img2.png}
 - {path: readme_img3.png}
 - {path: readme_img4.png}
-config_file: []
 configuration:
 - {name: SL_STACK_SIZE, value: '2752'}
 - {name: SL_HEAP_SIZE, value: '9200'}
