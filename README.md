@@ -13,4 +13,3 @@ In the project explorer click on main.c and now you can debug using F11 or Run -
 
 ## FAQ
 Q: Why do I **have to** clone into `C:\GitRepos`?
-A: Because Simplicity Studio sucks :)
