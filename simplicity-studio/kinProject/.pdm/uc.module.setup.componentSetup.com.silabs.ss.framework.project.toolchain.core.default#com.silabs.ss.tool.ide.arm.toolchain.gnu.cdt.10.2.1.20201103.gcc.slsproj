@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project name="uc.module.setup.componentSetup.com.silabs.ss.framework.project.toolchain.core.default#com.silabs.ss.tool.ide.arm.toolchain.gnu.cdt:10.2.1.20201103.gcc" propertyScope="project">
-  <folder name="gecko_sdk_4.0.1">
+  <folder name="gecko_sdk_4.0.2">
     <folder name="platform">
       <folder name="Device">
         <folder name="SiliconLabs">
@@ -221,6 +221,7 @@
           <file name="em_core.c" uri="studio:/sdk/platform/emlib/src/em_core.c"/>
           <file name="em_emu.c" uri="studio:/sdk/platform/emlib/src/em_emu.c"/>
           <file name="em_gpio.c" uri="studio:/sdk/platform/emlib/src/em_gpio.c"/>
+          <file name="em_i2c.c" uri="studio:/sdk/platform/emlib/src/em_i2c.c"/>
           <file name="em_msc.c" uri="studio:/sdk/platform/emlib/src/em_msc.c"/>
           <file name="em_prs.c" uri="studio:/sdk/platform/emlib/src/em_prs.c"/>
           <file name="em_rtcc.c" uri="studio:/sdk/platform/emlib/src/em_rtcc.c"/>
@@ -240,6 +241,7 @@
           <file name="em_core.h" uri="studio:/sdk/platform/emlib/inc/em_core.h"/>
           <file name="em_emu.h" uri="studio:/sdk/platform/emlib/inc/em_emu.h"/>
           <file name="em_gpio.h" uri="studio:/sdk/platform/emlib/inc/em_gpio.h"/>
+          <file name="em_i2c.h" uri="studio:/sdk/platform/emlib/inc/em_i2c.h"/>
           <file name="em_msc.h" uri="studio:/sdk/platform/emlib/inc/em_msc.h"/>
           <file name="em_msc_compat.h" uri="studio:/sdk/platform/emlib/inc/em_msc_compat.h"/>
           <file name="em_prs.h" uri="studio:/sdk/platform/emlib/inc/em_prs.h"/>
@@ -632,17 +634,17 @@
       </folder>
     </folder>
   </folder>
-  <file name="main.c" linked="false" uri="studio:/sdk/app/bluetooth/example/soc_empty/main.c"/>
-  <file name="app.c" linked="false" uri="studio:/sdk/app/bluetooth/example/soc_empty/app.c"/>
-  <file name="app.h" linked="false" uri="studio:/sdk/app/bluetooth/example/soc_empty/app.h"/>
-  <file name="create_bl_files.bat" linked="false" uri="studio:/sdk/app/bluetooth/script/create_bl_files.bat"/>
-  <file name="create_bl_files.sh" linked="false" uri="studio:/sdk/app/bluetooth/script/create_bl_files.sh"/>
-  <file name="readme_img0.png" linked="false" uri="studio:/sdk/app/bluetooth/documentation/example/soc_empty/readme_img0.png"/>
-  <file name="readme_img1.png" linked="false" uri="studio:/sdk/app/bluetooth/documentation/example/soc_empty/readme_img1.png"/>
-  <file name="readme_img2.png" linked="false" uri="studio:/sdk/app/bluetooth/documentation/example/soc_empty/readme_img2.png"/>
-  <file name="readme_img3.png" linked="false" uri="studio:/sdk/app/bluetooth/documentation/example/soc_empty/readme_img3.png"/>
-  <file name="readme_img4.png" linked="false" uri="studio:/sdk/app/bluetooth/documentation/example/soc_empty/readme_img4.png"/>
-  <file name="readme.md" linked="false" uri="studio:/sdk/app/bluetooth/documentation/example/soc_empty/readme.md"/>
+  <file name="main.c" linked="false" uri="studio:/project/main.c"/>
+  <file name="app.c" linked="false" uri="studio:/project/app.c"/>
+  <file name="app.h" linked="false" uri="studio:/project/app.h"/>
+  <file name="create_bl_files.bat" linked="false" uri="studio:/project/create_bl_files.bat"/>
+  <file name="create_bl_files.sh" linked="false" uri="studio:/project/create_bl_files.sh"/>
+  <file name="readme_img0.png" linked="false" uri="studio:/project/readme_img0.png"/>
+  <file name="readme_img1.png" linked="false" uri="studio:/project/readme_img1.png"/>
+  <file name="readme_img2.png" linked="false" uri="studio:/project/readme_img2.png"/>
+  <file name="readme_img3.png" linked="false" uri="studio:/project/readme_img3.png"/>
+  <file name="readme_img4.png" linked="false" uri="studio:/project/readme_img4.png"/>
+  <file name="readme.md" linked="false" uri="file:/C:/GitRepos/SDKs/gecko_sdk/app/bluetooth/documentation/example/soc_empty/readme.md"/>
   <includePath uri="studio:/project/"/>
   <includePath uri="studio:/sdk/platform/Device/SiliconLabs/EFR32BG22/Include"/>
   <includePath uri="studio:/sdk/app/common/util/app_assert"/>

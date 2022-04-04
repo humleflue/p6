@@ -1,9 +1,9 @@
 /***************************************************************************//**
  * @file
- * @brief HFXO Manager configuration file.
+ * @brief Application Properties Header File
  *******************************************************************************
  * # License
- * <b>Copyright 2020 Silicon Laboratories Inc. www.silabs.com</b>
+ * <b>Copyright 2021 Silicon Laboratories Inc. www.silabs.com</b>
  *******************************************************************************
  *
  * SPDX-License-Identifier: Zlib
@@ -28,29 +28,38 @@
  *
  ******************************************************************************/
 
+#ifndef APP_PROPERTIES_CONFIG_H
+#define APP_PROPERTIES_CONFIG_H
+
+#include "sl_application_type.h"
+
 // <<< Use Configuration Wizard in Context Menu >>>
 
-#ifndef SL_HFXO_MANAGER_CONFIG_H
-#define SL_HFXO_MANAGER_CONFIG_H
+// <h>App Properties settings
 
-// <h>Power Manager Configuration
+// Type of signature this application is signed with
+// Default: APPLICATION_SIGNATURE_NONE(0)
+#define SL_APPLICATION_SIGNATURE               0
 
-// <q SL_HFXO_MANAGER_CUSTOM_HFXO_IRQ_HANDLER> Enable custom IRQ handler for crystal HF oscillator.
-// <i> Enable if HFXO0_IRQHandler is needed from your application.
-// <i> The HFXO IRQ priority must not be changed as the HFXO Manager module needs it to be high priority
-// <i> and to stay enabled through atomic sections.
-// <i> The function sl_hfxo_manager_irq_handler() will have to be called from you custom handler if this is enabled.
-// <i> Default: 0
-#define SL_HFXO_MANAGER_CUSTOM_HFXO_IRQ_HANDLER  0
+// Location of the signature
+// Default: 0xFFFFFFFF
+#define SL_APPLICATION_SIGNATURE_LOCATION      0xFFFFFFFF
 
-// <q SL_HFXO_MANAGER_SLEEPY_CRYSTAL_SUPPORT> Enable support for Sleepy Crystals.
-// <i> If Enabled and if HFXO fails to startup due to a sleepy crystal, HFXO Manager will retry the startup with more aggressive settings
-// <i> before falling back to the configured settings.
-// <i> Default: 1
-#define SL_HFXO_MANAGER_SLEEPY_CRYSTAL_SUPPORT  1
+// Bitfield representing type of application
+#define SL_APPLICATION_TYPE                    APPLICATION_TYPE
+
+// <o SL_APPLICATION_VERSION> Version number for this application
+// <0-4294967295:1>
+// <i> Default: 1 [0-4294967295]
+#define SL_APPLICATION_VERSION                 1
+
+// Capabilities of this application
+// Default: 0
+#define SL_APPLICATION_CAPABILITIES            0
+
+//Product ID of the device for which the application is built
+#define SL_APPLICATION_PRODUCT_ID             { 0 }
 
 // </h>
 
-#endif /* SL_HFXO_MANAGER_CONFIG_H */
-
-// <<< end of configuration section >>>
+#endif // APP_PROPERTIES_CONFIG_H
