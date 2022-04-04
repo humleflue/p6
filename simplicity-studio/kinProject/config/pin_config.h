@@ -92,6 +92,14 @@
 // [IADC0]$
 
 // $[I2C0]
+// I2C0 SCL on PC04
+#define I2C0_SCL_PORT                            gpioPortC
+#define I2C0_SCL_PIN                             4
+
+// I2C0 SDA on PC03
+#define I2C0_SDA_PORT                            gpioPortC
+#define I2C0_SDA_PIN                             3
+
 // [I2C0]$
 
 // $[EUART0]

@@ -14,6 +14,7 @@ sl_device_init_dcdc_config.h=-412905792
 sl_device_init_emu_config.h=622680131
 sl_device_init_hfxo_config.h=1133380573
 sl_device_init_lfrco_config.h=-1106719712
+sl_emlib_gpio_init_pin_config.h=-1897173575
 sl_hfxo_manager_config.h=415033866
 sl_memory_config.h=503032768
 sl_power_manager_config.h=-1475773310
