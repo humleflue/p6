@@ -32,6 +32,13 @@
 #include "sl_bluetooth.h"
 #include "gatt_db.h"
 #include "app.h"
+#include "em_i2c.h"
+#include "em_cmu.h"
+#include "em_gpio.h"
+#include "pin_config.h"
+
+// The advertising set handle allocated from Bluetooth stack.
+static uint8_t advertising_set_handle = 0xff;
 
 /**************************************************************************//**
  * Application Init.
@@ -42,7 +49,45 @@ SL_WEAK void app_init(void)
   // Put your additional application init code here!                         //
   // This is called once during start-up.                                    //
   /////////////////////////////////////////////////////////////////////////////
+
+  CMU_ClockEnable(cmuClock_I2C0, true);
+  CMU_ClockEnable(cmuClock_GPIO, true);
+
+  GPIO_PinModeSet(I2C0_SCL_PORT, I2C0_SCL_PIN, gpioModeWiredAndAlternate, 1);
+  GPIO_PinModeSet(I2C0_SDA_PORT, I2C0_SCL_PIN, gpioModeWiredAndAlternate, 1);
+
+  I2C_Init_TypeDef i2c_init = I2C_INIT_DEFAULT;
+  I2C_Init(I2C0, &i2c_init);
+
+  uint8_t probe_write_buf[1] = { 0x0F };
+  uint8_t probe_read_buf[1];
+
+  I2C_TransferSeq_TypeDef probe_transfer_data =
+  {
+    .addr = 0b0011001,
+    .flags = I2C_FLAG_WRITE_READ,
+    .buf[0].data = probe_write_buf,
+    .buf[0].len = 1,
+    .buf[1].data = probe_read_buf,
+    .buf[1].len = 1,
+  };
+
+  I2C_TransferReturn_TypeDef ret = I2C_TransferInit (I2C0, &probe_transfer_data);
+  while (ret == i2cTransferInProgress)
+  {
+    ret = I2C_Transfer(I2C0);
+  }
+
+  if (probe_read_buf[0] == 0x44)
+  {
+    volatile uint8_t i = 0;
+    i++;
+  }
 }
+
+
+const uint8_t foo[6]={0x02,0x01,0x06,0x02,0x09,0x3F};
+//uint8_t* pointerToFoo = &foo;
 
 /**************************************************************************//**
  * Application Process Action.
@@ -54,21 +99,7 @@ SL_WEAK void app_process_action(void)
   // This is called infinitely.                                              //
   // Do not call blocking functions from here!                               //
   /////////////////////////////////////////////////////////////////////////////
-
 }
-
-typedef struct {
-  int32_t duration;
-  uint8_t power;
-} ad_data_t __attribute__((packed));
-
-static ad_data_t ad_data = {
-  .duration = 0xFFFF,
-  .power = 0,
-};
-
-uint32_t advertising_set_handle = 0xFF;
-
 
 /**************************************************************************//**
  * Bluetooth stack event handler.
@@ -112,8 +143,10 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
       sc = sl_bt_advertiser_create_set(&advertising_set_handle);
       app_assert_status(sc);
 
-      sc = sl_bt_advertiser_set_data (advertising_set_handle, 0, sizeof(ad_data), &ad_data);
-      app_assert_status(sc);
+
+      //Jacob og Laurits
+      sl_bt_advertiser_set_channel_map(advertising_set_handle, 7);
+
 
       // Set advertising interval to 100ms.
       sc = sl_bt_advertiser_set_timing(
@@ -121,48 +154,35 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
         160, // min. adv. interval (milliseconds * 1.6)
         160, // max. adv. interval (milliseconds * 1.6)
         0,   // adv. duration
-        10);  // max. num. adv. events
+        0);  // max. num. adv. events
+      app_assert_status(sc);
+      // Start general advertising and enable connections.
+
+
+
+
+      sc = sl_bt_advertiser_set_data(
+          advertising_set_handle,
+          0,
+          sizeof(foo),
+          (const uint8_t*)&foo
+          );
+
 
       app_assert_status(sc);
 
-      // Start general advertising and enable connections.
-      sc = sl_bt_advertiser_start(advertising_set_handle,
-                                  sl_bt_advertiser_user_data,
-                                  sl_bt_advertiser_connectable_scannable);
+      sc = sl_bt_advertiser_start(
+        advertising_set_handle,
+        sl_bt_advertiser_user_data,
+        sl_bt_advertiser_connectable_scannable);
+
       app_assert_status(sc);
       break;
 
     // -------------------------------
     // This event indicates that a new connection was opened.
     case sl_bt_evt_connection_opened_id:
-    {
       break;
-    }
-
-
-    case sl_bt_evt_advertiser_timeout_id:
-    {
-      ad_data.power++;
-
-      sc = sl_bt_advertiser_set_data (advertising_set_handle, 0, sizeof(ad_data), &ad_data);
-      app_assert_status(sc);
-
-      /*
-      // Start general advertising and enable connections.
-      sc = sl_bt_advertiser_start(advertising_set_handle,
-                                  sl_bt_advertiser_general_discoverable,
-                                  sl_bt_advertiser_connectable_scannable)
-      */
-
-      // Start general advertising and enable connections.
-      sc = sl_bt_advertiser_start(advertising_set_handle,
-                                  sl_bt_advertiser_user_data,
-                                  sl_bt_advertiser_connectable_scannable);
-
-
-      app_assert_status(sc);
-      break;
-    }
 
     // -------------------------------
     // This event indicates that a connection was closed.
@@ -170,7 +190,7 @@ void sl_bt_on_event(sl_bt_msg_t *evt)
       // Restart advertising after client has disconnected.
       sc = sl_bt_advertiser_start(
         advertising_set_handle,
-        sl_bt_advertiser_general_discoverable,
+        sl_bt_advertiser_user_data,
         sl_bt_advertiser_connectable_scannable);
       app_assert_status(sc);
       break;
