@@ -40,13 +40,7 @@ def run_svm(X_train, X_test, Y_train, Y_test, conf: SVCConfiguration) -> SVCConf
     conf.set_accuracy(accuracy)
     return conf
 
-def main(path_to_dataset="../datasetsModified/flattened_datasets/flattened_1sec_with_broad_category.csv"):
-    # Setup
-    df = pd.read_csv(path_to_dataset)
-    df["broad_category"] = "None" # This adds an extra column to the df
-    df = info.add_classification_to_df(df)
-    X_train, X_test, Y_train, Y_test = get_train_test_split(df)
-
+def run_grid_search_on_configurations(X_train, X_test, Y_train, Y_test):
     configs = []
     for kernel in KERNELS:
         print(kernel)
@@ -63,6 +57,16 @@ def main(path_to_dataset="../datasetsModified/flattened_datasets/flattened_1sec_
                         config = run_svm(X_train, X_test, Y_train, Y_test, config)
                         print(config)
                         configs.append(config)
+    return configs
+        
+def main(path_to_dataset="../datasetsModified/flattened_datasets/flattened_1sec_with_broad_category.csv"):
+    # Setup
+    df = pd.read_csv(path_to_dataset)
+    df["broad_category"] = "None" # This adds an extra column to the df
+    df = info.add_classification_to_df(df)
+    X_train, X_test, Y_train, Y_test = get_train_test_split(df)
+
+    configs = run_grid_search_on_configurations(X_train, X_test, Y_train, Y_test)
     printNBestConfigs(500, configs)
 
 if __name__ == '__main__':
