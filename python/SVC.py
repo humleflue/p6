@@ -35,4 +35,3 @@ def get_train_test_split(df: pd.DataFrame):
     X = df.iloc[:,:-2]
     Y = df.iloc[:,-2:]
     return train_test_split( X, Y, test_size=0.25)
-    
