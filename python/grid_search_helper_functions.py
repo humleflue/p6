@@ -4,4 +4,3 @@ def printNBestConfigs(n, configs):
     for index, config in enumerate(configs):
         if(index < 500):
             print(config)
-            
