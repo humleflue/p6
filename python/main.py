@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, classification_report
 from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_split
 from dotenv import load_dotenv
 
@@ -19,7 +19,9 @@ def main():
     # Get predictions and measure accuracy
     Y_pred = classifier.predict(X_test)
     accuracy = accuracy_score(Y_test.iloc[:,-1], Y_pred)
-    model_config.setAccuracy(accuracy)
+    model_config.set_accuracy(accuracy)
+    report = classification_report(Y_test.iloc[:,-1], Y_pred)
+    model_config.set_report(report)
     
     print(model_config)
 
