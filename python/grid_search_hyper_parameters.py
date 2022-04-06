@@ -37,7 +37,7 @@ def run_svm(X_train, X_test, Y_train, Y_test, conf: SVCConfiguration) -> SVCConf
     classifier = create_and_fit_SVC_classifier(X_train, Y_train, conf)
     Y_pred = classifier.predict(X_test)
     accuracy = accuracy_score(Y_test.iloc[:,-1], Y_pred)
-    conf.setAccuracy(accuracy)
+    conf.set_accuracy(accuracy)
     return conf
 
 def main(path_to_dataset="../datasetsModified/flattened_datasets/flattened_1sec_with_broad_category.csv"):
