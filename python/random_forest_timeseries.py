@@ -1,33 +1,14 @@
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
-import data_api.retrieve_data as rd
+import modules.retrieve_data as rd
 import numpy as np
 import printing as prt
-
-data_path = '../datasets'
-driving_labels = ['Driving']
-using_labels = ['Industrial equipment', 'High vibration', 'Hand tools']
-stationary_labels = ['Stationary']
-walking_labels = ['Walking']
+import modules.info as info
 
 def get_flattened_data():
     all_data = rd.get_file_by_path_and_name('all_data_noise_removed_3_second_series_flattened.csv', ',')
     return all_data
-
-def add_classification(dfc : rd.DataFrameContainer):
-    dfc.df['broad_category'] = 'None'
-
-    for index, row in dfc.df.iterrows():
-        dataset_name = row[-2].split("/")[2]
-        if dataset_name in driving_labels:
-          dfc.df.iloc[index, -1] = "Driving"
-        elif dataset_name in using_labels:
-          dfc.df.iloc[index, -1] = "Using"
-        elif dataset_name in stationary_labels:
-          dfc.df.iloc[index, -1] = "Stationary"
-        elif dataset_name in walking_labels:
-          dfc.df.iloc[index, -1] = "Walking"
 
 def transform_data(dfc : rd.DataFrameContainer):
     x = dfc.df.iloc[:,:-2].values
@@ -50,7 +31,7 @@ def predict(classifier, x_test):
 
 def main():
     all_data_class = get_flattened_data()
-    add_classification(all_data_class)
+    info.add_classification(all_data_class)
     x_train, x_test, y_train, y_test = transform_data(all_data_class)
     for i in range(1,10):
         # n_of_trees = 1*10**i
