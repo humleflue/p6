@@ -11,13 +11,17 @@ class SVCConfiguration:
         self.gamma = gamma
         self.poly_degrees = poly_degrees
         self.accuracy=None
+        self.report=None
 
     def __str__(self):
         poly_degrees = f', poly_degrees:{self.poly_degrees}' if self.kernel == 'poly' else ''
         return f'{self.accuracy}: <kernel:{self.kernel}, soft_margin:{self.soft_margin}, gamma:{self.gamma}{poly_degrees}>'
 
-    def setAccuracy(self, accuracy: float):
+    def set_accuracy(self, accuracy: float):
         self.accuracy = accuracy
+
+    def set_report(self, report):
+        self.report = report
 
 def create_and_fit_SVC_classifier(X_train, Y_train, conf: SVCConfiguration) -> SVCConfiguration:
     classifier = svm.SVC(kernel=conf.kernel, C=conf.soft_margin, gamma=conf.gamma, degree=conf.poly_degrees)
