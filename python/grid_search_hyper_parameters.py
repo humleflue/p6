@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 from sklearn.metrics import accuracy_score
 from typing import Final
 from SVC import SVCConfiguration, create_and_fit_SVC_classifier, get_train_test_split
+from grid_search_helper_functions import printNBestConfigs
 
 # BEST RESULT SO FAR #
 # 0.875195007800312: <kernel:rbf, soft_margin:24.5, gamma:0.0001>
@@ -62,12 +63,7 @@ def main(path_to_dataset="../datasetsModified/flattened_datasets/flattened_1sec_
                         config = run_svm(X_train, X_test, Y_train, Y_test, config)
                         print(config)
                         configs.append(config)
-        
-    configs.sort(key=lambda x: x.accuracy, reverse=True)
-    print("--------")
-    for index, config in enumerate(configs):
-        if(index < 500):
-            print(config)
+    printNBestConfigs(500, configs)
 
 if __name__ == '__main__':
     main()

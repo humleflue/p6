@@ -7,6 +7,7 @@ import modules.info as info
 from typing import Final
 from SVC import SVCConfiguration, get_train_test_split
 from grid_search_hyper_parameters import run_svm
+from grid_search_helper_functions import printNBestConfigs
 
 # BEST RESULT SO FAR #
 # 0.875195007800312: <kernel:rbf, soft_margin:24.5, gamma:0.0001>
@@ -38,11 +39,7 @@ def main():
         config = run_svm(X_train, X_test, Y_train, Y_test, config)
         configs.append(config)
 
-    print("--------")
-    configs.sort(key=lambda x: x.accuracy, reverse=True)
-    for index, config in enumerate(configs):
-        if(index < 500):
-            print(config)
+    printNBestConfigs(500, configs)
 
 if __name__ == '__main__':
     main()
