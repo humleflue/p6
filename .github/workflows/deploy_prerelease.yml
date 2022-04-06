@@ -4,7 +4,7 @@ on:
     paths:
       - "paper"
     branches:
-      - paper # trigger branch
+      - "paper" # trigger branch
 jobs:
   release_paper:
     runs-on: ubuntu-latest
