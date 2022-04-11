@@ -5,20 +5,22 @@
 #include <stdbool.h>
 #include <assert.h>
 
-#define OBSERVATION_DIM 36
-#define TRANSFORMED_OBSERVATION_DIM 3
+#define VECTOR_DIM 3
+#define TIME_SERIES_VECTORS_AMOUNT 12
+#define TIME_SERIES_OBSERVATION_DIM (TIME_SERIES_VECTORS_AMOUNT * VECTOR_DIM)
+#define AGGREGATED_OBSERVATION_DIM 3
 
-typedef struct Observation {
+typedef struct TimeSeriesObservation {
     bool isFull;
-    double observation[OBSERVATION_DIM];
+    double observation[TIME_SERIES_OBSERVATION_DIM];
     int _currentIndex;
-} Observation;
+} TimeSeriesObservation;
 
-typedef struct TransformedObservation {
-    double observation[TRANSFORMED_OBSERVATION_DIM];
-} TransformedObservation;
+typedef struct AggregatedObservation {
+    double observation[AGGREGATED_OBSERVATION_DIM];
+} AggregatedObservation;
 
-void addVectorToObservation(Observation *o, double newVector[3]);
-TransformedObservation transform(Observation o);
+void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVector[VECTOR_DIM]);
+void transform(TimeSeriesObservation o, AggregatedObservation *out);
 
 #endif /* END OF TRANSFORM_H */
