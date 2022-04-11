@@ -57,7 +57,7 @@ void addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex(C
 	CuAssertTrue(tc, o.isFull);
 }
 
-void transform_transform_xYZShouldBeAverage(CuTest* tc)
+void transform_transformTso_xYZShouldBeAverage(CuTest* tc)
 {
 	/* Arrange */
 	TimeSeriesObservation tso;
@@ -88,7 +88,7 @@ CuSuite* CuGetSuite(void)
 	SUITE_ADD_TEST(suite, addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack);
 	SUITE_ADD_TEST(suite, addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex);
 
-	SUITE_ADD_TEST(suite, transform_transform_xYZShouldBeAverage);
+	SUITE_ADD_TEST(suite, transform_transformTso_xYZShouldBeAverage);
 
 	return suite;
 }
