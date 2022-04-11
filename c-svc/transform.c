@@ -24,14 +24,14 @@ void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVect
 /* Transforms a time series observation into an aggregated observation,
  * by taking the average of all x, y and z values
  */
-void transform(TimeSeriesObservation o, AggregatedObservation *out) {
+void transform(TimeSeriesObservation tso, AggregatedObservation *out) {
     int i;
     double x = 0.0, y = 0.0, z = 0.0;
 
     for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i+=3) {
-        x += o.observation[i];
-        y += o.observation[i+1];
-        z += o.observation[i+2];
+        x += tso.observation[i];
+        y += tso.observation[i+1];
+        z += tso.observation[i+2];
     }
 
     out->observation[0] = x / TIME_SERIES_VECTORS_AMOUNT;
