@@ -23,7 +23,7 @@ $(ODIR)/%.o: %.c
 	$(CC) -c $^ $(CFLAGS) -o $@
 
 test:
-	$(CC) $(ALL_TESTS).c $(CUTEST).c $(TDIR)/TransformTests.c -o $(TESTS_TARGET).out
+	$(CC) $(ALL_TESTS).c $(CUTEST).c $(TDIR)/TransformTests.c $(ODIR)/$(TRANSFORM_TARGET).o -o $(TESTS_TARGET).out
 
 clean:
 	$(RM) $(ODIR)/*.o *.exe *.out

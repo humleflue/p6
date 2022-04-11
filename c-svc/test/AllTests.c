@@ -9,7 +9,9 @@ void RunAllTests(void)
 	CuString *output = CuStringNew();
 	CuSuite* suite = CuSuiteNew();
 
+	/* ADD NEW SUITES IN THIS REGION */
 	CuSuiteAddSuite(suite, CuGetSuite());
+	/* ADD NEW SUITES IN THIS REGION */
 
 	CuSuiteRun(suite);
 	CuSuiteSummary(suite, output);

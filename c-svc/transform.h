@@ -6,6 +6,7 @@
 #include <assert.h>
 
 #define OBSERVATION_DIM 36
+#define TRANSFORMED_OBSERVATION_DIM 3
 
 typedef struct Observation {
     bool isFull;
@@ -13,6 +14,11 @@ typedef struct Observation {
     int _currentIndex;
 } Observation;
 
-void transform(Observation *o, double newVector[3]);
+typedef struct TransformedObservation {
+    double observation[TRANSFORMED_OBSERVATION_DIM];
+} TransformedObservation;
+
+void addVectorToObservation(Observation *o, double newVector[3]);
+TransformedObservation transform(Observation o);
 
 #endif /* END OF TRANSFORM_H */
