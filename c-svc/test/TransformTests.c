@@ -6,6 +6,17 @@
 #include "CuTest/CuTest.h"
 #include "../transform.h"
 
+/*-------------------------------------------------------------------------*
+ * Helper functions
+ *-------------------------------------------------------------------------*/
+void fillArrayWithDoubles(int size, double vector[size], double value) {
+	int i;
+	for(i = 0; i < size; i++){
+		vector[i] = value;
+	}
+}
+
+
 /* The name of your test should consist of three parts:
 	- The name of the method being tested.
 	- The scenario under which it's being tested.
@@ -15,61 +26,55 @@
 void addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack(CuTest* tc)
 {
 	/* Arrange */
-	TimeSeriesObservation o;
-	double newVector[VECTOR_DIM], arbitraryDouble = 0.42;
+	TimeSeriesObservation tso = TimeSeriesObservation_init;
+	double vector[VECTOR_DIM], 
+	       arbitraryDouble = 0.42;
 	int i;
 
-	o._currentIndex = 0;
-for(i = 0; i < VECTOR_DIM; i++){
-	newVector[i] = arbitraryDouble;
-}
+	fillArrayWithDoubles(VECTOR_DIM, vector, arbitraryDouble);
 
 	/* Act */
 	/* We try to add one more vector (+1), than there's space for */
 	for(i = 0; i < TIME_SERIES_OBSERVATION_DIM / 3 + 1; i++) {
-		addVectorToTimeSeriesObservation(&o, newVector);
+		addVectorToTimeSeriesObservation(&tso, vector);
 	}
 
 	/* Assert */
-	CuAssertTrue(tc, o.observation[TIME_SERIES_OBSERVATION_DIM] != arbitraryDouble);
-	CuAssertTrue(tc, o.isFull);
+	CuAssertTrue(tc, tso.observation[TIME_SERIES_OBSERVATION_DIM] != arbitraryDouble);
+	CuAssertTrue(tc, tso.isFull);
 }
 
 void addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex(CuTest* tc)
 {
 	/* Arrange */
-	TimeSeriesObservation o;
-	double newVector[3], arbitraryDouble = 0.42;
+	TimeSeriesObservation tso = TimeSeriesObservation_init;
+	double vector[VECTOR_DIM], 
+		   arbitraryDouble = 0.42;
 	int i;
 
-	o._currentIndex = 0;
-	newVector[0] = arbitraryDouble;
-	newVector[1] = arbitraryDouble;
-	newVector[2] = arbitraryDouble;
+	fillArrayWithDoubles(VECTOR_DIM, vector, arbitraryDouble);
 
 	/* Act */
 	for(i = 0; i < TIME_SERIES_OBSERVATION_DIM / 3; i++) {
-		addVectorToTimeSeriesObservation(&o, newVector);
+		addVectorToTimeSeriesObservation(&tso, vector);
 	}
 
 	/* Assert */
-	CuAssertTrue(tc, o.observation[TIME_SERIES_OBSERVATION_DIM - 1] == arbitraryDouble);
-	CuAssertTrue(tc, o.isFull);
+	CuAssertTrue(tc, tso.observation[TIME_SERIES_OBSERVATION_DIM - 1] == arbitraryDouble);
+	CuAssertTrue(tc, tso.isFull);
 }
 
 void transform_transformTso_xYZShouldBeAverage(CuTest* tc)
 {
 	/* Arrange */
-	TimeSeriesObservation tso;
+	TimeSeriesObservation tso = TimeSeriesObservation_init;
 	AggregatedObservation ao;
 	int i;
 	double expected = 3.1;
 
 	/* We fill up the tso's observations with the expected value,
 	   which means that the average will always be the expected value */
-	for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i++) {
-		tso.observation[i] = expected;
-	}
+	fillArrayWithDoubles(TIME_SERIES_OBSERVATION_DIM, tso.observation, expected);
 
 	/* Act */
 	transform(tso, &ao);
