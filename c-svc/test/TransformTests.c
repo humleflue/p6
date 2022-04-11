@@ -20,9 +20,9 @@ void addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack(CuTes
 	int i;
 
 	o._currentIndex = 0;
-	newVector[0] = arbitraryDouble;
-	newVector[1] = arbitraryDouble;
-	newVector[2] = arbitraryDouble;
+for(i = 0; i < VECTOR_DIM; i++){
+	newVector[i] = arbitraryDouble;
+}
 
 	/* Act */
 	/* We try to add one more vector (+1), than there's space for */
