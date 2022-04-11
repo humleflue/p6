@@ -12,10 +12,10 @@
 	- The expected behavior when the scenario is invoked.
 */
 
-void addVectorToObservation_tryToStackSmash_shouldNotAffectStack(CuTest* tc)
+void addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack(CuTest* tc)
 {
 	/* Arrange */
-	Observation o;
+	TimeSeriesObservation o;
 	double newVector[3], arbitraryDouble = 0.42;
 	int i;
 
@@ -26,18 +26,18 @@ void addVectorToObservation_tryToStackSmash_shouldNotAffectStack(CuTest* tc)
 
 	/* Act */
 	/* We try to add one more vector (+1), than there's space for */
-	for(i = 0; i < OBSERVATION_DIM / 3 + 1; i++) {
-		addVectorToObservation(&o, newVector);
+	for(i = 0; i < TIME_SERIES_OBSERVATION_DIM / 3 + 1; i++) {
+		addVectorToTimeSeriesObservation(&o, newVector);
 	}
 
 	/* Assert */
-	CuAssertTrue(tc, o.observation[OBSERVATION_DIM] != arbitraryDouble);
+	CuAssertTrue(tc, o.observation[TIME_SERIES_OBSERVATION_DIM] != arbitraryDouble);
 }
 
-void addVectorToObservation_fillUpObservations_shouldFillUpLastIndex(CuTest* tc)
+void addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex(CuTest* tc)
 {
 	/* Arrange */
-	Observation o;
+	TimeSeriesObservation o;
 	double newVector[3], arbitraryDouble = 0.42;
 	int i;
 
@@ -47,20 +47,46 @@ void addVectorToObservation_fillUpObservations_shouldFillUpLastIndex(CuTest* tc)
 	newVector[2] = arbitraryDouble;
 
 	/* Act */
-	for(i = 0; i < OBSERVATION_DIM / 3; i++) {
-		addVectorToObservation(&o, newVector);
+	for(i = 0; i < TIME_SERIES_OBSERVATION_DIM / 3; i++) {
+		addVectorToTimeSeriesObservation(&o, newVector);
 	}
 
 	/* Assert */
-	CuAssertTrue(tc, o.observation[OBSERVATION_DIM - 1] == arbitraryDouble);
+	CuAssertTrue(tc, o.observation[TIME_SERIES_OBSERVATION_DIM - 1] == arbitraryDouble);
 }
+
+void transform_transform_xYZShouldBeAverage(CuTest* tc)
+{
+	/* Arrange */
+	TimeSeriesObservation tso;
+	AggregatedObservation ao;
+	int i;
+	double expected = 3.1;
+
+	/* We fill up the tso's observations with the expected value,
+	   which means that the average will always be the expected value */
+	for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i++) {
+		tso.observation[i] = expected;
+	}
+
+	/* Act */
+	transform(tso, &ao);
+
+	/* Assert */
+	CuAssertDblEquals(tc, expected, ao.observation[0], 0.01);
+	CuAssertDblEquals(tc, expected, ao.observation[1], 0.01);
+	CuAssertDblEquals(tc, expected, ao.observation[2], 0.01);
+}
+
 
 CuSuite* CuGetSuite(void)
 {
 	CuSuite* suite = CuSuiteNew();
 
-	SUITE_ADD_TEST(suite, addVectorToObservation_tryToStackSmash_shouldNotAffectStack);
-	SUITE_ADD_TEST(suite, addVectorToObservation_fillUpObservations_shouldFillUpLastIndex);
+	SUITE_ADD_TEST(suite, addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack);
+	SUITE_ADD_TEST(suite, addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex);
+
+	SUITE_ADD_TEST(suite, transform_transform_xYZShouldBeAverage);
 
 	return suite;
 }
