@@ -1,7 +1,7 @@
 # Support Vector Classifier in C
 
 ## Getting started
-To run the SVC started run `make` in your terminal/console and execute the generated svc.out/svc.exe file.
+To run the SVC run `make` in your terminal/console and execute the generated svc.out/svc.exe file.
 
 If you want to fire a single command, then run the following: `make && svc.out` (use svc.exe on Windows).
 

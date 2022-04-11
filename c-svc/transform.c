@@ -5,12 +5,13 @@
  * Note: tso is both input and output param 
  */
 void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVector[VECTOR_DIM]) {
-    int i = tso->_currentIndex;
+    int i = tso->_currentIndex,
+        j;
     
     if(!tso->isFull) {
-        tso->observation[i  ] = newVector[0];
-        tso->observation[i+1] = newVector[1];
-        tso->observation[i+2] = newVector[2];
+        for(j = 0; j < VECTOR_DIM; j++) {
+            tso->observation[i+j] = newVector[j];
+        }
         
         tso->_currentIndex += 3;
 
