@@ -32,6 +32,7 @@ void addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack(CuTes
 
 	/* Assert */
 	CuAssertTrue(tc, o.observation[TIME_SERIES_OBSERVATION_DIM] != arbitraryDouble);
+	CuAssertTrue(tc, o.isFull);
 }
 
 void addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex(CuTest* tc)
@@ -53,6 +54,7 @@ void addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex(C
 
 	/* Assert */
 	CuAssertTrue(tc, o.observation[TIME_SERIES_OBSERVATION_DIM - 1] == arbitraryDouble);
+	CuAssertTrue(tc, o.isFull);
 }
 
 void transform_transform_xYZShouldBeAverage(CuTest* tc)

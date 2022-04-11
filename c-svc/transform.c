@@ -1,6 +1,9 @@
 #include "transform.h"
 
-/* Note: tso is both input and output param */
+/* Adds the x, y and z from newVector to the observation array in the tso,
+ * If the tso.observation array is full we do nothing
+ * Note: tso is both input and output param 
+ */
 void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVector[VECTOR_DIM]) {
     int i = tso->_currentIndex;
     
@@ -21,7 +24,7 @@ void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVect
  * by taking the average of all x, y and z values
  */
 void transform(TimeSeriesObservation o, AggregatedObservation *out) {
-    int i, k;
+    int i;
     double x = 0.0, y = 0.0, z = 0.0;
 
     for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i++) {
