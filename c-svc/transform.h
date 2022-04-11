@@ -10,11 +10,14 @@
 #define TIME_SERIES_OBSERVATION_DIM (TIME_SERIES_VECTORS_AMOUNT * VECTOR_DIM)
 #define AGGREGATED_OBSERVATION_DIM 3
 
-typedef struct TimeSeriesObservation {
+typedef struct TimeSeriesObservation_s {
     bool isFull;
     double observation[TIME_SERIES_OBSERVATION_DIM];
     int _currentIndex;
 } TimeSeriesObservation;
+
+/* The most important thing here is that _currentIndex is set to 0 */
+const TimeSeriesObservation TimeSeriesObservation_init = { false, { 0 }, 0 };
 
 typedef struct AggregatedObservation {
     double observation[AGGREGATED_OBSERVATION_DIM];
