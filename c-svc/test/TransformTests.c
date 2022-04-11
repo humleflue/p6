@@ -16,7 +16,7 @@ void addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack(CuTes
 {
 	/* Arrange */
 	TimeSeriesObservation o;
-	double newVector[3], arbitraryDouble = 0.42;
+	double newVector[VECTOR_DIM], arbitraryDouble = 0.42;
 	int i;
 
 	o._currentIndex = 0;
