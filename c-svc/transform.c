@@ -27,13 +27,10 @@ void transform(TimeSeriesObservation o, AggregatedObservation *out) {
     int i;
     double x = 0.0, y = 0.0, z = 0.0;
 
-    for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i++) {
-        if(i % 3 == 0)
-            x += o.observation[i];
-        else if(i % 3 == 1)
-            y += o.observation[i];
-        else
-            z += o.observation[i];
+    for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i+=3) {
+        x += o.observation[i];
+        y += o.observation[i+1];
+        z += o.observation[i+2];
     }
 
     out->observation[0] = x / TIME_SERIES_VECTORS_AMOUNT;
