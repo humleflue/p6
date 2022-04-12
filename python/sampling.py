@@ -1,5 +1,5 @@
 import os
-import data_api.retrieve_data as rd
+from .modules import retrieve_data as rd
 import data_visualisation as visualise
 
 base_dir_path = "../"
