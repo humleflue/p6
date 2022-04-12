@@ -7,7 +7,7 @@ import modules.info as info
 from typing import Final
 from SVC import SVCConfiguration, get_train_test_split
 from grid_search_hyper_parameters import run_svm
-from grid_search_helper_functions import printNBestConfigs
+from .modules.grid_search_helper_functions import printNBestConfigs
 
 # BEST RESULT SO FAR #
 # 0.875195007800312: <kernel:rbf, soft_margin:24.5, gamma:0.0001>
@@ -31,7 +31,7 @@ def main():
     # Setup
     configs = []
     for timeseries_size in ROWS_PER_TIMESERIES:
-        df = pd.read_csv(f"../datasetsModified/flattened_datasets/lessThanOneSecond/all_data_noise_removed_small{int(timeseries_size)}_points_series_flattened.csv")
+        df = pd.read_csv(f"./datasets/flattened_datasets/lessThanOneSecond/all_data_noise_removed_small{int(timeseries_size)}_points_series_flattened.csv")
         df["broad_category"] = "None" # This adds an extra column to the df
         df = info.add_classification_to_df(df)
         X_train, X_test, Y_train, Y_test = get_train_test_split(df)

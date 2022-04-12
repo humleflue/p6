@@ -3,7 +3,7 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
 import modules.retrieve_data as rd
 import numpy as np
-import printing as prt
+from .modules import printing as prt
 import modules.info as info
 
 def get_flattened_data():
