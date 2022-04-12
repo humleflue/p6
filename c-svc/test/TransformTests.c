@@ -26,12 +26,12 @@ void fillArrayWithDoubles(int size, double vector[size], double value) {
 void addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack(CuTest* tc)
 {
 	/* Arrange */
-	TimeSeriesObservation tso = TimeSeriesObservation_init;
-	double vector[VECTOR_DIM], 
+	TimeSeriesObservation tso = TIME_SERIES_OBSERVATION_INIT;
+	double vector[ACCELEROMETOR_VECTOR_DIM], 
 	       arbitraryDouble = 0.42;
 	int i;
 
-	fillArrayWithDoubles(VECTOR_DIM, vector, arbitraryDouble);
+	fillArrayWithDoubles(ACCELEROMETOR_VECTOR_DIM, vector, arbitraryDouble);
 
 	/* Act */
 	/* We try to add one more vector (+1), than there's space for */
@@ -47,12 +47,12 @@ void addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack(CuTes
 void addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex(CuTest* tc)
 {
 	/* Arrange */
-	TimeSeriesObservation tso = TimeSeriesObservation_init;
-	double vector[VECTOR_DIM], 
+	TimeSeriesObservation tso = TIME_SERIES_OBSERVATION_INIT;
+	double vector[ACCELEROMETOR_VECTOR_DIM], 
 		   arbitraryDouble = 0.42;
 	int i;
 
-	fillArrayWithDoubles(VECTOR_DIM, vector, arbitraryDouble);
+	fillArrayWithDoubles(ACCELEROMETOR_VECTOR_DIM, vector, arbitraryDouble);
 
 	/* Act */
 	for(i = 0; i < TIME_SERIES_OBSERVATION_DIM / 3; i++) {
@@ -67,7 +67,7 @@ void addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex(C
 void transform_transformTso_xYZShouldBeAverage(CuTest* tc)
 {
 	/* Arrange */
-	TimeSeriesObservation tso = TimeSeriesObservation_init;
+	TimeSeriesObservation tso = TIME_SERIES_OBSERVATION_INIT;
 	AggregatedObservation ao;
 	int i;
 	double expected = 3.1;

@@ -1,8 +1,10 @@
 CC = gcc
-CFLAGS = -ansi -pedantic -Wall -Wextra -lm -O0
+CFLAGS = -ansi -pedantic -Wall -Wextra -O0
 TARGET = svc
 TRANSFORM_TARGET = transform
-OBJ = $(TARGET).c $(ODIR)/$(TRANSFORM_TARGET).o
+KERNELS_TARGET = kernels
+MATH_TARGET = math
+OBJ = $(TARGET).c $(ODIR)/$(TRANSFORM_TARGET).o $(ODIR)/$(KERNELS_TARGET).o $(ODIR)/$(MATH_TARGET).o
 
 ODIR = out
 TDIR = test

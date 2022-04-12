@@ -4,12 +4,12 @@
  * If the tso.observation array is full we do nothing
  * Note: tso is both input and output param 
  */
-void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVector[VECTOR_DIM]) {
+void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVector[ACCELEROMETOR_VECTOR_DIM]) {
     int i = tso->_currentIndex,
         j;
     
     if(!tso->isFull) {
-        for(j = 0; j < VECTOR_DIM; j++) {
+        for(j = 0; j < ACCELEROMETOR_VECTOR_DIM; j++) {
             tso->observation[i+j] = newVector[j];
         }
         
