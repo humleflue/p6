@@ -12,7 +12,7 @@ ROWS_PER_TIMESERIES_MAX:  Final = float(os.getenv('ROWS_PER_TIMESERIES_MAX'))
 ROWS_PER_TIMESERIES_STEP: Final = float(os.getenv('ROWS_PER_TIMESERIES_STEP'))
 ROWS_PER_TIMESERIES: Final = np.arange(ROWS_PER_TIMESERIES_MIN, ROWS_PER_TIMESERIES_MAX, ROWS_PER_TIMESERIES_STEP)
 
-def create_dataframe_with_flattened_datasets(rows_per_time_series, dirName="../datasetsTU"):
+def create_dataframe_with_flattened_datasets(rows_per_time_series, dirName="./datasets/datasetsTU"):
     all_datasets_flattened = []
     all_file_paths = create_all_file_paths(dirName)
 
@@ -30,7 +30,7 @@ def create_time_series_partition(partition, rows_per_time_series, dataFrame, lab
     time_series = time_series.assign(label=[label])
     return time_series.values.tolist()[0]
 
-def create_all_file_paths(dirName="../datasetsTU"):
+def create_all_file_paths(dirName="./datasets/datasetsTU"):
     all_file_paths = []
     for subDir in os.listdir(dirName):
         for fileName in os.listdir(f"{dirName}/{subDir}"):

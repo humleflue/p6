@@ -59,7 +59,7 @@ def run_grid_search_on_configurations(X_train, X_test, Y_train, Y_test):
                         configs.append(config)
     return configs
         
-def main(path_to_dataset="../datasetsModified/flattened_datasets/flattened_1sec_with_broad_category.csv"):
+def main(path_to_dataset="./datasets/flattened_datasets/flattened_1sec_with_broad_category.csv"):
     # Setup
     df = pd.read_csv(path_to_dataset)
     df["broad_category"] = "None" # This adds an extra column to the df

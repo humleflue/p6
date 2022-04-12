@@ -13,7 +13,7 @@ def save_plot(dfc: rd.DataFrameContainer, sampling: str):
     dfc.df.plot(title=dfc.caption, kind='line')
     figure_filename = f'{sampling} - {dfc.caption}'
     # Relative path from p6
-    plt.savefig(os.path.join(base_dir_path, 'visualisations', 'plots', f'{figure_filename}.png'), format='png')
+    plt.savefig(os.path.join(base_dir_path, 'visualisations', f'{figure_filename}.png'), format='png')
 
 
 # def save_all_plots(path, folder_name, sampling):

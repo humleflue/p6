@@ -6,7 +6,7 @@ import data_api.retrieve_data as rd
 import os
 import printing as prt
 
-data_path = '../datasets'
+data_path = './datasets/datasetsTU'
 
 def train_model(data):
     x = data.iloc[:,0:3].values
