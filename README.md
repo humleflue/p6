@@ -6,10 +6,13 @@
 Our bachelor's project on Software at Aalborg University.
 
 ## Development Setup Guide
-To be able to run the code in the `simplicity-studio` directory, you will have to clone this repo into the `C:\GitRepos` directory.
-Open Simplicity studio then click Files -> Switch Workspace then select the simplicity-studio repo in the p6 directory and click Launch.
-Click Files (again) -> import, browse and find the Simplicity-Studios/kinProject. Click Next, Next, and name the project kinProject (remove the \_2).
-In the project explorer click on main.c and now you can debug using F11 or Run -> Debug.
+To be able to run the code in the `simplicity-studio` directory, you will have to:
+1. clone this repo into the `C:\GitRepos` directory.
+2. Open Simplicity studio then click Files -> Switch Workspace then select the simplicity-studio repo in the p6 directory and click Launch.
+3. Click Files (again) -> import, browse and select the `./simplicity-studios/kinProject` directory. 
+4. Click Next, Next, and name the project kinProject (remove the \_2).
+5. In the project explorer click on `main.c` and now you can debug using F11 or Run -> Debug.
 
 ## FAQ
 Q: Why do I **have to** clone into `C:\GitRepos`?
+A: Because Simplicity Studio workspaces depend on absolute paths.
