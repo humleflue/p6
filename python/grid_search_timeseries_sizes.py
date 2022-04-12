@@ -7,7 +7,7 @@ import modules.info as info
 from typing import Final
 from SVC import SVCConfiguration, get_train_test_split
 from grid_search_hyper_parameters import run_svm
-from grid_search_helper_functions import printNBestConfigs
+from .modules.grid_search_helper_functions import printNBestConfigs
 
 # BEST RESULT SO FAR #
 # 0.875195007800312: <kernel:rbf, soft_margin:24.5, gamma:0.0001>

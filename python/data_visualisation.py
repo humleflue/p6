@@ -2,7 +2,7 @@ import os
 
 import matplotlib.pyplot as plt
 import pandas as pd
-import data_api.retrieve_data as rd
+from .modules import retrieve_data as rd
 
 base_dir_path = "../"
 data_path = 'datasets'

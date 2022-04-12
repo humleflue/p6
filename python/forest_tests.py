@@ -2,9 +2,9 @@ import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
 from sklearn.ensemble import RandomForestClassifier
-import data_api.retrieve_data as rd
+from .modules import retrieve_data as rd
 import os
-import printing as prt
+from .modules import printing as prt
 
 data_path = './datasets/datasetsTU'
 

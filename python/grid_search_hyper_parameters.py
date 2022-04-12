@@ -6,7 +6,7 @@ from dotenv import load_dotenv
 from sklearn.metrics import accuracy_score
 from typing import Final
 from SVC import SVCConfiguration, create_and_fit_SVC_classifier, get_train_test_split
-from grid_search_helper_functions import printNBestConfigs
+from .modules.grid_search_helper_functions import printNBestConfigs
 
 # BEST RESULT SO FAR #
 # 0.875195007800312: <kernel:rbf, soft_margin:24.5, gamma:0.0001>
