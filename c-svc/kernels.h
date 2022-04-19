@@ -7,7 +7,7 @@
 #define EULER 2.71828
 #define GAMMA 24.5
 
-double radialKernel(AggregatedObservation x, AggregatedObservation y);
-double linearKernel(AggregatedObservation x, AggregatedObservation y);
+double radialKernel(SampledObservation x, SampledObservation y);
+double linearKernel(SampledObservation x, SampledObservation y);
 
 #endif /* END OF KERNELS_H */

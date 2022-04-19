@@ -68,7 +68,7 @@ void transform_transformTso_xYZShouldBeAverage(CuTest* tc)
 {
 	/* Arrange */
 	TimeSeriesObservation tso = TIME_SERIES_OBSERVATION_INIT;
-	AggregatedObservation ao;
+	SampledObservation ao;
 	int i;
 	double expected = 3.1;
 
