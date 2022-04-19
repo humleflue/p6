@@ -1,13 +1,13 @@
 \section{Related work}
 Research of activity recognition (AR) provides new ways to react on human behavior. 
-That could be by helping elderly falling, athletes measuring performance or sales companies measuring appropriate use of equipment.
-The latter is of particular interest as we aim to identify use of small size construction equipment, which could help reduce repair or replace costs. However research in AR for small size equipment is sparse, but looking at medium to large sized equipment has shown promising results\cite{ConstructionRecognitionFractionalRandomForest,constructionRecognitionMobileSensors,soaWorkersAndEquipment}. Combining the findings from such research with that of HAR \cite{HAR_CNN,DNN_CNN_RNN_HAR,HumanActivityrecognitionAccelerometer,hybridHARSVMCNN} where computational limitations is a determining factor leads to a proposal of a simple algorithm for small size equipment AR. This section will therefore start by introducing AR in a broader context. Hereafter it will look at current solutions within the construction industry and finish by looking at current implementations of the SVM algorithm.
-\fxwarning{Introduce the section with few lines. It is not clear why it start with activity recognition}
+That could be by helping elderly falling, athletes measuring performance or sales companies measuring appropriate use of equipment \fxwarning{Cite an example}.
+The latter is of particular interest as we aim to identify use of small size construction equipment, which could help reduce repair or replace costs \fxwarning{Is there a reference? At one meeting you mention the business relevance, so you can elaborate about that, a couple of lines with citation}. However research in AR for small size equipment is sparse, but looking at medium to large sized equipment has shown promising results\cite{ConstructionRecognitionFractionalRandomForest,constructionRecognitionMobileSensors,soaWorkersAndEquipment}. Combining the findings from such research with that of HAR \cite{HAR_CNN,DNN_CNN_RNN_HAR,HumanActivityrecognitionAccelerometer,hybridHARSVMCNN} where computational limitations is a determining factor leads to a proposal of a simple algorithm for small size equipment AR. This section will therefore start by introducing AR in a broader context. Hereafter it will look at current solutions within the construction industry and finish by looking at current implementations of the SVM algorithm.
+\fxwarning{Introduce the section with few lines. It is not clear why it start with activity recognition. It seems fine now.}
 \subsection{Activity recognition}
 AR is used in a variety of domains, most noticeable in the area of HAR where different applications such as recognizing gestures and motions (running, walking, falling) \cite{HumanActivityrecognitionAccelerometer, hybridHARSVMCNN,HARsignalprocessing}. 
 They offer different approaches varying in the type of algorithms such as DNN \cite{DNN_CNN_RNN_HAR}, CNN \cite{hybridHARSVMCNN} and SVM \cite{hybridHARSVMCNN} 
 The three major activity recognition methods is kinematic-based, computer vision-based and audio-based. 
-Kinematic-based revolves around sensors that gives information about the rotation and orientation of the device. 
+Kinematic-based revolves around sensors that gives information \fxwarning{Probably "data". Information is what you produce using data. Sensors readings are data, detecting that someone is using the equipment is information.} about the rotation and orientation of the device. 
 Computer vision-based uses 2D and 3D images as information. 
 Audio-based rely on recordings of sound for classification \cite{soaWorkersAndEquipment}. 
 As the only data collection source is an accelerometer, we use the kinematic-based method, where current solutions apply DNN \cite{DNN_CNN_RNN_HAR}, CNN \cite{hybridHARSVMCNN} and RNN \cite{DNN_CNN_RNN_HAR} or a combination of if with simpler models such as random forest (RF) and SVM \cite{hybridHARSVMCNN}. 
@@ -16,7 +16,7 @@ Using such complex and load intensive algorithms is not feasible with low comput
 \subsection{Construction activity recognition}
 Current research of AR in the construction industry revolves around medium and large sized equipment \cite{soaWorkersAndEquipment, activityAudioSVM, timeseriesDataAugmentationConstruction}
 They make use of NN's, RF's and SVM's working on a combination of accelerometer data, gyroscope data and images. These large amounts of data provide a good foundation for AR, however it also requires complex computation running on computers build for heavy computations.
-A state of the art review showed that within kinetic-based methods reached upwards of 99\% accuracy when measuring a workers activity in a lab environment using a SVM and an accelerometer.
+A state of the art review showed that within kinetic-based methods reached upwards of 99\% accuracy when measuring a workers activity in a lab environment using a SVM and an accelerometer. \fxwarning{Is related to the references in line 13? Merge it or add the 99/% reference.}
 As the SVM is a computational light model compared to NN \cite{comparisonMLAlgorithms} it is favorable due to the low processing power provided by the \kin.
 
-\subsection{Support Vector Machine} \fxnote{Introduce SVM and use cases}
+\subsection{Support Vector Machine} \fxnote{Introduce SVM and use cases} \fxwarning{Lines 13, 14, and 20 seems to fit here.}
