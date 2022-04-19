@@ -3,8 +3,8 @@
 double radialKernel(AggregatedObservation x, AggregatedObservation y) {
     double sumOfVectorsSquared = 0,
            vectorEntryDiffSquared;
-    int i,
-        roundedExponent;
+    int    i,
+           roundedExponent;
 
     for(i = 0; i < AGGREGATED_OBSERVATION_DIM; i++) {
         vectorEntryDiffSquared = power(x.observation[i] - y.observation[i], 2);

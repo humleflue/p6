@@ -25,8 +25,10 @@ void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVect
  * by taking the average of all x, y and z values
  */
 void transform(TimeSeriesObservation tso, AggregatedObservation *out) {
-    int i;
-    double x = 0.0, y = 0.0, z = 0.0;
+    int    i;
+    double x = 0.0, 
+           y = 0.0, 
+           z = 0.0;
 
     for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i+=3) {
         x += tso.observation[i];
