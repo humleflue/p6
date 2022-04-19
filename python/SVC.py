@@ -52,12 +52,12 @@ def sample_flattened_dataset(df, percentage):
     return res
 
 # TODO: This is not acutally the magnitude. Find out what it is, or if something else should be used
-def flattened_dataframe_avg_magnitude(df):
+def flattened_dataframe_square_sum(df):
     # Seperating the data labels from the actual data
     df_last_two_columns = df.iloc[:,-2:]
     df_without_last_two_columns = df.iloc[:,:-2]
     
-    # New dataframe that will contain the magnitude data
+    # New dataframe that will contain the smaller data
     new_df = pd.DataFrame(columns = ["x","y","z"])
 
     # Loops through all rows (This is bad practice)
