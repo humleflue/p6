@@ -1,12 +1,12 @@
 #include "kernels.h"
 
-double radialKernel(AggregatedObservation x, AggregatedObservation y) {
+double radialKernel(SampledObservation x, SampledObservation y) {
     double sumOfVectorsSquared = 0,
            vectorEntryDiffSquared;
     int    i,
            roundedExponent;
 
-    for(i = 0; i < AGGREGATED_OBSERVATION_DIM; i++) {
+    for(i = 0; i < SAMPLED_OBSERVATION_DIM; i++) {
         vectorEntryDiffSquared = power(x.observation[i] - y.observation[i], 2);
         sumOfVectorsSquared += vectorEntryDiffSquared;
     }
@@ -17,6 +17,6 @@ double radialKernel(AggregatedObservation x, AggregatedObservation y) {
 }
 
 /* TODO: Implement the Linear Kernel */
-double linearKernel(AggregatedObservation x, AggregatedObservation y) {
+double linearKernel(SampledObservation x, SampledObservation y) {
     return 0.0 + x.observation[0] + y.observation[0];
 }
