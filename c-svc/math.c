@@ -17,3 +17,15 @@ int round(double num) {
     else
         return (int)(num + 0.5);
 }
+
+double dotProduct3dVector(double input1[3], double input2[3]) {
+    int    i;
+    double sum = 0;
+
+    for (i = 0; i < 3; i++)
+    {
+        sum += input1[i] * input2[i];
+    }
+
+    return sum;
+}

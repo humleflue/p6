@@ -16,7 +16,6 @@ double radialKernel(SampledObservation x, SampledObservation y) {
     return power(EULER, roundedExponent);
 }
 
-/* TODO: Implement the Linear Kernel */
 double linearKernel(SampledObservation x, SampledObservation y) {
-    return 0.0 + x.observation[0] + y.observation[0];
+    return dotProduct3dVector(x.observation, y.observation);
 }
