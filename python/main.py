@@ -1,10 +1,8 @@
 import os
-from matplotlib import projections
 import pandas as pd
 from sklearn.metrics import accuracy_score, classification_report
 from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_split, sample_flattened_dataset, average_sampling
 from dotenv import load_dotenv
-import plotly.express as px
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
@@ -47,6 +45,7 @@ def main(use_existing_model=True):
     x, y = np.meshgrid(line, line)  
     ax = fig.add_subplot(111, projection='3d')
     for i in range(classifier.coef_.shape[0]):
+        # This math is not understood yet
         z = lambda x,y: (-classifier.intercept_[i]-classifier.coef_[i][0]*x -classifier.coef_[i][1]*y) / classifier.coef_[i][2]
         ax.plot_surface(x, y, z(x, y))
     plt.show()
