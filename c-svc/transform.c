@@ -13,7 +13,7 @@ void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVect
             tso->observation[i+j] = newVector[j];
         }
         
-        tso->_currentIndex += 3;
+        tso->_currentIndex += ACCELEROMETOR_VECTOR_DIM;
 
         if(tso->_currentIndex == TIME_SERIES_OBSERVATION_DIM) {
             tso->isFull = true;
@@ -25,7 +25,7 @@ void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVect
  * by taking the average of all x, y and z values
  */
 void transform(TimeSeriesObservation tso, SampledObservation *out) {
-    int i;
+    int    i;
     double x = 0.0, y = 0.0, z = 0.0;
 
     for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i+=3) {

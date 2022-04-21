@@ -3,8 +3,8 @@
 
 #include "math.h"
 #include "types.h"
+#include "matrixmath.h"
 
-#define EULER 2.71828
 #define GAMMA 24.5
 
 double radialKernel(SampledObservation x, SampledObservation y);
