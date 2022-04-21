@@ -1,11 +1,16 @@
 import os
-import math
+from matplotlib import projections
 import pandas as pd
 from sklearn.metrics import accuracy_score, classification_report
-from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_split
+from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_split, sample_flattened_dataset, average_sampling
 from dotenv import load_dotenv
+import plotly.express as px
+import pickle
+import numpy as np
+import matplotlib.pyplot as plt
 
-def main():
+
+def main(use_existing_model=True):
     load_dotenv()
 
     # Load data
@@ -15,9 +20,19 @@ def main():
     df_avg_data =  average_sampling(df)
     X_train, X_test, Y_train, Y_test = get_train_test_split(df_avg_data)
 
-    # Create and fit model   
+    filename = f'fitted_{os.getenv("BEST_KERNEL")}_OVO_model.sav'
     model_config = get_default_config()
-    classifier   = create_and_fit_SVC_classifier(X_train, Y_train, model_config)
+
+    if use_existing_model:
+        classifier = pickle.load(open(filename, 'rb'))
+    else:
+        # Create fit and save model 
+        classifier = create_new_model(X_train, Y_train, model_config, filename)
+
+    # Print model config, coefficients and intercepts 
+    print('config\n', model_config)
+    print(' \n\ncoef\n', classifier.coef_)
+    print(' \n\nintercept\n', classifier.intercept_)
 
     # Get predictions and measure accuracy
     Y_pred = classifier.predict(X_test)
@@ -26,44 +41,23 @@ def main():
     report = classification_report(Y_test.iloc[:,-1], Y_pred)
     model_config.set_report(report)
     
-    print(model_config)
+    # Plot a 3D plot
+    fig = plt.figure()
+    line = np.linspace(-15, 100, 30)
+    x, y = np.meshgrid(line, line)  
+    ax = fig.add_subplot(111, projection='3d')
+    for i in range(classifier.coef_.shape[0]):
+        z = lambda x,y: (-classifier.intercept_[i]-classifier.coef_[i][0]*x -classifier.coef_[i][1]*y) / classifier.coef_[i][2]
+        ax.plot_surface(x, y, z(x, y))
+    plt.show()
 
-def sample_flattened_dataset(df):
-    df_last_two_columns = df.iloc[:,-2:]
-    df_without_last_two_columns = df.iloc[:,:-2]
-    df_with_sampling = df_without_last_two_columns.sample(frac = 0.25, axis = 1) # Axis = 1 means columns. 0 is rows
-    res = pd.merge(df_with_sampling, df_last_two_columns, left_index=True, right_index=True) # Combines the two dataframes on index
-    
-    return res
 
-def average_sampling(df):
-    # Seperating the data labels from the actual data
-    df_last_two_columns = df.iloc[:,-2:]
-    df_without_last_two_columns = df.iloc[:,:-2]
-    
-    # New dataframe that will contain mean square data
-    new_df = pd.DataFrame(columns = ["x","y","z"])
-
-    # Loops through all rows
-    for index1, row in df_without_last_two_columns.iterrows():
-        # List containing the sum of x, y, and z squared.
-        time_series_sum = [0,0,0]
-
-        # Loops through all data points in a row and adds the squared value to time_series_sum
-        for index2, ele in enumerate(row.to_list()):
-            time_series_sum[index2 % 3] += (ele ** 2)
-
-        #length_of_row = row.shape[0]
-
-        # Takes the square root of the sum, and appends it to the new dataframe
-        time_series_avg = [math.sqrt(x) for x in time_series_sum]
-        new_df.loc[index1] = time_series_avg
-    
-    # Combines the two dataframes on index, thereby adding the label back
-    res = pd.merge(new_df, df_last_two_columns, left_index=True, right_index=True) 
-    print(res)
-    return res
-
+def create_new_model(X_train, Y_train, model_config, filename):
+    print('start fitting')
+    classifier = create_and_fit_SVC_classifier(X_train, Y_train, model_config)
+    pickle.dump(classifier, open(filename, 'wb'))
+    print('done dumping')
+    return classifier
 
 
 if __name__ == '__main__':
