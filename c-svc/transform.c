@@ -13,7 +13,7 @@ void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVect
             tso->observation[i+j] = newVector[j];
         }
         
-        tso->_currentIndex += 3;
+        tso->_currentIndex += ACCELEROMETOR_VECTOR_DIM;
 
         if(tso->_currentIndex == TIME_SERIES_OBSERVATION_DIM) {
             tso->isFull = true;
