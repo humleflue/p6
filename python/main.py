@@ -40,15 +40,16 @@ def main(use_existing_model=True):
     model_config.set_report(report)
     
     # Plot a 3D plot
-    fig = plt.figure()
-    line = np.linspace(-15, 100, 30)
-    x, y = np.meshgrid(line, line)  
-    ax = fig.add_subplot(111, projection='3d')
-    for i in range(classifier.coef_.shape[0]):
-        # This math is not understood yet
-        z = lambda x,y: (-classifier.intercept_[i]-classifier.coef_[i][0]*x -classifier.coef_[i][1]*y) / classifier.coef_[i][2]
-        ax.plot_surface(x, y, z(x, y))
-    plt.show()
+    if model_config.kernel == 'linear':
+        fig = plt.figure()
+        line = np.linspace(-15, 100, 30)
+        x, y = np.meshgrid(line, line)  
+        ax = fig.add_subplot(111, projection='3d')
+        for i in range(classifier.coef_.shape[0]):
+            # This math is not understood yet
+            z = lambda x,y: (-classifier.intercept_[i]-classifier.coef_[i][0]*x -classifier.coef_[i][1]*y) / classifier.coef_[i][2]
+            ax.plot_surface(x, y, z(x, y))
+        plt.show()
 
 
 def create_new_model(X_train, Y_train, model_config, filename):
