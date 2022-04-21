@@ -1,7 +1,7 @@
 import os
 import pandas as pd
 from sklearn.metrics import accuracy_score, classification_report
-from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_split
+from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_validation_split
 from dotenv import load_dotenv
 
 def main():
@@ -10,7 +10,7 @@ def main():
     # Load data
     dataset_path = os.getenv('BEST_DATASET')
     df = pd.read_csv(dataset_path)
-    X_train, X_test, Y_train, Y_test = get_train_test_split(df)
+    X_train, X_test, Y_train, Y_test = get_train_test_validation_split(df)
 
     # Create and fit model   
     model_config = get_default_config()

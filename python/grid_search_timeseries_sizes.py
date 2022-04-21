@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 import modules.info as info
 from typing import Final
-from SVC import SVCConfiguration, get_train_test_split
+from SVC import SVCConfiguration, get_train_test_validation_split
 from grid_search_hyper_parameters import run_svm
 from .modules.grid_search_helper_functions import printNBestConfigs
 
@@ -34,7 +34,7 @@ def main():
         df = pd.read_csv(f"./datasets/flattened_datasets/lessThanOneSecond/all_data_noise_removed_small{int(timeseries_size)}_points_series_flattened.csv")
         df["broad_category"] = "None" # This adds an extra column to the df
         df = info.add_classification_to_df(df)
-        X_train, X_test, Y_train, Y_test = get_train_test_split(df)
+        X_train, X_test, Y_train, Y_test = get_train_test_validation_split(df)
         config = SVCConfiguration(KERNEL, SOFT_MARGIN, GAMMA, timeseries_size)
         config = run_svm(X_train, X_test, Y_train, Y_test, config)
         configs.append(config)
