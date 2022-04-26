@@ -6,6 +6,7 @@ from dotenv import load_dotenv
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
+from manualPredictor import predict
 
 
 def main(use_existing_model=True):
@@ -39,6 +40,10 @@ def main(use_existing_model=True):
     report = classification_report(Y_test.iloc[:,-1], Y_pred)
     model_config.set_report(report)
     
+    new_point_stationary = [1, 2, 1]
+
+    predict([new_point_stationary], classifier.coef_, classifier.intercept_)
+
     # Plot a 3D plot
     if model_config.kernel == 'linear':
         fig = plt.figure()
