@@ -3,7 +3,7 @@ import numpy as np
 # Sets of labels corresponding to the 6 hyperplanes 
 hyperplanes = [('Driving', 'Stationary'), ('Driving', 'Using'), ('Driving','Walking'), ('Stationary' ,'Using'), ('Stationary', 'Walking'), ('Using','Walking')]    
 
-def predict(datapoints, coefs, intercepts):
+def manual_predict(datapoints, coefs, intercepts):
     vectors_coefs_intercepts = zip(hyperplanes, coefs, intercepts) # Creating 3 tuples consisting of a label sets, vectors/coefs and intercepts
     for point in datapoints:
         point_classification_scores = {'Driving':0, 'Using':0, 'Stationary':0, 'Walking':0} # set or reset the score for the datapoint
