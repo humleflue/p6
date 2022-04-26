@@ -18,7 +18,7 @@ def main(use_existing_model=True):
     df_avg_data =  average_sampling(df)
     X_train, X_test, Y_train, Y_test = get_train_test_split(df_avg_data)
 
-    filename = f'fitted_{os.getenv("BEST_KERNEL")}_OVO_model.sav'
+    filename = f'fitted_{os.getenv("BEST_KERNEL")}_OVO_foo_model.sav'
     model_config = get_default_config()
 
     if use_existing_model:
@@ -38,6 +38,8 @@ def main(use_existing_model=True):
     model_config.set_accuracy(accuracy)
     report = classification_report(Y_test.iloc[:,-1], Y_pred)
     model_config.set_report(report)
+    print(accuracy)
+    print(report)
     
     # Plot a 3D plot
     if model_config.kernel == 'linear':
@@ -61,5 +63,5 @@ def create_new_model(X_train, Y_train, model_config, filename):
 
 
 if __name__ == '__main__':
-    main()
+    main(False)
     
