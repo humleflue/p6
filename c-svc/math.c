@@ -11,7 +11,7 @@ double power(double base, int exponent) {
     return result;
 }
 
-int round(double num) {
+int roundDouble(double num) {
     if (num < 0.0)
         return (int)(num - 0.5);
     else

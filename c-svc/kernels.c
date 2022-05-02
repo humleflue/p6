@@ -11,7 +11,7 @@ double radialKernel(SampledObservation x, SampledObservation y) {
         sumOfVectorsSquared += vectorEntryDiffSquared;
     }
 
-    roundedExponent = round((GAMMA * -1) * sumOfVectorsSquared);
+    roundedExponent = roundDouble((GAMMA * -1) * sumOfVectorsSquared);
 
     return power(EULER, roundedExponent);
 }

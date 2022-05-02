@@ -4,7 +4,8 @@ TARGET = svc
 TRANSFORM_TARGET = transform
 KERNELS_TARGET = kernels
 MATH_TARGET = math
-OBJ = $(TARGET).c $(ODIR)/$(TRANSFORM_TARGET).o $(ODIR)/$(KERNELS_TARGET).o $(ODIR)/$(MATH_TARGET).o
+MANUAL_PREDICTOR_TARGET = manualPredictor
+OBJ = $(TARGET).c $(ODIR)/$(TRANSFORM_TARGET).o $(ODIR)/$(KERNELS_TARGET).o $(ODIR)/$(MATH_TARGET).o $(ODIR)/$(MANUAL_PREDICTOR_TARGET).o 
 
 ODIR = out
 TDIR = test
@@ -13,6 +14,9 @@ CUTEST_DIR = $(TDIR)/CuTest
 CUTEST = $(CUTEST_DIR)/CuTest
 ALL_TESTS = $(TDIR)/AllTests
 TESTS_TARGET = AllTests
+MATH_TESTS 		       = $(TDIR)/MathTests.c  			$(ODIR)/$(MATH_TARGET).o
+TRANSFORM_TESTS        = $(TDIR)/TransformTests.c 		$(ODIR)/$(TRANSFORM_TARGET).o
+MANUAL_PREDICTOR_TESTS = $(TDIR)/ManualPredictorTests.c $(ODIR)/$(MANUAL_PREDICTOR_TARGET).o
 
 # Target
 $(TARGET).out: $(OBJ)
@@ -24,8 +28,9 @@ $(TARGET).exe: $(OBJ)
 $(ODIR)/%.o: %.c
 	$(CC) -c $^ $(CFLAGS) -o $@
 
+
 test:
-	$(CC) $(ALL_TESTS).c $(CUTEST).c $(TDIR)/TransformTests.c $(ODIR)/$(TRANSFORM_TARGET).o -o $(TESTS_TARGET).out
+	$(CC) $(ALL_TESTS).c $(CUTEST).c $(TRANSFORM_TESTS) $(MATH_TESTS) $(MANUAL_PREDICTOR_TESTS) -o $(TESTS_TARGET).out
 
 clean:
 	$(RM) $(ODIR)/*.o *.exe *.out

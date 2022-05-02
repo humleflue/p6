@@ -3,7 +3,6 @@
 
 #include "math.h"
 #include "types.h"
-#include "matrixmath.h"
 
 #define GAMMA 24.5
 
