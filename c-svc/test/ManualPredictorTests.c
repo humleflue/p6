@@ -19,10 +19,10 @@ void manualPredictor_givenStationaryPointAndDrivingVsStationary_shouldReturnNega
     double vectorA[3] = {1.0, 2.0,  1.0};
 
 	/* Act */
-    double actual = predict(vectorA, HYPER_PLANES[0]);
+    char actual = predictPoint(vectorA, HYPER_PLANES[0]);
 
 	/* Assert */
-	CuAssertTrue(tc, actual < 0);
+	CuAssertTrue(tc, actual == STATIONARY);
 }
 
 void manualPredictor_givenStationaryPointAndStationaryVsUsing_shouldReturnPositiveValue(CuTest* tc)
@@ -31,10 +31,10 @@ void manualPredictor_givenStationaryPointAndStationaryVsUsing_shouldReturnPositi
     double vectorA[3] = {1.0, 2.0,  1.0};
 
 	/* Act */
-    double actual = predict(vectorA, HYPER_PLANES[3]);
+    double actual = predictPoint(vectorA, HYPER_PLANES[3]);
 
 	/* Assert */
-	CuAssertTrue(tc, actual > 0);
+	CuAssertTrue(tc, actual == STATIONARY);
 }
 
 

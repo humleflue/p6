@@ -6,9 +6,10 @@
 #define USING 'u'
 #define WALKING 'w'
 #define HYPER_PLANES_LENGTH 6
+#define LABELS_AMOUNT 4
 
 #include "math.h"
-
+#include "bool.h"
 
 typedef struct HyperPlane
 {
@@ -18,8 +19,15 @@ typedef struct HyperPlane
     double intercept; 
 } HyperPlane;
 
+typedef struct PredictionScore
+{
+    char label;
+    int score;
+} PredictionScore;
+
 extern HyperPlane HYPER_PLANES[HYPER_PLANES_LENGTH];
 
-double predict(double pointToPredict[3], HyperPlane hyperPlane);
+char predictPoint(double pointToPredict[3], HyperPlane hyperPlane);
+char predict(double pointToPredict[3]);
 
 #endif /*Ending Manual Predictor */
