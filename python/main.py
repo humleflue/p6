@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, ConfusionMatrixDisplay
 from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_split, sample_flattened_dataset, average_sampling
 from dotenv import load_dotenv
 import pickle
@@ -18,7 +18,7 @@ def main(use_existing_model=True):
     df_avg_data =  average_sampling(df)
     X_train, X_test, Y_train, Y_test = get_train_test_split(df_avg_data)
 
-    filename = f'fitted_{os.getenv("BEST_KERNEL")}_OVO_foo_model.sav'
+    filename = f'fitted_{os.getenv("BEST_KERNEL")}_OVO_best_model.sav'
     model_config = get_default_config()
 
     if use_existing_model:
@@ -40,6 +40,7 @@ def main(use_existing_model=True):
     model_config.set_report(report)
     print(accuracy)
     print(report)
+    ConfusionMatrixDisplay.from_predictions(Y_test.iloc[:,-1], Y_pred)
     
     # Plot a 3D plot
     if model_config.kernel == 'linear':
@@ -63,5 +64,5 @@ def create_new_model(X_train, Y_train, model_config, filename):
 
 
 if __name__ == '__main__':
-    main(False)
+    main()
     
