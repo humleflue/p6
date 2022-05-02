@@ -30,4 +30,4 @@ extern HyperPlane HYPER_PLANES[HYPER_PLANES_LENGTH];
 char predictPoint(double pointToPredict[3], HyperPlane hyperPlane);
 char predict(double pointToPredict[3]);
 
-#endif /*Ending Manual Predictor */
+#endif /* END OF MANUAL_PREDICTOR_H */
