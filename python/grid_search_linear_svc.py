@@ -1,7 +1,7 @@
 from matplotlib import pyplot as plt
 import pandas as pd
 from sklearn.metrics import confusion_matrix
-from sklearn.svm import LinearSVC
+from sklearn import svm
 from sklearn.model_selection import cross_val_score
 
 from SVC import average_sampling, get_train_test_split
@@ -24,20 +24,24 @@ X_train, X_test, Y_train, Y_test = get_train_test_split(df_avg_data)
 # Comment in/out the wanted/unwanted sections
 results = []
 for c_val in [1]:
-    svc = LinearSVC(C=c_val, max_iter=10000, dual=False)
+    svc = svm.SVC(kernel='linear', C=20)
+    print("Fitting...")
     svc.fit(X_train, Y_train.iloc[:,-1])
+    print("Done fitting.")
 
     # SECTION START: Confusion matrix
-    Y_pred = svc.predict(X_test)
-    conf = confusion_matrix(Y_test.iloc[:,-1], Y_pred)
-    print(c_val, conf)
+    # Y_pred = svc.predict(X_test)
+    # conf = confusion_matrix(Y_test.iloc[:,-1], Y_pred)
+    # print(c_val, conf)
     # SECTION END: Confusion matrix
 
     # SECTION START: Cross validation
-    # scores = cross_val_score(svc, X_train, Y_train.iloc[:,-1], cv=10)
-    # mean = scores.mean()
-    # print(c_val, mean, scores.std())
-    # results.append(Data(c_val, mean))
+    print("Cross validating...")
+    scores = cross_val_score(svc, X_train, Y_train.iloc[:,-1], cv=5)
+    print("Done cross validating.")
+    mean = scores.mean()
+    print(c_val, mean, scores.std())
+    results.append(Data(c_val, mean))
     # SECTION END: Cross validation
 
 # Print the 20 best results

@@ -6,7 +6,7 @@ from sklearn.model_selection import train_test_split
 import math
 
 class SVCConfiguration:
-    def __init__(self, kernel, soft_margin, gamma, poly_degrees=2):
+    def __init__(self, kernel, soft_margin, gamma=0.0001, poly_degrees=2):
         self.kernel = kernel
         self.soft_margin = soft_margin
         self.gamma = gamma
