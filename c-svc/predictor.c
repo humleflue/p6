@@ -72,6 +72,7 @@ void countUpScore(char label, PredictionScore predictionScores[LABELS_AMOUNT]) {
 PredictionScore* getHighestScore(PredictionScore predictionScores[LABELS_AMOUNT]) {
     int i;
     PredictionScore *highestPredictionScore = &predictionScores[0],
+                    /* Used later because we prefer to return stationary */
                     *stationaryPredictionScore = lookupScore(STATIONARY, predictionScores);
 
     /* Start loop from 1, as we initialized highestPredictionScore to the first index */
