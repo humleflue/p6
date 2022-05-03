@@ -4,7 +4,7 @@
 
 CuSuite* CuGetTransformSuite();
 CuSuite* CuGetMathSuite();
-CuSuite* CuGetManualPredictorSuite();
+CuSuite* CuGetPredictorSuite();
 
 void RunAllTests(void)
 {
@@ -14,7 +14,7 @@ void RunAllTests(void)
 	/* ADD NEW SUITES IN THIS REGION */
 	CuSuiteAddSuite(suite, CuGetTransformSuite());
 	CuSuiteAddSuite(suite, CuGetMathSuite());
-	CuSuiteAddSuite(suite, CuGetManualPredictorSuite());
+	CuSuiteAddSuite(suite, CuGetPredictorSuite());
 	/* ADD NEW SUITES IN THIS REGION */
 
 	CuSuiteRun(suite);

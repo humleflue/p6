@@ -1,4 +1,4 @@
-#include "manualPredictor.h"
+#include "predictor.h"
 
 HyperPlane HYPER_PLANES[HYPER_PLANES_LENGTH] = {
     {DRIVING, STATIONARY, { 0.19360316, -0.05755878,  0.06869084}, -2.11173355},
@@ -18,7 +18,8 @@ char predictPoint(double pointToPredict[3], HyperPlane hyperPlane) {
 PredictionScore* lookupScore(char label, PredictionScore predictionScores[LABELS_AMOUNT]) {
     bool match = false;
     int i = 0;
-    PredictionScore predictionScore;
+    PredictionScore predictionScore,
+                   *result;
 
     while(!match && i < LABELS_AMOUNT) {
         predictionScore = predictionScores[i];
@@ -31,7 +32,11 @@ PredictionScore* lookupScore(char label, PredictionScore predictionScores[LABELS
         }
     }
 
-    return &predictionScores[i];
+    result = &predictionScores[i];
+    if(result->label != label) {
+        result = NULL;
+    }
+    return result;
 }
 
 /* Helper function */
@@ -58,19 +63,23 @@ PredictionScore* getHighestScore(PredictionScore predictionScores[LABELS_AMOUNT]
         return highestPredictionScore;
 }
 
-char predict(double pointToPredict[3]) {
+void getPredictionScores(double pointToPredict[3], PredictionScore predictionScores[LABELS_AMOUNT]) {
     int i;
     char prediction;
+
+    for(i = 0; i < HYPER_PLANES_LENGTH; i++) {
+        prediction = predictPoint(pointToPredict, HYPER_PLANES[i]);
+        countUpScore(prediction, predictionScores);
+    }
+}
+
+char predict(double pointToPredict[3]) {
     PredictionScore predictionScores[LABELS_AMOUNT] = {
         { DRIVING, 0 },
         { STATIONARY, 0 },
         { USING, 0 },
         { WALKING, 0 },
     };
-
-    for(i = 0; i < HYPER_PLANES_LENGTH; i++) {
-        prediction = predictPoint(pointToPredict, HYPER_PLANES[i]);
-        countUpScore(prediction, predictionScores);
-    }
+    getPredictionScores(pointToPredict, predictionScores);
     return getHighestScore(predictionScores)->label;
 }

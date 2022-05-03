@@ -1,5 +1,5 @@
-#ifndef MANUAL_PREDICTOR_H
-#define MANUAL_PREDICTOR_H
+#ifndef PREDICTOR_H
+#define PREDICTOR_H
 
 #define DRIVING 'd'
 #define STATIONARY 's'
@@ -7,6 +7,7 @@
 #define WALKING 'w'
 #define HYPER_PLANES_LENGTH 6
 #define LABELS_AMOUNT 4
+#define NULL ((void *)0)
 
 #include "math.h"
 #include "bool.h"
@@ -27,7 +28,9 @@ typedef struct PredictionScore
 
 extern HyperPlane HYPER_PLANES[HYPER_PLANES_LENGTH];
 
+PredictionScore* lookupScore(char label, PredictionScore predictionScores[LABELS_AMOUNT]);
 char predictPoint(double pointToPredict[3], HyperPlane hyperPlane);
+void getPredictionScores(double pointToPredict[3], PredictionScore predictionScores[LABELS_AMOUNT]);
 char predict(double pointToPredict[3]);
 
-#endif /* END OF MANUAL_PREDICTOR_H */
+#endif /* END OF PREDICTOR_H */
