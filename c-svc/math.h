@@ -4,6 +4,7 @@
 #define EULER 2.71828
 
 double power(double base, int exponent);
-int    round(double num);
+int    roundDouble(double num);
+double dotProduct3dVector(const double input1[3], const double input2[3]);
 
 #endif /* END OF MATH_H */

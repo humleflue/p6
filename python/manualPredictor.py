@@ -5,6 +5,7 @@ hyperplanes = [('Driving', 'Stationary'), ('Driving', 'Using'), ('Driving','Walk
 
 def manual_predict(datapoints, coefs, intercepts):
     vectors_coefs_intercepts = zip(hyperplanes, coefs, intercepts) # Creating 3 tuples consisting of a label sets, vectors/coefs and intercepts
+    print(vectors_coefs_intercepts)
     for point in datapoints:
         point_classification_scores = {'Driving':0, 'Using':0, 'Stationary':0, 'Walking':0} # set or reset the score for the datapoint
         for vector_coef_intercept in list(vectors_coefs_intercepts):
@@ -18,4 +19,4 @@ def manual_predict(datapoints, coefs, intercepts):
             else:
                 point_classification_scores[vector_coef_intercept[0][1]] += 1
 
-        print(point_classification_scores)
+        print(list(point_classification_scores))

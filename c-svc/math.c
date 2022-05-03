@@ -11,14 +11,14 @@ double power(double base, int exponent) {
     return result;
 }
 
-int round(double num) {
+int roundDouble(double num) {
     if (num < 0.0)
         return (int)(num - 0.5);
     else
         return (int)(num + 0.5);
 }
 
-double dotProduct3dVector(double input1[3], double input2[3]) {
+double dotProduct3dVector(const double input1[3], const double input2[3]) {
     int    i;
     double sum = 0;
 
