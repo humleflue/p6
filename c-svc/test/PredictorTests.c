@@ -177,6 +177,59 @@ void predictPoint_givenStationaryPointAndStationaryVsUsing_shouldReturnPositiveV
 }
 /* Predict Point END */
 
+/* Get Highest Score START */
+void getHighestScore_givenDrivingIsHighestScore_shouldReturnDriving(CuTest* tc)
+{
+	/* Arrange */
+    PredictionScore predictionScores[LABELS_AMOUNT] = {
+        { DRIVING, 3 },
+        { STATIONARY, 2 },
+        { USING, 1 },
+        { WALKING, 0 },
+    };
+
+	/* Act */
+    PredictionScore *actual = getHighestScore(predictionScores);
+
+	/* Assert */
+	CuAssertPtrEquals(tc, &predictionScores[0] ,actual);
+}
+
+void getHighestScore_givenTieBreakerBetweenStationaryAndOther_shouldReturnStationary(CuTest* tc)
+{
+	/* Arrange */
+    PredictionScore predictionScores[LABELS_AMOUNT] = {
+        { DRIVING, 2 },
+        { STATIONARY, 2 },
+        { USING, 2 },
+        { WALKING, 0 },
+    };
+
+	/* Act */
+    PredictionScore *actual = getHighestScore(predictionScores);
+
+	/* Assert */
+	CuAssertPtrEquals(tc, &predictionScores[1] ,actual);
+}
+
+void getHighestScore_givenTieBreakerNotIncludingStationary_shouldNotReturnStationary(CuTest* tc)
+{
+	/* Arrange */
+    PredictionScore predictionScores[LABELS_AMOUNT] = {
+        { DRIVING, 2 },
+        { STATIONARY, 0 },
+        { USING, 2 },
+        { WALKING, 2 },
+    };
+
+	/* Act */
+    PredictionScore *actual = getHighestScore(predictionScores);
+
+	/* Assert */
+	CuAssertTrue(tc, actual->label != STATIONARY);
+}
+/* Get Highest Score END */
+
 /* Get Prediction Scores START */
 void getPredictionScores_givenStationaryPoint_shouldGetSameScoresAsInPython(CuTest* tc)
 {
@@ -190,7 +243,7 @@ void getPredictionScores_givenStationaryPoint_shouldGetSameScoresAsInPython(CuTe
     };
 
 	/* Act */
-    getPredictionScores(vector, predictionScores);
+    gatherPredictionScores(vector, predictionScores);
 
 	/* Assert */
 	CuAssertIntEquals(tc, 2, lookupScore(DRIVING, predictionScores)->score);
@@ -233,6 +286,10 @@ CuSuite* CuGetPredictorSuite(void)
 	/* Predict Point */
 	SUITE_ADD_TEST(suite, predictPoint_givenStationaryPointAndDrivingVsStationary_shouldReturnNegativeValue);
 	SUITE_ADD_TEST(suite, predictPoint_givenStationaryPointAndStationaryVsUsing_shouldReturnPositiveValue);
+	/* Get Highest Score */
+	SUITE_ADD_TEST(suite, getHighestScore_givenDrivingIsHighestScore_shouldReturnDriving);
+	SUITE_ADD_TEST(suite, getHighestScore_givenTieBreakerBetweenStationaryAndOther_shouldReturnStationary);
+	SUITE_ADD_TEST(suite, getHighestScore_givenTieBreakerNotIncludingStationary_shouldNotReturnStationary);
 	/* Get Prediction Scores */
 	SUITE_ADD_TEST(suite, getPredictionScores_givenStationaryPoint_shouldGetSameScoresAsInPython);
 	/* Predict */
