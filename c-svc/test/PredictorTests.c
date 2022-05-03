@@ -13,6 +13,55 @@
 	- The expected behavior when the scenario is invoked.
 */
 
+/* Lookup Hyper Plane START */
+void lookupHyperPlane_givenDrivingStationary_shouldGetDrivingStationary(CuTest* tc)
+{
+	/* Act */
+    const HyperPlane *actual = lookupHyperPlane(DRIVING, STATIONARY);
+
+	/* Assert */
+	CuAssertTrue(tc, actual->label1 == DRIVING);
+	CuAssertTrue(tc, actual->label2 == STATIONARY);
+}
+
+void lookupHyperPlane_givenStationaryUsing_shouldGetStationaryUsing(CuTest* tc)
+{
+	/* Act */
+    const HyperPlane *actual = lookupHyperPlane(STATIONARY, USING);
+
+	/* Assert */
+	CuAssertTrue(tc, actual->label1 == STATIONARY);
+	CuAssertTrue(tc, actual->label2 == USING);
+}
+
+void lookupHyperPlane_givenInvalidInvalid_shouldGetNULL(CuTest* tc)
+{
+	/* Act */
+    const HyperPlane *actual = lookupHyperPlane('a', 'b');
+
+	/* Assert */
+	CuAssertPtrEquals(tc, NULL, (HyperPlane *)actual);
+}
+
+void lookupHyperPlane_givenValidInvalid_shouldGetNULL(CuTest* tc)
+{
+	/* Act */
+    const HyperPlane *actual = lookupHyperPlane(STATIONARY, 'a');
+
+	/* Assert */
+	CuAssertPtrEquals(tc, NULL, (HyperPlane *)actual);
+}
+
+void lookupHyperPlane_givenInvalidValid_shouldGetNULL(CuTest* tc)
+{
+	/* Act */
+    const HyperPlane *actual = lookupHyperPlane('a', STATIONARY);
+
+	/* Assert */
+	CuAssertPtrEquals(tc, NULL, (HyperPlane *)actual);
+}
+/* Lookup Hyper Plane END */
+
 /* Lookup Score START */
 void lookupScore_givenStationary_shouldGetStationary(CuTest* tc)
 {
@@ -105,9 +154,10 @@ void predictPoint_givenStationaryPointAndDrivingVsStationary_shouldReturnNegativ
 {
 	/* Arrange */
     double vectorA[3] = {1.0, 2.0,  1.0};
+	const HyperPlane *hyperPlane = lookupHyperPlane(DRIVING, STATIONARY);
 
 	/* Act */
-    char actual = predictPoint(vectorA, HYPER_PLANES[0]);
+    char actual = predictPoint(vectorA, hyperPlane);
 
 	/* Assert */
 	CuAssertTrue(tc, actual == STATIONARY);
@@ -117,9 +167,10 @@ void predictPoint_givenStationaryPointAndStationaryVsUsing_shouldReturnPositiveV
 {
 	/* Arrange */
     double vectorA[3] = {1.0, 2.0,  1.0};
+	const HyperPlane *hyperPlane = lookupHyperPlane(STATIONARY, USING);
 
 	/* Act */
-    char actual = predictPoint(vectorA, HYPER_PLANES[3]);
+    char actual = predictPoint(vectorA, hyperPlane);
 
 	/* Assert */
 	CuAssertTrue(tc, actual == STATIONARY);
@@ -167,6 +218,12 @@ CuSuite* CuGetPredictorSuite(void)
 {
 	CuSuite* suite = CuSuiteNew();
 
+	/* Lookup Hyper Plane */
+	SUITE_ADD_TEST(suite, lookupHyperPlane_givenDrivingStationary_shouldGetDrivingStationary);
+	SUITE_ADD_TEST(suite, lookupHyperPlane_givenStationaryUsing_shouldGetStationaryUsing);
+	SUITE_ADD_TEST(suite, lookupHyperPlane_givenInvalidInvalid_shouldGetNULL);
+	SUITE_ADD_TEST(suite, lookupHyperPlane_givenValidInvalid_shouldGetNULL);
+	SUITE_ADD_TEST(suite, lookupHyperPlane_givenInvalidValid_shouldGetNULL);
 	/* Lookup Score */
 	SUITE_ADD_TEST(suite, lookupScore_givenStationary_shouldGetStationary);
 	SUITE_ADD_TEST(suite, lookupScore_givenDriving_shouldGetDriving);

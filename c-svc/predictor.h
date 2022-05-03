@@ -14,10 +14,10 @@
 
 typedef struct HyperPlane
 {
-    char label1;
-    char label2;
-    double vector[3];
-    double intercept; 
+    const char label1;
+    const char label2;
+    const double vector[3];
+    const double intercept; 
 } HyperPlane;
 
 typedef struct PredictionScore
@@ -28,8 +28,9 @@ typedef struct PredictionScore
 
 extern const HyperPlane HYPER_PLANES[HYPER_PLANES_LENGTH];
 
+const HyperPlane* lookupHyperPlane(char label1, char label2);
 PredictionScore* lookupScore(char label, PredictionScore predictionScores[LABELS_AMOUNT]);
-char predictPoint(double pointToPredict[3], HyperPlane hyperPlane);
+char predictPoint(double pointToPredict[3], const HyperPlane *hyperPlane);
 void getPredictionScores(double pointToPredict[3], PredictionScore predictionScores[LABELS_AMOUNT]);
 char predict(double pointToPredict[3]);
 

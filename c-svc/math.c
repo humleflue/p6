@@ -18,7 +18,7 @@ int roundDouble(double num) {
         return (int)(num + 0.5);
 }
 
-double dotProduct3dVector(double input1[3], double input2[3]) {
+double dotProduct3dVector(const double input1[3], const double input2[3]) {
     int    i;
     double sum = 0;
 
