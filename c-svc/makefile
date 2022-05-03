@@ -36,9 +36,7 @@ testu:
 testw:
 	$(TESTS) -o $(TESTS_TARGET).exe
 
-
-
 clean:
 	$(RM) $(ODIR)/*.o *.exe *.out
 
-.PHONY: clean test
+.PHONY: clean testw testu
