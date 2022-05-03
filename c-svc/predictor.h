@@ -26,7 +26,7 @@ typedef struct PredictionScore
     int score;
 } PredictionScore;
 
-extern HyperPlane HYPER_PLANES[HYPER_PLANES_LENGTH];
+extern const HyperPlane HYPER_PLANES[HYPER_PLANES_LENGTH];
 
 PredictionScore* lookupScore(char label, PredictionScore predictionScores[LABELS_AMOUNT]);
 char predictPoint(double pointToPredict[3], HyperPlane hyperPlane);
