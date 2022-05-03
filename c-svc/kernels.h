@@ -8,5 +8,6 @@
 
 double radialKernel(SampledObservation x, SampledObservation y);
 double linearKernel(SampledObservation x, SampledObservation y);
+SampledObservation sampledObservationConstructor(const double vector[SAMPLED_OBSERVATION_DIM]);
 
 #endif /* END OF KERNELS_H */

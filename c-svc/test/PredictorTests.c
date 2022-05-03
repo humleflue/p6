@@ -153,11 +153,11 @@ void lookupScore_givenSomeOtherChar_shouldGetNULL(CuTest* tc)
 void predictPoint_givenStationaryPointAndDrivingVsStationary_shouldReturnNegativeValue(CuTest* tc)
 {
 	/* Arrange */
-    double vectorA[3] = {1.0, 2.0,  1.0};
+    SampledObservation obs = {{1.0, 2.0,  1.0}};
 	const HyperPlane *hyperPlane = lookupHyperPlane(DRIVING, STATIONARY);
 
 	/* Act */
-    char actual = predictPoint(vectorA, hyperPlane);
+    char actual = predictPoint(obs, hyperPlane);
 
 	/* Assert */
 	CuAssertTrue(tc, actual == STATIONARY);
@@ -166,11 +166,11 @@ void predictPoint_givenStationaryPointAndDrivingVsStationary_shouldReturnNegativ
 void predictPoint_givenStationaryPointAndStationaryVsUsing_shouldReturnPositiveValue(CuTest* tc)
 {
 	/* Arrange */
-    double vectorA[3] = {1.0, 2.0,  1.0};
+    SampledObservation obs = {{1.0, 2.0,  1.0}};
 	const HyperPlane *hyperPlane = lookupHyperPlane(STATIONARY, USING);
 
 	/* Act */
-    char actual = predictPoint(vectorA, hyperPlane);
+    char actual = predictPoint(obs, hyperPlane);
 
 	/* Assert */
 	CuAssertTrue(tc, actual == STATIONARY);
@@ -234,7 +234,7 @@ void getHighestScore_givenTieBreakerNotIncludingStationary_shouldNotReturnStatio
 void getPredictionScores_givenStationaryPoint_shouldGetSameScoresAsInPython(CuTest* tc)
 {
 	/* Arrange */
-    double vector[3] = {1.0, 2.0,  1.0};
+    SampledObservation obs = {{1.0, 2.0,  1.0}};
 	PredictionScore predictionScores[LABELS_AMOUNT] = {
         { DRIVING, 0 },
         { STATIONARY, 0 },
@@ -243,7 +243,7 @@ void getPredictionScores_givenStationaryPoint_shouldGetSameScoresAsInPython(CuTe
     };
 
 	/* Act */
-    gatherPredictionScores(vector, predictionScores);
+    gatherPredictionScores(obs, predictionScores);
 
 	/* Assert */
 	CuAssertIntEquals(tc, 2, lookupScore(DRIVING, predictionScores)->score);
@@ -257,10 +257,10 @@ void getPredictionScores_givenStationaryPoint_shouldGetSameScoresAsInPython(CuTe
 void predict_givenStationaryPoint_shouldPredictStationary(CuTest* tc)
 {
 	/* Arrange */
-    double vector[3] = {1.0, 2.0,  1.0};
+    SampledObservation obs = {{1.0, 2.0,  1.0}};
 
 	/* Act */
-    double actual = predict(vector);
+    double actual = predict(obs);
 
 	/* Assert */
 	CuAssertTrue(tc, actual == STATIONARY);
