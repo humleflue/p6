@@ -32,17 +32,17 @@ const HyperPlane* lookupHyperPlane(char label1, char label2) {
 }
 
 
-char predictPoint(double pointToPredict[3], const HyperPlane *hyperPlane) {
+char predictPoint(const double pointToPredict[3], const HyperPlane *hyperPlane) {
     double result = dotProduct3dVector(pointToPredict, hyperPlane->vector) + hyperPlane->intercept;
     return result < 0 ? hyperPlane->label2 : hyperPlane->label1;
 }
 
 /* Helper function */
-PredictionScore* lookupScore(char label, PredictionScore predictionScores[LABELS_AMOUNT]) {
+PredictionScore* lookupScore(char label, const PredictionScore predictionScores[LABELS_AMOUNT]) {
+    const PredictionScore *result;
+    PredictionScore predictionScore;
     bool match = false;
     int i = 0;
-    PredictionScore predictionScore,
-                   *result;
 
     while(!match && i < LABELS_AMOUNT) {
         predictionScore = predictionScores[i];
@@ -59,7 +59,7 @@ PredictionScore* lookupScore(char label, PredictionScore predictionScores[LABELS
     if(result->label != label) {
         result = NULL;
     }
-    return result;
+    return (PredictionScore *)result;
 }
 
 /* Helper function */
@@ -69,11 +69,11 @@ void countUpScore(char label, PredictionScore predictionScores[LABELS_AMOUNT]) {
 }
 
 /* Helper function */
-PredictionScore* getHighestScore(PredictionScore predictionScores[LABELS_AMOUNT]) {
+PredictionScore* getHighestScore(const PredictionScore predictionScores[LABELS_AMOUNT]) {
     int i;
-    PredictionScore *highestPredictionScore = &predictionScores[0],
-                    /* Used later because we prefer to return stationary */
-                    *stationaryPredictionScore = lookupScore(STATIONARY, predictionScores);
+    const PredictionScore *highestPredictionScore = &predictionScores[0];
+    /* Used later because we prefer to return stationary */
+    PredictionScore *stationaryPredictionScore = lookupScore(STATIONARY, predictionScores);
 
     /* Start loop from 1, as we initialized highestPredictionScore to the first index */
     for(i = 1; i < LABELS_AMOUNT; i++) {
@@ -84,10 +84,10 @@ PredictionScore* getHighestScore(PredictionScore predictionScores[LABELS_AMOUNT]
     if(stationaryPredictionScore->score == highestPredictionScore->score)
         return stationaryPredictionScore;
     else    
-        return highestPredictionScore;
+        return (PredictionScore*)highestPredictionScore;
 }
 
-void getPredictionScores(double pointToPredict[3], PredictionScore predictionScores[LABELS_AMOUNT]) {
+void gatherPredictionScores(const double pointToPredict[3], PredictionScore predictionScores[LABELS_AMOUNT]) {
     int i;
     char prediction;
 
@@ -97,13 +97,13 @@ void getPredictionScores(double pointToPredict[3], PredictionScore predictionSco
     }
 }
 
-char predict(double pointToPredict[3]) {
+char predict(const double pointToPredict[3]) {
     PredictionScore predictionScores[LABELS_AMOUNT] = {
         { DRIVING, 0 },
         { STATIONARY, 0 },
         { USING, 0 },
         { WALKING, 0 },
     };
-    getPredictionScores(pointToPredict, predictionScores);
+    gatherPredictionScores(pointToPredict, predictionScores);
     return getHighestScore(predictionScores)->label;
 }

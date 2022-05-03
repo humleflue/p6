@@ -29,9 +29,10 @@ typedef struct PredictionScore
 extern const HyperPlane HYPER_PLANES[HYPER_PLANES_LENGTH];
 
 const HyperPlane* lookupHyperPlane(char label1, char label2);
-PredictionScore* lookupScore(char label, PredictionScore predictionScores[LABELS_AMOUNT]);
-char predictPoint(double pointToPredict[3], const HyperPlane *hyperPlane);
-void getPredictionScores(double pointToPredict[3], PredictionScore predictionScores[LABELS_AMOUNT]);
-char predict(double pointToPredict[3]);
+PredictionScore* lookupScore(char label, const PredictionScore predictionScores[LABELS_AMOUNT]);
+char predictPoint(const double pointToPredict[3], const HyperPlane *hyperPlane);
+PredictionScore* getHighestScore(const PredictionScore predictionScores[LABELS_AMOUNT]);
+void gatherPredictionScores(const double pointToPredict[3], PredictionScore predictionScores[LABELS_AMOUNT]);
+char predict(const double pointToPredict[3]);
 
 #endif /* END OF PREDICTOR_H */
