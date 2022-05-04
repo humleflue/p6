@@ -1,0 +1,35 @@
+name: Test C Code
+on:
+  push:
+    paths:
+      - "c-svc/**"
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - name: Install dependencies
+      run: |
+          echo Update gcc-9 =======================================================================
+          echo gcc version before
+          gcc --version
+          sudo add-apt-repository ppa:ubuntu-toolchain-r/test
+          sudo apt-get update
+          sudo apt-get install make gcc
+          echo gcc version after
+          gcc --version
+
+      - name: Run Make
+      run: |
+          echo Run Make =======================================================================
+          cd c-svc
+          make
+          echo Run Make tests =======================================================================
+          make testu
+
+      - name: Run Tests
+      run: |
+          echo Run tests =======================================================================
+          ./AllTests.out
+          echo Done! =======================================================================
