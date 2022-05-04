@@ -31,5 +31,8 @@ jobs:
       - name: Run Tests
         run: |
             echo Run tests =======================================================================
-            if ./c-svc/AllTests.out | grep '!!!FAILURES!!!' -q; then core.setFailed('Some tests FAILED!')
+            ./c-svc/AllTests.out | grep '!!!FAILURES!!!' &> /dev/null
+            if [ $? == 0 ]; then
+              core.setFailed('Some tests FAILED!')
+            fi
             echo Done! =======================================================================
