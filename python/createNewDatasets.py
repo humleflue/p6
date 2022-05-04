@@ -25,4 +25,4 @@ for number in numbers:
     df = df.assign(broad_category = broad_category)
     df['broad_category'] = df['broad_category'].map(categories)
     print(df.isnull().values.any())
-    df.to_csv(f'flattened_{number}sec_with_broad_category.csv')
+    df.to_csv(f'flattened_{number}sec_with_broad_category.csv', index=False)
