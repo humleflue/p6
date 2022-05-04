@@ -35,6 +35,5 @@ char predictPoint(SampledObservation obs, const HyperPlane *hyperPlane);
 PredictionScore* getHighestScore(const PredictionScore predictionScores[LABELS_AMOUNT]);
 void gatherPredictionScores(SampledObservation obs, PredictionScore predictionScores[LABELS_AMOUNT]);
 char predict(SampledObservation obs);
-char predict3dVector(const double pointToPredict[3]);
 
 #endif /* END OF PREDICTOR_H */
