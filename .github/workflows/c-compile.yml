@@ -31,5 +31,5 @@ jobs:
       - name: Run Tests
         run: |
             echo Run tests =======================================================================
-            ./c-svc/AllTests.out | grep '!!!FAILURES!!!' && exit 1
+            ./c-svc/AllTests.out | grep '!!!FAILURES!!!' && ./c-svc/AllTests.out && exit 1 
             echo Done! =======================================================================
