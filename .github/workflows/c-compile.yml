@@ -1,8 +1,8 @@
 name: Test C Code
 on:
   push:
-    # paths:
-    #   - "c-svc/**"
+    paths:
+      - "c-svc/**"
 jobs:
   test:
     runs-on: ubuntu-latest
