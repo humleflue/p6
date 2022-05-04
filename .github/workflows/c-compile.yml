@@ -31,6 +31,8 @@ jobs:
       - name: Run Tests
         run: |
             echo Run tests =======================================================================
+            # Check for failed tests and throw error if any failures
             ./c-svc/AllTests.out | grep '!!!FAILURES!!!' &> /dev/null && echo Results ======================================================================= && ./c-svc/AllTests.out && exit 1 
-            ./c-svc/AllTests.out # All tests have passed
+            # If all tests have passed print results
+            ./c-svc/AllTests.out 
             echo Done! =======================================================================
