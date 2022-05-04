@@ -31,12 +31,6 @@ const HyperPlane* lookupHyperPlane(char label1, char label2) {
     return &HYPER_PLANES[i];
 }
 
-
-char predictPoint(const double pointToPredict[3], const HyperPlane *hyperPlane) {
-    double result = dotProduct3dVector(pointToPredict, hyperPlane->vector) + hyperPlane->intercept;
-    return result < 0 ? hyperPlane->label2 : hyperPlane->label1;
-}
-
 /* Helper function */
 PredictionScore* lookupScore(char label, const PredictionScore predictionScores[LABELS_AMOUNT]) {
     const PredictionScore *result;
@@ -60,6 +54,12 @@ PredictionScore* lookupScore(char label, const PredictionScore predictionScores[
         result = NULL;
     }
     return (PredictionScore *)result;
+}
+
+char predictPoint(SampledObservation obs, const HyperPlane *hyperPlane) {
+    SampledObservation hyperPlaneAsObservation = sampledObservationConstructor(hyperPlane->vector);
+    double result = linearKernel(obs, hyperPlaneAsObservation) + hyperPlane->intercept;
+    return result < 0 ? hyperPlane->label2 : hyperPlane->label1;
 }
 
 /* Helper function */
@@ -87,23 +87,23 @@ PredictionScore* getHighestScore(const PredictionScore predictionScores[LABELS_A
         return (PredictionScore*)highestPredictionScore;
 }
 
-void gatherPredictionScores(const double pointToPredict[3], PredictionScore predictionScores[LABELS_AMOUNT]) {
+void gatherPredictionScores(SampledObservation obs, PredictionScore predictionScores[LABELS_AMOUNT]) {
     int i;
     char prediction;
 
     for(i = 0; i < HYPER_PLANES_LENGTH; i++) {
-        prediction = predictPoint(pointToPredict, &HYPER_PLANES[i]);
+        prediction = predictPoint(obs, &HYPER_PLANES[i]);
         countUpScore(prediction, predictionScores);
     }
 }
 
-char predict(const double pointToPredict[3]) {
+char predict(SampledObservation obs) {
     PredictionScore predictionScores[LABELS_AMOUNT] = {
         { DRIVING, 0 },
         { STATIONARY, 0 },
         { USING, 0 },
         { WALKING, 0 },
     };
-    gatherPredictionScores(pointToPredict, predictionScores);
-    return getHighestScore(predictionScores)->label;
+    gatherPredictionScores(obs, predictionScores);
+    return getHighestScore(predictionScores)->label;   
 }
