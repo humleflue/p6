@@ -33,6 +33,6 @@ jobs:
             echo Run tests =======================================================================
             ./c-svc/AllTests.out | grep '!!!FAILURES!!!' &> /dev/null
             if [ $? == 0 ]; then
-              core.setFailed('Some tests FAILED!')
+              core.setFailed("Some tests FAILED!")
             fi
             echo Done! =======================================================================
