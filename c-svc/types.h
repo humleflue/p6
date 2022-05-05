@@ -17,7 +17,7 @@ typedef struct TimeSeriesObservation_s {
     int _currentIndex;
 } TimeSeriesObservation;
 
-typedef struct AggregatedObservation_s {
+typedef struct SampledObservation_s {
     double observation[SAMPLED_OBSERVATION_DIM];
 } SampledObservation;
 
