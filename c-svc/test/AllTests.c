@@ -2,7 +2,9 @@
 
 #include "CuTest/CuTest.h"
 
-CuSuite* CuGetSuite();
+CuSuite* CuGetTransformSuite();
+CuSuite* CuGetMathSuite();
+CuSuite* CuGetPredictorSuite();
 
 void RunAllTests(void)
 {
@@ -10,7 +12,9 @@ void RunAllTests(void)
 	CuSuite* suite = CuSuiteNew();
 
 	/* ADD NEW SUITES IN THIS REGION */
-	CuSuiteAddSuite(suite, CuGetSuite());
+	CuSuiteAddSuite(suite, CuGetTransformSuite());
+	CuSuiteAddSuite(suite, CuGetMathSuite());
+	CuSuiteAddSuite(suite, CuGetPredictorSuite());
 	/* ADD NEW SUITES IN THIS REGION */
 
 	CuSuiteRun(suite);
