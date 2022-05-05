@@ -20,7 +20,7 @@ void dotProduct3dVector_givenVectorsOfIntegers_expectsTheCorrectDotProduct(CuTes
     double vectorB[3] = {4.0, 8.0, 10.0};
 
 	/* Act */
-    double actual = dotProduct3dVector(vectorA, vectorB);
+    double actual = dotProduct3dVectors(vectorA, vectorB);
 
 
 	/* Assert */
@@ -34,7 +34,7 @@ void dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct(CuTest
     double vectorB[3] = {4.1, 8.987, 10.1};
 
 	/* Act */
-    double actual = dotProduct3dVector(vectorA, vectorB);
+    double actual = dotProduct3dVectors(vectorA, vectorB);
 
 	/* Assert */
 	CuAssertDblEquals(tc,  127.987, actual, 0.01);

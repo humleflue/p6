@@ -17,7 +17,7 @@ double radialKernel(SampledObservation x, SampledObservation y) {
 }
 
 double linearKernel(SampledObservation x, SampledObservation y) {
-    return dotProduct3dVector(x.observation, y.observation);
+    return dotProduct3dVectors(x.observation, y.observation);
 }
 
 SampledObservation sampledObservationConstructor(const double vector[SAMPLED_OBSERVATION_DIM]) {
