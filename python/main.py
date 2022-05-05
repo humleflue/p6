@@ -24,11 +24,10 @@ def main(use_existing_model=True):
     intersect = [value for value in sum if value in using_l]
     df = df.drop(intersect, axis=0)
 
-    df_test = feature_extraction(df)
-    df_sampled_data = sample_flattened_dataset(df)
-    df_avg_data =  average_sampling(df)
-    print(df_test)
-    X_train, X_test, Y_train, Y_test = get_train_test_split(df_test)
+    df_many_features = feature_extraction(df)
+    #df_sampled_data = sample_flattened_dataset(df)
+    #df_avg_data =  average_sampling(df)
+    X_train, X_test, Y_train, Y_test = get_train_test_split(df_many_features)
 
     filename = f'fitted_{os.getenv("BEST_KERNEL")}_OVO_model.sav'
     model_config = get_default_config()

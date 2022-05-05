@@ -25,9 +25,9 @@ using_l = df.index[df['broad_category'] == "Using"].tolist()
 intersect = [value for value in sum if value in using_l]
 df = df.drop(intersect, axis=0)
 
-df_sampled = feature_extraction(df)
-df_abs_sum = average_sampling(df)
-X_train, X_test, Y_train, Y_test = get_train_test_split(df_sampled)
+df_many_features = feature_extraction(df)
+#df_abs_sum = average_sampling(df)
+X_train, X_test, Y_train, Y_test = get_train_test_split(df_many_features)
 
 # Comment in/out the wanted/unwanted sections
 results = []
