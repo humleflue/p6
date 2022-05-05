@@ -1,4 +1,5 @@
 import os
+import numpy as np
 import pandas as pd
 from dotenv import load_dotenv
 from sklearn import svm
@@ -25,7 +26,7 @@ class SVCConfiguration:
         self.report = report
 
 def create_and_fit_SVC_classifier(X_train, Y_train, conf: SVCConfiguration) -> SVCConfiguration:
-    classifier = svm.SVC(kernel=conf.kernel, C=conf.soft_margin, gamma=conf.gamma, degree=conf.poly_degrees)
+    classifier = svm.SVC(kernel=conf.kernel, C=conf.soft_margin, gamma=conf.gamma, degree=conf.poly_degrees, verbose=False)
     classifier.fit(X_train, Y_train.iloc[:,-1])
     return classifier
 
@@ -39,12 +40,12 @@ def get_default_config() -> SVCConfiguration:
 def get_train_test_split(df: pd.DataFrame):
     X = df.iloc[:,:-2]
     Y = df.iloc[:,-2:]
-    return train_test_split( X, Y, test_size=0.25)
+    return train_test_split( X, Y, test_size=0.01)
 
 def sample_flattened_dataset(df):
     df_last_two_columns = df.iloc[:,-2:]
     df_without_last_two_columns = df.iloc[:,:-2]
-    df_with_sampling = df_without_last_two_columns.sample(frac = 0.25, axis = 1) # Axis = 1 means columns. 0 is rows
+    df_with_sampling = df_without_last_two_columns.sample(frac = 0.99, axis = 1) # Axis = 1 means columns. 0 is rows
     res = pd.merge(df_with_sampling, df_last_two_columns, left_index=True, right_index=True) # Combines the two dataframes on index
     
     return res
@@ -75,5 +76,54 @@ def average_sampling(df):
     # Combines the two dataframes on index, thereby adding the label back
     res = pd.merge(new_df, df_last_two_columns, left_index=True, right_index=True) 
     # print(res)
+
+    return res
+
+def split_flattened_row_into_xyz(df):
+    xyz_list = [[],[],[]]
+
+    for index, ele in enumerate(df.to_list()):
+        xyz_list[index % 3].append(ele)
+
+    return xyz_list[0], xyz_list[1], xyz_list[2]
+
+
+def big_sampling(df):
+    df_last_two_columns = df.iloc[:,-2:]
+    df_without_last_two_columns = df.iloc[:,:-2]
+
+    new_df = pd.DataFrame(columns = ["x_mean","y_mean","z_mean",
+        "x_max","y_max","z_max",
+        "x_min","y_min","z_min",
+        "x_abs_sum","y_abs_sum","z_abs_sum",
+        "x_abs_mean","y_abs_mean","z_abs_mean",
+        "x_abs_std","y_abs_std","z_abs_std",
+        "total_max",
+        "total_min",
+        "total_abs_sum",
+        "total_abs_mean",
+        "total_abs_std"])
+
+    for index, row in df_without_last_two_columns.iterrows():
+        # List containing the sum of x, y, and z squared.
+        x, y, z = split_flattened_row_into_xyz(row)
+
+        new_row = [np.mean(x), np.mean(y), np.mean(z), 
+            np.max(x), np.max(y), np.max(z), 
+            np.min(x), np.min(y), np.min(z), 
+            sum([abs(num) for num in x]), sum([abs(num) for num in y]), sum([abs(num) for num in z]),
+            np.mean([abs(num) for num in x]), np.mean([abs(num) for num in y]), np.mean([abs(num) for num in z]),
+            np.std([abs(num) for num in x]), np.std([abs(num) for num in y]), np.std([abs(num) for num in z]),
+            np.max(row),
+            np.min(row),
+            sum([abs(num) for num in row]),
+            np.mean([abs(num) for num in row]),
+            np.std([abs(num) for num in row]),
+        ]
+
+        new_df.loc[index] = new_row
+
+
+    res = pd.merge(new_df, df_last_two_columns, left_index=True, right_index=True) 
 
     return res
