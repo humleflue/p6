@@ -45,7 +45,7 @@ def get_train_test_split(df: pd.DataFrame):
 def sample_flattened_dataset(df):
     df_last_two_columns = df.iloc[:,-2:]
     df_without_last_two_columns = df.iloc[:,:-2]
-    df_with_sampling = df_without_last_two_columns.sample(frac = 0.99, axis = 1) # Axis = 1 means columns. 0 is rows
+    df_with_sampling = df_without_last_two_columns.sample(frac = 0.25, axis = 1) # Axis = 1 means columns. 0 is rows
     res = pd.merge(df_with_sampling, df_last_two_columns, left_index=True, right_index=True) # Combines the two dataframes on index
     
     return res
@@ -79,6 +79,7 @@ def average_sampling(df):
 
     return res
 
+# Splits a flattened row into X, Y, Z arrays.
 def split_flattened_row_into_xyz(df):
     xyz_list = [[],[],[]]
 
@@ -88,7 +89,8 @@ def split_flattened_row_into_xyz(df):
     return xyz_list[0], xyz_list[1], xyz_list[2]
 
 
-def big_sampling(df):
+# Extracts a bunch of features from the flattened dataset, and returns a dataframe with each feature being its own column.
+def feature_extraction(df):
     df_last_two_columns = df.iloc[:,-2:]
     df_without_last_two_columns = df.iloc[:,:-2]
 
@@ -123,7 +125,7 @@ def big_sampling(df):
 
         new_df.loc[index] = new_row
 
-
+    # Merges the dataframe containing the features back with the dataframe containing the labels.
     res = pd.merge(new_df, df_last_two_columns, left_index=True, right_index=True) 
 
     return res

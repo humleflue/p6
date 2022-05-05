@@ -4,7 +4,7 @@ from sklearn.metrics import confusion_matrix
 from sklearn import svm
 from sklearn.model_selection import cross_val_score
 
-from SVC import average_sampling, get_train_test_split, big_sampling
+from SVC import average_sampling, get_train_test_split, feature_extraction
 from modules.grid_search_helper_functions import printNBestConfigs
 
 path_to_dataset="./datasets/flattened_datasets/flattened_3.0sec_with_broad_category.csv"
@@ -18,13 +18,14 @@ class Data:
         return f'C={self.c}, score={self.score}'
 # Setup
 df = pd.read_csv(path_to_dataset)
-# Colle-Filter
+
+# Colle filter. Slet når det er ændret i filerne
 sum = (df.loc[abs(df.iloc[:,:-2]).sum(1) < 400]).index.tolist()
 using_l = df.index[df['broad_category'] == "Using"].tolist()
 intersect = [value for value in sum if value in using_l]
 df = df.drop(intersect, axis=0)
 
-df_sampled = big_sampling(df)
+df_sampled = feature_extraction(df)
 df_abs_sum = average_sampling(df)
 X_train, X_test, Y_train, Y_test = get_train_test_split(df_sampled)
 

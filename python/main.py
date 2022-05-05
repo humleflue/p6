@@ -4,7 +4,7 @@ from sklearn.metrics import accuracy_score, classification_report
 from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_selection import RFECV
 from sklearn.datasets import make_classification
-from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_split, sample_flattened_dataset, average_sampling, big_sampling
+from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_split, sample_flattened_dataset, average_sampling, feature_extraction
 from dotenv import load_dotenv
 import pickle
 import numpy as np
@@ -17,11 +17,14 @@ def main(use_existing_model=True):
     # Load data
     dataset_path = os.getenv('BEST_DATASET')
     df = pd.read_csv(dataset_path)
+
+    # Colle filter. Slet når det er ændret i filerne
     sum = (df.loc[abs(df.iloc[:,:-2]).sum(1) < 400]).index.tolist()
     using_l = df.index[df['broad_category'] == "Using"].tolist()
     intersect = [value for value in sum if value in using_l]
     df = df.drop(intersect, axis=0)
-    df_test = big_sampling(df)
+
+    df_test = feature_extraction(df)
     df_sampled_data = sample_flattened_dataset(df)
     df_avg_data =  average_sampling(df)
     print(df_test)
