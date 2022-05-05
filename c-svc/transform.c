@@ -3,6 +3,7 @@
 /* Adds the x, y and z from newVector to the observation array in the tso,
  * If the tso.observation array is full we do nothing
  * Note: tso is both input and output param 
+ * WARNING: This function will FAIL if the tso object's _currentIndex is not initialized to 0 - use TIME_SERIES_OBSERVATION_INIT for this.
  */
 void addVectorToTimeSeriesObservation(TimeSeriesObservation *tso, double newVector[ACCELEROMETOR_VECTOR_DIM]) {
     int i = tso->_currentIndex,

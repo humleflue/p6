@@ -20,10 +20,10 @@ PREDICTOR_TESTS = $(TDIR)/PredictorTests.c $(ODIR)/$(PREDICTOR_TARGET).o $(ODIR)
 TESTS = $(CC) $(ALL_TESTS).c $(CUTEST).c $(TRANSFORM_TESTS) $(MATH_TESTS) $(PREDICTOR_TESTS)
 
 # Target
-$(TARGET).out: $(OBJ)
+$(TARGET).exe: $(OBJ)
 	$(CC) $^ $(CFLAGS) -o $@
 
-$(TARGET).exe: $(OBJ)
+$(TARGET).out: $(OBJ)
 	$(CC) $^ $(CFLAGS) -o $@
 
 $(ODIR)/%.o: %.c
