@@ -58,7 +58,7 @@ PredictionScore* lookupScore(char label, const PredictionScore predictionScores[
 
 char predictPoint(SampledObservation obs, const HyperPlane *hyperPlane) {
     SampledObservation hyperPlaneAsObservation = sampledObservationConstructor(hyperPlane->vector);
-    double result = linearKernel(obs, hyperPlaneAsObservation) + hyperPlane->intercept;
+    int result = linearKernel(obs, hyperPlaneAsObservation) + hyperPlane->intercept;
     return result < 0 ? hyperPlane->label2 : hyperPlane->label1;
 }
 
