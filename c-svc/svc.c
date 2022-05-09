@@ -1,4 +1,3 @@
-/* #include <stdio.h> */
 #include "transform.h"
 #include "predictor.h"
 
