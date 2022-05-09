@@ -13,12 +13,12 @@
 
 typedef struct TimeSeriesObservation_s {
     bool isFull;
-    double observation[TIME_SERIES_OBSERVATION_DIM];
-    int _currentIndex;
+    int  observation[TIME_SERIES_OBSERVATION_DIM];
+    int  _currentIndex;
 } TimeSeriesObservation;
 
 typedef struct SampledObservation_s {
-    double observation[SAMPLED_OBSERVATION_DIM];
+    int observation[SAMPLED_OBSERVATION_DIM];
 } SampledObservation;
 
 #endif /* END OF TYPES_H */
