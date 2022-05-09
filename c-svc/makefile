@@ -1,11 +1,12 @@
 CC = gcc
 CFLAGS = -ansi -pedantic -Wall -Wextra -O0
-TARGET = svc
+TARGET = main
+SVC_TARGET = svc
 TRANSFORM_TARGET = transform
 KERNELS_TARGET = kernels
 MATH_TARGET = math
 PREDICTOR_TARGET = predictor
-OBJ = $(TARGET).c $(ODIR)/$(TRANSFORM_TARGET).o $(ODIR)/$(KERNELS_TARGET).o $(ODIR)/$(MATH_TARGET).o $(ODIR)/$(PREDICTOR_TARGET).o 
+OBJ = $(TARGET).c $(ODIR)/$(SVC_TARGET).o $(ODIR)/$(TRANSFORM_TARGET).o $(ODIR)/$(KERNELS_TARGET).o $(ODIR)/$(MATH_TARGET).o $(ODIR)/$(PREDICTOR_TARGET).o 
 
 ODIR = out
 TDIR = test

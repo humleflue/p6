@@ -52,11 +52,3 @@ char svc() {
     transform(timeSeriesObservation, &sampledObservation);
     return predict(sampledObservation);
 }
-
-/*
-int main(void) {
-    char result = svc();
-    printf("%c\n", result);
-    return 0;
-}
-*/
