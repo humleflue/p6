@@ -18,6 +18,7 @@
     <file name="sl_bluetooth_advertiser_config.h" generated="true" linked="false"/>
     <file name="sl_device_init_emu_config.h" generated="true" linked="false"/>
     <file name="sl_device_init_hfxo_config.h" generated="true" linked="false"/>
+    <file name="sl_i2cspm_i2c_spm_instance_config.h" generated="true" linked="false"/>
     <file name="sl_rail_util_pa_config.h" generated="true" linked="false"/>
     <file name="mbedtls_config.h" generated="true" linked="false"/>
     <file name="app_assert_config.h" generated="true" linked="false"/>
