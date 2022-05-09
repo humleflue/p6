@@ -9,6 +9,7 @@ from dotenv import load_dotenv
 import pickle
 import numpy as np
 import matplotlib.pyplot as plt
+from manualPredictor import manual_predict
 
 
 def main(use_existing_model=True):
@@ -51,6 +52,9 @@ def main(use_existing_model=True):
     model_config.set_report(report)
     print(accuracy)
     print(report)
+    
+    #new_point_stationary = [1, 2, 1]
+    #manual_predict([new_point_stationary], classifier.coef_, classifier.intercept_)
 
     # Plot a 3D plot
     if model_config.kernel == 'linear':

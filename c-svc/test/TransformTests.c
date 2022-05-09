@@ -86,7 +86,7 @@ void transform_transformTso_xYZShouldBeAverage(CuTest* tc)
 }
 
 
-CuSuite* CuGetSuite(void)
+CuSuite* CuGetTransformSuite(void)
 {
 	CuSuite* suite = CuSuiteNew();
 

@@ -11,11 +11,22 @@ double radialKernel(SampledObservation x, SampledObservation y) {
         sumOfVectorsSquared += vectorEntryDiffSquared;
     }
 
-    roundedExponent = round((GAMMA * -1) * sumOfVectorsSquared);
+    roundedExponent = roundDouble((GAMMA * -1) * sumOfVectorsSquared);
 
     return power(EULER, roundedExponent);
 }
 
 double linearKernel(SampledObservation x, SampledObservation y) {
-    return dotProduct3dVector(x.observation, y.observation);
+    return dotProduct3dVectors(x.observation, y.observation);
+}
+
+SampledObservation sampledObservationConstructor(const double vector[SAMPLED_OBSERVATION_DIM]) {
+    int i;
+    SampledObservation result;
+
+    for(i = 0; i < SAMPLED_OBSERVATION_DIM; i++) {
+        result.observation[i] = vector[i];
+    }
+
+    return result;
 }
