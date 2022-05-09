@@ -5,6 +5,6 @@
 
 double power(double base, int exponent);
 int    roundDouble(double num);
-int    dotProduct3dVectors(const int input1[3], const int input2[3]);
+double dotProduct3dVectors(const double input1[3], const double input2[3]);
 
 #endif /* END OF MATH_H */

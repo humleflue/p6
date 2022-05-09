@@ -16,38 +16,37 @@
 void dotProduct3dVector_givenVectorsOfIntegers_expectsTheCorrectDotProduct(CuTest* tc)
 {
 	/* Arrange */
-    int vectorA[3] = {9, 2,  7};
-    int vectorB[3] = {4, 8, 10};
+    double vectorA[3] = {9.0, 2.0,  7.0};
+    double vectorB[3] = {4.0, 8.0, 10.0};
 
 	/* Act */
-    int actual = dotProduct3dVectors(vectorA, vectorB);
+    double actual = dotProduct3dVectors(vectorA, vectorB);
 
 
 	/* Assert */
-	CuAssertIntEquals(tc, 122.0, actual);
+	CuAssertDblEquals(tc, 122.0, actual, 0.1);
 }
 
-/*
-	void dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct(CuTest* tc)
-	{
-		/* Arrange *
-		double vectorA[3] = {9.123, 2.1,  7.1};
-		double vectorB[3] = {4.1, 8.987, 10.1};
+void dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct(CuTest* tc)
+{
+	/* Arrange */
+    double vectorA[3] = {9.123, 2.1,  7.1};
+    double vectorB[3] = {4.1, 8.987, 10.1};
 
-		/* Act *
-		double actual = dotProduct3dVectors(vectorA, vectorB);
+	/* Act */
+    double actual = dotProduct3dVectors(vectorA, vectorB);
 
-		/* Assert *
-		CuAssertDblEquals(tc,  127.987, actual, 0.01);
-	}
-*/
+	/* Assert */
+	CuAssertDblEquals(tc,  127.987, actual, 0.01);
+}
+
 
 CuSuite* CuGetMathSuite(void)
 {
 	CuSuite* suite = CuSuiteNew();
 
 	SUITE_ADD_TEST(suite, dotProduct3dVector_givenVectorsOfIntegers_expectsTheCorrectDotProduct);
-	/* SUITE_ADD_TEST(suite, dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct); */
+	SUITE_ADD_TEST(suite, dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct);
 
 	return suite;
 }
