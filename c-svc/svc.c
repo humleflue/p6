@@ -3,7 +3,7 @@
 #include "predictor.h"
 
 int main(void) {
-    double data[TIME_SERIES_OBSERVATION_DIM][ACCELEROMETOR_VECTOR_DIM] = {
+    int data[TIME_SERIES_OBSERVATION_DIM][ACCELEROMETOR_VECTOR_DIM] = {
         {0, -1, 0},
         {-1, -6, -35},
         {0, 4, 32},

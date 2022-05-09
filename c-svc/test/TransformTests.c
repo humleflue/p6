@@ -9,7 +9,7 @@
 /*-------------------------------------------------------------------------*
  * Helper functions
  *-------------------------------------------------------------------------*/
-void fillArrayWithDoubles(int size, double vector[size], double value) {
+void fillArrayWithInts(int size, int vector[size], int value) {
 	int i;
 	for(i = 0; i < size; i++){
 		vector[i] = value;
@@ -27,11 +27,11 @@ void addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack(CuTes
 {
 	/* Arrange */
 	TimeSeriesObservation tso = TIME_SERIES_OBSERVATION_INIT;
-	double vector[ACCELEROMETOR_VECTOR_DIM], 
-	       arbitraryDouble = 0.42;
-	int i;
+	int vector[ACCELEROMETOR_VECTOR_DIM], 
+	    arbitraryInt = 42,
+		i;
 
-	fillArrayWithDoubles(ACCELEROMETOR_VECTOR_DIM, vector, arbitraryDouble);
+	fillArrayWithInts(ACCELEROMETOR_VECTOR_DIM, vector, arbitraryInt);
 
 	/* Act */
 	/* We try to add one more vector (+1), than there's space for */
@@ -40,7 +40,7 @@ void addVectorToTimeSeriesObservation_tryToStackSmash_shouldNotAffectStack(CuTes
 	}
 
 	/* Assert */
-	CuAssertTrue(tc, tso.observation[TIME_SERIES_OBSERVATION_DIM] != arbitraryDouble);
+	CuAssertTrue(tc, tso.observation[TIME_SERIES_OBSERVATION_DIM] != arbitraryInt);
 	CuAssertTrue(tc, tso.isFull);
 }
 
@@ -48,11 +48,11 @@ void addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex(C
 {
 	/* Arrange */
 	TimeSeriesObservation tso = TIME_SERIES_OBSERVATION_INIT;
-	double vector[ACCELEROMETOR_VECTOR_DIM], 
-		   arbitraryDouble = 0.42;
-	int i;
+	int vector[ACCELEROMETOR_VECTOR_DIM], 
+		arbitraryInt = 42,
+		i;
 
-	fillArrayWithDoubles(ACCELEROMETOR_VECTOR_DIM, vector, arbitraryDouble);
+	fillArrayWithInts(ACCELEROMETOR_VECTOR_DIM, vector, arbitraryInt);
 
 	/* Act */
 	for(i = 0; i < TIME_SERIES_OBSERVATION_DIM / 3; i++) {
@@ -60,7 +60,7 @@ void addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex(C
 	}
 
 	/* Assert */
-	CuAssertTrue(tc, tso.observation[TIME_SERIES_OBSERVATION_DIM - 1] == arbitraryDouble);
+	CuAssertTrue(tc, tso.observation[TIME_SERIES_OBSERVATION_DIM - 1] == arbitraryInt);
 	CuAssertTrue(tc, tso.isFull);
 }
 
@@ -70,19 +70,19 @@ void transform_transformTso_xYZShouldBeAverage(CuTest* tc)
 	TimeSeriesObservation tso = TIME_SERIES_OBSERVATION_INIT;
 	SampledObservation ao;
 	int i;
-	double expected = 3.1;
+	int expected = 3;
 
 	/* We fill up the tso's observations with the expected value,
 	   which means that the average will always be the expected value */
-	fillArrayWithDoubles(TIME_SERIES_OBSERVATION_DIM, tso.observation, expected);
+	fillArrayWithInts(TIME_SERIES_OBSERVATION_DIM, tso.observation, expected);
 
 	/* Act */
 	transform(tso, &ao);
 
 	/* Assert */
-	CuAssertDblEquals(tc, expected, ao.observation[0], 0.01);
-	CuAssertDblEquals(tc, expected, ao.observation[1], 0.01);
-	CuAssertDblEquals(tc, expected, ao.observation[2], 0.01);
+	CuAssertIntEquals(tc, expected, ao.observation[0]);
+	CuAssertIntEquals(tc, expected, ao.observation[1]);
+	CuAssertIntEquals(tc, expected, ao.observation[2]);
 }
 
 
