@@ -37,10 +37,10 @@ def get_default_config() -> SVCConfiguration:
     soft_margin = float(os.getenv('BEST_SOFT_MARGIN'))
     return SVCConfiguration(kernel, soft_margin, gamma)
 
-def get_train_test_split(df: pd.DataFrame):
+def get_train_test_split(df: pd.DataFrame, split=0.25):
     X = df.iloc[:,:-2]
     Y = df.iloc[:,-2:]
-    return train_test_split( X, Y, test_size=0.01)
+    return train_test_split( X, Y, test_size=split)
 
 def sample_flattened_dataset(df):
     df_last_two_columns = df.iloc[:,-2:]

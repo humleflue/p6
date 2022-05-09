@@ -20,10 +20,10 @@ def main(use_existing_model=True):
     df = pd.read_csv(dataset_path)
 
     # Colle filter. Slet når det er ændret i filerne
-    sum = (df.loc[abs(df.iloc[:,:-2]).sum(1) < 400]).index.tolist()
-    using_l = df.index[df['broad_category'] == "Using"].tolist()
-    intersect = [value for value in sum if value in using_l]
-    df = df.drop(intersect, axis=0)
+    #sum = (df.loc[abs(df.iloc[:,:-2]).sum(1) < 400]).index.tolist()
+    #using_l = df.index[df['broad_category'] == "Using"].tolist()
+    #intersect = [value for value in sum if value in using_l]
+    #df = df.drop(intersect, axis=0)
 
     df_many_features = feature_extraction(df)
     #df_sampled_data = sample_flattened_dataset(df)
