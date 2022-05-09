@@ -2,7 +2,7 @@
 #include "transform.h"
 #include "predictor.h"
 
-int main(void) {
+char svc() {
     int data[TIME_SERIES_OBSERVATION_DIM][ACCELEROMETOR_VECTOR_DIM] = {
         {0, -1, 0},
         {-1, -6, -35},
@@ -44,15 +44,17 @@ int main(void) {
     int i;
     TimeSeriesObservation timeSeriesObservation = TIME_SERIES_OBSERVATION_INIT;
     SampledObservation sampledObservation;
-    char result;
 
     for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i++) {
         addVectorToTimeSeriesObservation(&timeSeriesObservation, data[i]);
     }
 
     transform(timeSeriesObservation, &sampledObservation);
-    result = predict(sampledObservation);
+    return predict(sampledObservation);
+}
 
+int main(void) {
+    char result = svc();
     printf("%c\n", result);
     return 0;
 }
