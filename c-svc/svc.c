@@ -1,4 +1,4 @@
-#include <stdio.h>
+/* #include <stdio.h> */
 #include "transform.h"
 #include "predictor.h"
 
@@ -53,8 +53,10 @@ char svc() {
     return predict(sampledObservation);
 }
 
+/*
 int main(void) {
     char result = svc();
     printf("%c\n", result);
     return 0;
 }
+*/
