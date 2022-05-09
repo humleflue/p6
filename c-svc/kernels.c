@@ -16,7 +16,7 @@ double radialKernel(SampledObservation x, SampledObservation y) {
     return power(EULER, roundedExponent);
 }
 
-int linearKernel(SampledObservation x, SampledObservation y) {
+double linearKernel(SampledObservation x, SampledObservation y) {
     return dotProduct3dVectors(x.observation, y.observation);
 }
 
@@ -25,7 +25,7 @@ SampledObservation sampledObservationConstructor(const double vector[SAMPLED_OBS
     SampledObservation result;
 
     for(i = 0; i < SAMPLED_OBSERVATION_DIM; i++) {
-        result.observation[i] = (int)vector[i];
+        result.observation[i] = vector[i];
     }
 
     return result;

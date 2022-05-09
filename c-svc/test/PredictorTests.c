@@ -260,7 +260,7 @@ void predict_givenStationaryPoint_shouldPredictStationary(CuTest* tc)
     SampledObservation obs = {{1.0, 2.0,  1.0}};
 
 	/* Act */
-    char actual = predict(obs);
+    double actual = predict(obs);
 
 	/* Assert */
 	CuAssertTrue(tc, actual == STATIONARY);

@@ -19,9 +19,9 @@ int roundDouble(double num) {
 }
 
 /* More generic helper function */
-int dotProductVectors(const int *input1, const int *input2, int length) {
-    int i,
-        sum = 0;
+double dotProductVectors(const double *input1, const double *input2, int length) {
+    int    i;
+    double sum = 0;
 
     for (i = 0; i < length; i++)
     {
@@ -31,6 +31,6 @@ int dotProductVectors(const int *input1, const int *input2, int length) {
     return sum;
 }
 
-int dotProduct3dVectors(const int input1[3], const int input2[3]) {
-    return dotProductVectors((const int*)input1, (const int*)input2, 3);
+double dotProduct3dVectors(const double input1[3], const double input2[3]) {
+    return dotProductVectors((const double*)input1, (const double*)input2, 3);
 }

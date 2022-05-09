@@ -120,9 +120,6 @@ SL_WEAK void app_init(void)
   };
 
   I2CSPM_Init(&i2c_def);
-
-  volatile char result = svc();
-  return;
 }
 
 const uint8_t foo[6]={0x02,0x01,0x06,0x02,0x09,0x3F};
