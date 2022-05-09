@@ -29,6 +29,8 @@ component:
 - {id: bluetooth_feature_system}
 - {id: gatt_configuration}
 - {id: bluetooth_feature_scanner}
+- instance: [i2c_spm_instance]
+  id: i2cspm
 - {id: bluetooth_stack}
 - {id: component_catalog}
 - {id: ota_dfu}

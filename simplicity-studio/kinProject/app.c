@@ -33,12 +33,69 @@
 #include "gatt_db.h"
 #include "app.h"
 #include "em_i2c.h"
+#include "sl_i2cspm.h"
 #include "em_cmu.h"
 #include "em_gpio.h"
 #include "pin_config.h"
+#include "sl_i2cspm_i2c_spm_instance_config.h"
+#include "stdint.h"
+#include "string.h"
 
 // The advertising set handle allocated from Bluetooth stack.
 static uint8_t advertising_set_handle = 0xff;
+static I2C_TypeDef * i2c = SL_I2CSPM_I2C_SPM_INSTANCE_PERIPHERAL;
+
+
+typedef struct
+{
+  int16_t x;
+  int16_t y;
+  int16_t z;
+} __attribute__ ((packed)) sample_t;
+
+int read_data(uint8_t read_from_addr, uint8_t * read_buffer, uint8_t read_bytes)
+{
+  I2C_TransferSeq_TypeDef seq =
+  {
+    .addr = 0x32,
+    .flags = I2C_FLAG_WRITE_READ,
+    .buf[0] = { .data = &read_from_addr, .len = 1},
+    .buf[1] = { .data = read_buffer, .len = read_bytes},
+  };
+
+  return I2CSPM_Transfer (i2c, &seq) == i2cTransferDone ? 0 : -1;
+}
+
+int write_data(uint8_t write_from_addr, uint8_t * write_buffer, uint8_t write_bytes)
+{
+  uint8_t buf[255];
+  memcpy(buf, write_buffer, write_bytes);
+
+  I2C_TransferSeq_TypeDef seq =
+  {
+    .addr = 0x32,
+    .flags = I2C_FLAG_WRITE,
+    .buf[0] = { .data = buf, .len = write_bytes + 1},
+  };
+
+  return I2CSPM_Transfer (i2c, &seq) == i2cTransferDone ? 0 : -1;
+}
+
+void read_samples(sample_t samples[32])
+{
+  uint8_t probe_write_buf[1] = { 0x0F };
+  uint8_t * probe_read_buf = (uint8_t*)samples;
+
+  I2C_TransferSeq_TypeDef seq =
+  {
+    .addr = 0x32,
+    .flags = I2C_FLAG_WRITE_READ,
+    .buf[0] = { .data = probe_write_buf, .len = 1},
+    .buf[1] = { .data = probe_read_buf, .len = 192},
+  };
+
+  I2C_TransferReturn_TypeDef ret = I2CSPM_Transfer (i2c, &seq);
+}
 
 /**************************************************************************//**
  * Application Init.
@@ -50,41 +107,20 @@ SL_WEAK void app_init(void)
   // This is called once during start-up.                                    //
   /////////////////////////////////////////////////////////////////////////////
 
-  CMU_ClockEnable(cmuClock_I2C0, true);
-  CMU_ClockEnable(cmuClock_GPIO, true);
-
-  GPIO_PinModeSet(I2C0_SCL_PORT, I2C0_SCL_PIN, gpioModeWiredAndAlternate, 1);
-  GPIO_PinModeSet(I2C0_SDA_PORT, I2C0_SCL_PIN, gpioModeWiredAndAlternate, 1);
-
-  I2C_Init_TypeDef i2c_init = I2C_INIT_DEFAULT;
-  I2C_Init(I2C0, &i2c_init);
-
-  uint8_t probe_write_buf[1] = { 0x0F };
-  uint8_t probe_read_buf[1];
-
-  I2C_TransferSeq_TypeDef probe_transfer_data =
+  I2CSPM_Init_TypeDef i2c_def =
   {
-    .addr = 0b0011001,
-    .flags = I2C_FLAG_WRITE_READ,
-    .buf[0].data = probe_write_buf,
-    .buf[0].len = 1,
-    .buf[1].data = probe_read_buf,
-    .buf[1].len = 1,
+    .i2cClhr = SL_I2CSPM_I2C_SPM_INSTANCE_REFERENCE_CLOCK,
+    .i2cMaxFreq = 0,
+    .i2cRefFreq = 0,
+    .port = i2c,
+    .sclPin = SL_I2CSPM_I2C_SPM_INSTANCE_SCL_PIN,
+    .sclPort = SL_I2CSPM_I2C_SPM_INSTANCE_SCL_PORT,
+    .sdaPin = SL_I2CSPM_I2C_SPM_INSTANCE_SDA_PIN,
+    .sdaPort = SL_I2CSPM_I2C_SPM_INSTANCE_SDA_PORT,
   };
 
-  I2C_TransferReturn_TypeDef ret = I2C_TransferInit (I2C0, &probe_transfer_data);
-  while (ret == i2cTransferInProgress)
-  {
-    ret = I2C_Transfer(I2C0);
-  }
-
-  if (probe_read_buf[0] == 0x44)
-  {
-    volatile uint8_t i = 0;
-    i++;
-  }
+  I2CSPM_Init(&i2c_def);
 }
-
 
 const uint8_t foo[6]={0x02,0x01,0x06,0x02,0x09,0x3F};
 //uint8_t* pointerToFoo = &foo;
