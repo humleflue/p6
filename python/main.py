@@ -1,6 +1,6 @@
 import os
 import pandas as pd
-from sklearn.metrics import accuracy_score, classification_report
+from sklearn.metrics import accuracy_score, classification_report, confusion_matrix, ConfusionMatrixDisplay
 from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_selection import RFECV
 from sklearn.datasets import make_classification
@@ -19,16 +19,10 @@ def main(use_existing_model=True):
     dataset_path = os.getenv('BEST_DATASET')
     df = pd.read_csv(dataset_path)
 
-    # Colle filter. Slet når det er ændret i filerne
-    #sum = (df.loc[abs(df.iloc[:,:-2]).sum(1) < 400]).index.tolist()
-    #using_l = df.index[df['broad_category'] == "Using"].tolist()
-    #intersect = [value for value in sum if value in using_l]
-    #df = df.drop(intersect, axis=0)
-
     df_many_features = feature_extraction(df)
     #df_sampled_data = sample_flattened_dataset(df)
     #df_avg_data =  average_sampling(df)
-    X_train, X_test, Y_train, Y_test = get_train_test_split(df_many_features)
+    X_train, X_test, Y_train, Y_test = get_train_test_split(df_many_features, 0.25)
 
     filename = f'fitted_{os.getenv("BEST_KERNEL")}_OVO_model.sav'
     model_config = get_default_config()
@@ -40,9 +34,9 @@ def main(use_existing_model=True):
         classifier = create_new_model(X_train, Y_train, model_config, filename)
 
     # Print model config, coefficients and intercepts 
-    #print('config\n', model_config)
-    #print(' \n\ncoef\n', classifier.coef_)
-    #print(' \n\nintercept\n', classifier.intercept_)
+    print('config\n', model_config)
+    print(' \n\ncoef\n', classifier.coef_)
+    print(' \n\nintercept\n', classifier.intercept_)
 
     # Get predictions and measure accuracy
     Y_pred = classifier.predict(X_test)
@@ -53,20 +47,23 @@ def main(use_existing_model=True):
     print(accuracy)
     print(report)
     
-    #new_point_stationary = [1, 2, 1]
-    #manual_predict([new_point_stationary], classifier.coef_, classifier.intercept_)
+    ConfusionMatrixDisplay.from_predictions(Y_test.iloc[:,-1], Y_pred)
+    plt.show()
 
-    # Plot a 3D plot
-    if model_config.kernel == 'linear':
-        fig = plt.figure()
-        line = np.linspace(-15, 100, 30)
-        x, y = np.meshgrid(line, line)  
-        ax = fig.add_subplot(111, projection='3d')
-        for i in range(classifier.coef_.shape[0]):
-            # This math is not understood yet
-            z = lambda x,y: (-classifier.intercept_[i]-classifier.coef_[i][0]*x -classifier.coef_[i][1]*y) / classifier.coef_[i][2]
-            ax.plot_surface(x, y, z(x, y))
-        plt.show()
+    # #new_point_stationary = [1, 2, 1]
+    # #manual_predict([new_point_stationary], classifier.coef_, classifier.intercept_)
+
+    # # Plot a 3D plot
+    # if model_config.kernel == 'linear':
+    #     fig = plt.figure()
+    #     line = np.linspace(-15, 100, 30)
+    #     x, y = np.meshgrid(line, line)  
+    #     ax = fig.add_subplot(111, projection='3d')
+    #     for i in range(classifier.coef_.shape[0]):
+    #         # This math is not understood yet
+    #         z = lambda x,y: (-classifier.intercept_[i]-classifier.coef_[i][0]*x -classifier.coef_[i][1]*y) / classifier.coef_[i][2]
+    #         ax.plot_surface(x, y, z(x, y))
+    #     plt.show()
 
 
 def create_new_model(X_train, Y_train, model_config, filename):
@@ -77,5 +74,5 @@ def create_new_model(X_train, Y_train, model_config, filename):
     return classifier
 
 if __name__ == '__main__':
-    main()
+    main(False)
     
