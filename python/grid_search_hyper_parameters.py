@@ -43,19 +43,25 @@ def run_grid_search_on_configurations(X_train, X_test, Y_train, Y_test):
     configs = []
     for kernel in KERNELS:
         print(kernel)
-        for margin in SOFT_MARGIN:
-            for gamma in GAMMAS:
-                if kernel != 'poly':
-                    config = SVCConfiguration(kernel, margin, gamma)
-                    config = run_svm(X_train, X_test, Y_train, Y_test, config)
-                    print(config)
-                    configs.append(config)
-                else:
-                    for degree in POLY_DEGREES:
-                        config = SVCConfiguration(kernel, margin, gamma, degree)
+        for margin in [1, 10, 100]:
+            if kernel == 'linear':
+                config = SVCConfiguration(kernel, margin)
+                config = run_svm(X_train, X_test, Y_train, Y_test, config)
+                print(config)
+                configs.append(config)
+            else:
+                for gamma in [0.0001]:
+                    if kernel != 'poly':
+                        config = SVCConfiguration(kernel, margin, gamma)
                         config = run_svm(X_train, X_test, Y_train, Y_test, config)
                         print(config)
                         configs.append(config)
+                    else:
+                        for degree in POLY_DEGREES:
+                            config = SVCConfiguration(kernel, margin, gamma, degree)
+                            config = run_svm(X_train, X_test, Y_train, Y_test, config)
+                            print(config)
+                            configs.append(config)
     return configs
         
 def main(path_to_dataset="./datasets/flattened_datasets/flattened_1sec_with_broad_category.csv"):
