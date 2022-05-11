@@ -28,15 +28,16 @@ component:
 - {id: mpu}
 - {id: bluetooth_feature_system}
 - {id: gatt_configuration}
-- {id: bluetooth_feature_scanner}
 - instance: [i2c_spm_instance]
   id: i2cspm
+- {id: bluetooth_feature_scanner}
 - {id: bluetooth_stack}
 - {id: component_catalog}
 - {id: ota_dfu}
 - {id: bootloader_interface}
 - {id: rail_util_pti}
 - {id: app_assert}
+- {id: ustimer}
 - {id: bluetooth_feature_gatt}
 other_file:
 - {path: create_bl_files.bat}

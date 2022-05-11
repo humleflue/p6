@@ -22,3 +22,4 @@ sl_power_manager_config.h=-1475773310
 sl_rail_util_pa_config.h=-916138227
 sl_rail_util_pti_config.h=167094148
 sl_sleeptimer_config.h=-1879962229
+ustimer_config.h=2106674886

@@ -40,6 +40,7 @@
 #include "sl_i2cspm_i2c_spm_instance_config.h"
 #include "stdint.h"
 #include "string.h"
+#include "ustimer.h"
 
 // The advertising set handle allocated from Bluetooth stack.
 static uint8_t advertising_set_handle = 0xff;
@@ -121,8 +122,17 @@ SL_WEAK void app_init(void)
 
   I2CSPM_Init(&i2c_def);
 
+  USTIMER_Init();
+  USTIMER_Reset();
   volatile char result = svc();
-  return;
+  svc();
+  svc();
+  svc();
+  svc();
+  svc();
+  volatile uint32_t elapsed_time_us = USTIMER_GetElapsedTime();
+  volatile uint32_t test = 0;
+  test++;
 }
 
 const uint8_t foo[6]={0x02,0x01,0x06,0x02,0x09,0x3F};
