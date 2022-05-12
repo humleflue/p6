@@ -1,4 +1,4 @@
-name: Test C Code
+name: Test C Code (23 vectors)
 on:
   push:
     paths:
@@ -34,5 +34,5 @@ jobs:
             # Check for failed tests and throw error if any failures
             ./c-svc23Vectors/AllTests.out | grep '!!!FAILURES!!!' &> /dev/null && echo Results ======================================================================= && ./svc23Vectors/AllTests.out && exit 1 
             # If all tests have passed print results
-            ./svc23Vectors/AllTests.out 
+            ./c-svc23Vectors/AllTests.out 
             echo Done! =======================================================================
