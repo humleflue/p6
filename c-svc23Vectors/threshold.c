@@ -18,6 +18,6 @@ int simulateThreshold(unsigned int num1, unsigned int num2) {
     res *= num1; /* mult7 */
     res /= num2; /* div2 */
     res *= num1; /* mult8 */
- 
+
     return res;
 }
