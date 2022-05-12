@@ -3,9 +3,8 @@ on:
   push:
     paths:
       - "c-svc/**"
-      - "c-svc23Vectors/**"
 jobs:
-  test:
+  test-old:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
