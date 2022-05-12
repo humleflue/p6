@@ -23,10 +23,10 @@ END_TO_END_TESTS = $(TDIR)/EndToEndTests.c
 TESTS = $(CC) $(ALL_TESTS).c $(CUTEST).c $(TEST_DEPENDENCIES) $(TRANSFORM_TESTS) $(MATH_TESTS) $(PREDICTOR_TESTS) $(END_TO_END_TESTS) 
 
 # Target
-$(TARGET).exe: $(OBJ)
+$(TARGET).out: $(OBJ)
 	$(CC) $^ $(CFLAGS) -o $@
 
-$(TARGET).out: $(OBJ)
+$(TARGET).exe: $(OBJ)
 	$(CC) $^ $(CFLAGS) -o $@
 
 $(ODIR)/%.o: %.c
