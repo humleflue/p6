@@ -3,6 +3,7 @@ on:
   push:
     paths:
       - "c-svc/**"
+      - "c-svc23Vectors/**"
 jobs:
   test:
     runs-on: ubuntu-latest
