@@ -1,4 +1,4 @@
-# P6 - Deep Neural Network On Low Consumption Devices
+# P6 - Support Vector Classifier On Low Consumption Devices
 
 [![Test C Code (3 vectors)](https://github.com/humleflue/p6/actions/workflows/c-compile-old.yml/badge.svg)](https://github.com/humleflue/p6/actions/workflows/c-compile-old.yml)
 [![Test C Code (23 vectors)](https://github.com/humleflue/p6/actions/workflows/c-compile-new.yml/badge.svg)](https://github.com/humleflue/p6/actions/workflows/c-compile-new.yml)
