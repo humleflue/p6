@@ -154,6 +154,34 @@ void absMean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
 	CuAssertTrue(tc, expected == actual);
 }
 
+void mean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[3] = {1.5, 1.5, 3};
+
+	/* Act */
+	double expected = 2;
+    double actual = mean(numbers, 3);
+
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
+void mean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[3] = {-1.5, 1.5, -3};
+
+	/* Act */
+	double expected = -1;
+    double actual = mean(numbers, 3);
+
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
 CuSuite* CuGetMathSuite(void)
 {
 	CuSuite* suite = CuSuiteNew();
@@ -166,6 +194,8 @@ CuSuite* CuGetMathSuite(void)
 	SUITE_ADD_TEST(suite, getSmallestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue);
 	SUITE_ADD_TEST(suite, absMean_givenAllPositives_shouldReturnCorrectMean);
 	SUITE_ADD_TEST(suite, absMean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean);
+	SUITE_ADD_TEST(suite, mean_givenAllPositives_shouldReturnCorrectMean);
+	SUITE_ADD_TEST(suite, mean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean);
 	/* SUITE_ADD_TEST(suite, dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct); */
 
 	return suite;

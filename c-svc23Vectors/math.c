@@ -107,3 +107,13 @@ double absMean(double axisArray[], int length){
     }
     return sum / length;    
 }
+
+double mean(double axisArray[], int length){
+    double sum = 0;
+    int i;
+    for (i = 0; i < length; i++)
+    {
+        sum += axisArray[i];
+    }
+    return sum / length;    
+}
