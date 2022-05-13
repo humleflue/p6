@@ -63,3 +63,31 @@ double getBiggestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]){
     }
     return negativeOrPositive * highestNumber;
 }
+
+double getSmallestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]){
+    double smallestNumber = 999999;
+    int negativeOrPositive = 1;
+    int i = 0;
+    for (i; i < TIME_SERIES_VECTORS_AMOUNT; i++)
+    {
+        double currentNumber = axisArray[i];
+        if(currentNumber > 0)
+        {
+            if (currentNumber < smallestNumber)
+            {
+                smallestNumber = currentNumber;
+                negativeOrPositive = 1;
+            }
+            
+        } else
+        {
+            if (-1 * currentNumber < smallestNumber)
+            {
+                smallestNumber = -1 * currentNumber;
+                negativeOrPositive = -1;
+            }
+            
+        }
+    }
+    return negativeOrPositive * smallestNumber;
+}

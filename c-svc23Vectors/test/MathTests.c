@@ -84,6 +84,47 @@ void getBiggestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberW
 	CuAssertTrue(tc, expected == actual);
 }
 
+void getSmallestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighestNegativeValue(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
+
+	/* Act */
+	double expected = -1;
+    double actual = getSmallestNumber(numbers);
+
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
+void getSmallestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestPositiveValue(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3};
+
+	/* Act */
+	double expected = 1;
+    double actual = getSmallestNumber(numbers);
+
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
+void getSmallestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
+
+	/* Act */
+	double expected = 1;
+    double actual = getSmallestNumber(numbers);
+
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
 
 CuSuite* CuGetMathSuite(void)
 {
@@ -92,6 +133,9 @@ CuSuite* CuGetMathSuite(void)
 	SUITE_ADD_TEST(suite, getBiggestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNegativeValue);
 	SUITE_ADD_TEST(suite, getBiggestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestPositiveValue);
 	SUITE_ADD_TEST(suite, getBiggestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithBiggestAbosluteValue);
+	SUITE_ADD_TEST(suite, getSmallestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighestNegativeValue);
+	SUITE_ADD_TEST(suite, getSmallestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestPositiveValue);
+	SUITE_ADD_TEST(suite, getSmallestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue);
 	/* SUITE_ADD_TEST(suite, dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct); */
 
 	return suite;
