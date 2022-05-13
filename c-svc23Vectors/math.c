@@ -34,3 +34,26 @@ int dotProductVectors(const int *input1, const int *input2, int length) {
 int dotProduct3dVectors(const int input1[3], const int input2[3]) {
     return dotProductVectors((const int*)input1, (const int*)input2, 3);
 }
+
+/* Returns floor of square root of x 
+ * Found here: https://www.geeksforgeeks.org/square-root-of-an-integer/
+ */
+unsigned int floorSqrt(unsigned int x) {
+    unsigned int i      = 1, 
+                 result = 1;
+
+    /* Base cases */
+    if (x == 0 || x == 1)
+        return x;
+ 
+    /* Starting from 1, try all numbers until
+     * i*i is greater than or equal to x.
+     */
+    while (result <= x)
+    {
+      i++;
+      result = i * i;
+    }
+
+    return i - 1;
+}
