@@ -1,4 +1,5 @@
 #include "math.h"
+#include "types.h"
 
 double power(double base, int exponent) {
     double result = 1.0;
@@ -33,4 +34,32 @@ int dotProductVectors(const int *input1, const int *input2, int length) {
 
 int dotProduct3dVectors(const int input1[3], const int input2[3]) {
     return dotProductVectors((const int*)input1, (const int*)input2, 3);
+}
+
+double getBiggestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]){
+    double highestNumber = 0;
+    int negativeOrPositive = 1;
+    int i = 0;
+    for (i; i < TIME_SERIES_VECTORS_AMOUNT; i++)
+    {
+        double currentNumber = axisArray[i];
+        if(currentNumber > 0)
+        {
+            if (currentNumber > highestNumber)
+            {
+                highestNumber = currentNumber;
+                negativeOrPositive = 1;
+            }
+            
+        } else
+        {
+            if (-1 * currentNumber > highestNumber)
+            {
+                highestNumber = -1 * currentNumber;
+                negativeOrPositive = -1;
+            }
+            
+        }
+    }
+    return negativeOrPositive * highestNumber;
 }
