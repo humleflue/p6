@@ -94,26 +94,36 @@ double getSmallestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]){
 }
 
 double absMean(double axisArray[], int length){
-    double sum = 0;
+    double result = absSum(axisArray, length);
+    return result / length;    
+}
+
+double mean(double axisArray[], int length){
+    double result = sum(axisArray, length);
+    return result / length;    
+}
+
+double absSum(double axisArray[], int length){
+    double result = 0;
     int i;
     for (i = 0; i < length; i++)
     {
         if(axisArray[i] < 0)
         {
-            sum += -1 * axisArray[i];
+            result += -1 * axisArray[i];
         } else {
-            sum += axisArray[i];
+            result += axisArray[i];
         }
     }
-    return sum / length;    
+    return result;   
 }
 
-double mean(double axisArray[], int length){
-    double sum = 0;
+double sum(double axisArray[], int length){
+    double result = 0;
     int i;
     for (i = 0; i < length; i++)
     {
-        sum += axisArray[i];
+        result += axisArray[i];
     }
-    return sum / length;    
+    return result;   
 }

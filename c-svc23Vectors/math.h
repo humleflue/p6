@@ -9,6 +9,8 @@ double getBiggestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]);
 double getSmallestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]);
 double absMean(double axisArray[TIME_SERIES_VECTORS_AMOUNT], int length);
 double mean(double axisArray[], int length);
+double absSum(double axisArray[], int length);
+double sum(double axisArray[], int length);
 int    roundDouble(double num);
 int    dotProduct3dVectors(const int input1[3], const int input2[3]);
 

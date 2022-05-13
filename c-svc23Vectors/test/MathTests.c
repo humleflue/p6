@@ -182,6 +182,58 @@ void mean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
 	CuAssertTrue(tc, expected == actual);
 }
 
+void absSum_givenPositiveAndNegativeNumbers_shouldReturnCorrectSum(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[3] = {-1.5, 1.5, -3};
+
+	/* Act */
+	double expected = 6;
+    double actual = absSum(numbers, 3);
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
+void absSum_givenPositiveNumbers_shouldReturnCorrectSum(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[3] = {1.5, 1.5, 3};
+
+	/* Act */
+	double expected = 6;
+    double actual = absSum(numbers, 3);
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
+void sum_givenPositiveAndNegativeNumbers_shouldReturnCorrectSum(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[3] = {-1.5, 1.5, -3};
+
+	/* Act */
+	double expected = -3;
+    double actual = sum(numbers, 3);
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
+void sum_givenPositiveNumbers_shouldReturnCorrectSum(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[3] = {1.5, 1.5, 3};
+
+	/* Act */
+	double expected = 6;
+    double actual = sum(numbers, 3);
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
 CuSuite* CuGetMathSuite(void)
 {
 	CuSuite* suite = CuSuiteNew();
@@ -196,6 +248,10 @@ CuSuite* CuGetMathSuite(void)
 	SUITE_ADD_TEST(suite, absMean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean);
 	SUITE_ADD_TEST(suite, mean_givenAllPositives_shouldReturnCorrectMean);
 	SUITE_ADD_TEST(suite, mean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean);
+	SUITE_ADD_TEST(suite, absSum_givenPositiveAndNegativeNumbers_shouldReturnCorrectSum);
+	SUITE_ADD_TEST(suite, absSum_givenPositiveNumbers_shouldReturnCorrectSum);
+	SUITE_ADD_TEST(suite, sum_givenPositiveAndNegativeNumbers_shouldReturnCorrectSum);
+	SUITE_ADD_TEST(suite, sum_givenPositiveNumbers_shouldReturnCorrectSum);
 	/* SUITE_ADD_TEST(suite, dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct); */
 
 	return suite;
