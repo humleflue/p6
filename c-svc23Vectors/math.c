@@ -1,5 +1,6 @@
 #include "math.h"
 #include "types.h"
+#include <stdio.h>
 
 double power(double base, int exponent) {
     double result = 1.0;
@@ -90,4 +91,19 @@ double getSmallestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]){
         }
     }
     return negativeOrPositive * smallestNumber;
+}
+
+double absMean(double axisArray[], int length){
+    double sum = 0;
+    int i;
+    for (i = 0; i < length; i++)
+    {
+        if(axisArray[i] < 0)
+        {
+            sum += -1 * axisArray[i];
+        } else {
+            sum += axisArray[i];
+        }
+    }
+    return sum / length;    
 }
