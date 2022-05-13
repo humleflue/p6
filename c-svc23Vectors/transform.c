@@ -39,3 +39,13 @@ void transform(TimeSeriesObservation tso, SampledObservation *out) {
     out->observation[1] = y / TIME_SERIES_VECTORS_AMOUNT;
     out->observation[2] = z / TIME_SERIES_VECTORS_AMOUNT;
 }
+
+void extractXYZ(TimeSeriesObservation tso, double x[TIME_SERIES_VECTORS_AMOUNT], double y[TIME_SERIES_VECTORS_AMOUNT], double z[TIME_SERIES_VECTORS_AMOUNT]){
+    int i, j = 0;
+    for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i+=3) {
+        x[j] = tso.observation[i];
+        y[j] = tso.observation[i+1];
+        z[j] = tso.observation[i+2];
+        j++;
+    }
+}

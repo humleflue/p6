@@ -4,12 +4,12 @@
 #include "bool.h"
 
 #define ACCELEROMETOR_VECTOR_DIM 3
-#define TIME_SERIES_VECTORS_AMOUNT 12
+#define TIME_SERIES_VECTORS_AMOUNT 36
 #define TIME_SERIES_OBSERVATION_DIM (TIME_SERIES_VECTORS_AMOUNT * ACCELEROMETOR_VECTOR_DIM)
-#define SAMPLED_OBSERVATION_DIM 3
+#define SAMPLED_OBSERVATION_DIM 23
 /* The most important thing here is that _currentIndex is set to 0 */
 #define TIME_SERIES_OBSERVATION_INIT { false, { 0 }, 0 }
-
+#define TIME_SERIES_OBSERVATION_INIT_108_VALUES {1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3}
 
 typedef struct TimeSeriesObservation_s {
     bool isFull;
