@@ -37,7 +37,7 @@ int dotProduct3dVectors(const int input1[3], const int input2[3]) {
     return dotProductVectors((const int*)input1, (const int*)input2, 3);
 }
 
-double getBiggestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]){
+double getBiggestNumber(double axisArray[], int length){
     double highestNumber = 0;
     int negativeOrPositive = 1;
     int i;
@@ -65,7 +65,7 @@ double getBiggestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]){
     return negativeOrPositive * highestNumber;
 }
 
-double getSmallestNumber(double axisArray[TIME_SERIES_VECTORS_AMOUNT]){
+double getSmallestNumber(double axisArray[], int length){
     double smallestNumber = 999999;
     int negativeOrPositive = 1;
     int i;

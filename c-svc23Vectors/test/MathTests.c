@@ -49,7 +49,7 @@ void getBiggestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNe
 
 	/* Act */
 	double expected = -5;
-    double actual = getBiggestNumber(numbers);
+    double actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -63,7 +63,7 @@ void getBiggestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestP
 
 	/* Act */
 	double expected = 5;
-    double actual = getBiggestNumber(numbers);
+    double actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -77,7 +77,7 @@ void getBiggestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberW
 
 	/* Act */
 	double expected = -5;
-    double actual = getBiggestNumber(numbers);
+    double actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -91,7 +91,7 @@ void getSmallestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighest
 
 	/* Act */
 	double expected = -1;
-    double actual = getSmallestNumber(numbers);
+    double actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -105,7 +105,7 @@ void getSmallestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestP
 
 	/* Act */
 	double expected = 1;
-    double actual = getSmallestNumber(numbers);
+    double actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -119,7 +119,7 @@ void getSmallestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumber
 
 	/* Act */
 	double expected = 1;
-    double actual = getSmallestNumber(numbers);
+    double actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
