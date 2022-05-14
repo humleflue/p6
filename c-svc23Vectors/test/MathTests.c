@@ -24,7 +24,7 @@ void dotProduct3dVector_givenVectorsOfIntegers_expectsTheCorrectDotProduct(CuTes
 
 
 	/* Assert */
-	CuAssertIntEquals(tc, 122.0, actual);
+	CuAssertIntEquals(tc, 122, actual);
 }
 
 /*
