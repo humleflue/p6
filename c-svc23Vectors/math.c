@@ -71,7 +71,6 @@ double getBiggestNumberInRow(double xAxisArray[], double yAxisArray[], double zA
     double biggestZ = getBiggestNumber(zAxisArray, length);
     double xyz[3] = {biggestX, biggestY, biggestZ};
     double result = getBiggestNumber(xyz, 3);
-    printf("biggestX: %f,\n biggestY: %f,\n biggestZ: %f,\n biggestXYZ %f\n", biggestX, biggestY, biggestZ, result);
     return result;
 }
 

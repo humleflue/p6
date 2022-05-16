@@ -245,7 +245,6 @@ void getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuT
 	double expected = 5;
     double actual = getBiggestNumberInRow(x, y, z, 3);
 
-	printf("expected: %f, actual: %f", expected, actual);
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
 }
@@ -261,7 +260,6 @@ void getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_sho
 	double expected = -5;
     double actual = getBiggestNumberInRow(x, y, z, 3);
 
-	printf("expected: %f, actual: %f", expected, actual);
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
 }
