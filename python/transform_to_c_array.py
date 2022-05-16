@@ -41,7 +41,7 @@ def transform_coef_and_intercept_to_c(coefs, intercepts, labels):
 
     string_result += "};"
 
-    print(string_result)
+    return string_result
 
 
 

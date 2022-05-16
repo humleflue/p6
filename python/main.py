@@ -39,7 +39,7 @@ def main(use_existing_model=True):
     print(' \n\ncoef\n', classifier.coef_)
     print(' \n\nintercept\n', classifier.intercept_)
 
-    transform_coef_and_intercept_to_c(classifier.coef_, classifier.intercept_, ["DRIVING", "STATIONARY", "USING", "WALKING"])
+    #print(transform_coef_and_intercept_to_c(classifier.coef_, classifier.intercept_, ["DRIVING", "STATIONARY", "USING", "WALKING"]))
 
     # Get predictions and measure accuracy
     Y_pred = classifier.predict(X_test)
