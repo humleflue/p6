@@ -20,5 +20,6 @@ double       power(double base, int exponent);
 int          roundDouble(double num);
 int          dotProduct3dVectors(const int input1[3], const int input2[3]);
 unsigned int floorSqrt(unsigned int x);
+double absValue(double input);
 
 #endif /* END OF MATH_H */

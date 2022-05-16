@@ -112,12 +112,7 @@ double absSum(double axisArray[], int length){
     int i;
     for (i = 0; i < length; i++)
     {
-        if(axisArray[i] < 0)
-        {
-            result += -1 * axisArray[i];
-        } else {
-            result += axisArray[i];
-        }
+        result += absValue(axisArray[i]);
     }
     return result;   
 }
@@ -148,6 +143,14 @@ double absVariance(double axisArray[], int length){
 double absStd(double axisArray[], int length){
     int abs_variance = (unsigned int) absVariance(axisArray, length);
     return (double) floorSqrt(abs_variance);
+}
+
+double absValue(double input){
+    if(input < 0) {
+        return input * -1;
+    } else {
+        return input;
+    }
 }
 
 /* Returns floor of square root of x 
