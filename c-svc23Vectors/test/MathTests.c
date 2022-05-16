@@ -30,14 +30,14 @@ void dotProduct3dVector_givenVectorsOfIntegers_expectsTheCorrectDotProduct(CuTes
 /*
 	void dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct(CuTest* tc)
 	{
-		/* Arrange *
+		* Arrange *
 		double vectorA[3] = {9.123, 2.1,  7.1};
 		double vectorB[3] = {4.1, 8.987, 10.1};
 
-		/* Act *
+		* Act *
 		double actual = dotProduct3dVectors(vectorA, vectorB);
 
-		/* Assert *
+		* Assert *
 		CuAssertDblEquals(tc,  127.987, actual, 0.01);
 	}
 */
@@ -45,7 +45,7 @@ void dotProduct3dVector_givenVectorsOfIntegers_expectsTheCorrectDotProduct(CuTes
 void getBiggestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNegativeValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
+    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
 
 	/* Act */
 	double expected = -5;
@@ -59,7 +59,7 @@ void getBiggestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNe
 void getBiggestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestPositiveValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3};
+    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3};
 
 	/* Act */
 	double expected = 5;
@@ -73,7 +73,7 @@ void getBiggestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestP
 void getBiggestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithBiggestAbosluteValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
+    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
 
 	/* Act */
 	double expected = -5;
@@ -87,7 +87,7 @@ void getBiggestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberW
 void getSmallestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighestNegativeValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
+    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-2,-3,-1,-2};
 
 	/* Act */
 	double expected = -1;
@@ -101,7 +101,7 @@ void getSmallestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighest
 void getSmallestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestPositiveValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3};
+    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,3,1,2,3,1,2};
 
 	/* Act */
 	double expected = 1;
@@ -115,7 +115,7 @@ void getSmallestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestP
 void getSmallestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
+    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
 
 	/* Act */
 	double expected = 1;
