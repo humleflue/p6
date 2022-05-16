@@ -36,13 +36,13 @@ int dotProduct3dVectors(const int input1[3], const int input2[3]) {
     return dotProductVectors((const int*)input1, (const int*)input2, 3);
 }
 
-double getBiggestNumber(double axisArray[], int length){
-    double highestNumber = 0;
+int getBiggestNumber(int axisArray[], int length){
+    int highestNumber = 0;
     int negativeOrPositive = 1;
     int i;
     for (i = 0; i < length; i++)
     {
-        double currentNumber = axisArray[i];
+        int currentNumber = axisArray[i];
         if(currentNumber > 0)
         {
             if (currentNumber > highestNumber)
@@ -62,22 +62,22 @@ double getBiggestNumber(double axisArray[], int length){
     return negativeOrPositive * highestNumber;
 }
 
-double getBiggestNumberInRow(double xAxisArray[], double yAxisArray[], double zAxisArray[], int length){
-    double biggestX = getBiggestNumber(xAxisArray, length);
-    double biggestY = getBiggestNumber(yAxisArray, length);
-    double biggestZ = getBiggestNumber(zAxisArray, length);
-    double xyz[3] = {biggestX, biggestY, biggestZ};
-    double result = getBiggestNumber(xyz, 3);
+int getBiggestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
+    int biggestX = getBiggestNumber(xAxisArray, length);
+    int biggestY = getBiggestNumber(yAxisArray, length);
+    int biggestZ = getBiggestNumber(zAxisArray, length);
+    int xyz[3] = {biggestX, biggestY, biggestZ};
+    int result = getBiggestNumber(xyz, 3);
     return result;
 }
 
-double getSmallestNumber(double axisArray[], int length){
-    double smallestNumber = 999999;
+int getSmallestNumber(int axisArray[], int length){
+    int smallestNumber = 999999;
     int negativeOrPositive = 1;
     int i;
     for (i = 0; i < length; i++)
     {
-        double currentNumber = axisArray[i];
+        int currentNumber = axisArray[i];
         if(currentNumber > 0)
         {
             if (currentNumber < smallestNumber)
@@ -97,18 +97,23 @@ double getSmallestNumber(double axisArray[], int length){
     return negativeOrPositive * smallestNumber;
 }
 
-double absMean(double axisArray[], int length){
+double absMean(int axisArray[], int length){
     double result = absSum(axisArray, length);
     return result / length;    
 }
 
-double mean(double axisArray[], int length){
+double mean(int axisArray[], int length){
     double result = sum(axisArray, length);
     return result / length;    
 }
 
-double absSum(double axisArray[], int length){
-    double result = 0;
+double meanDouble(double axisArray[], int length){
+    double result = sumDouble(axisArray, length);
+    return result / length;    
+}
+
+int absSum(int axisArray[], int length){
+    int result = 0;
     int i;
     for (i = 0; i < length; i++)
     {
@@ -117,7 +122,17 @@ double absSum(double axisArray[], int length){
     return result;   
 }
 
-double sum(double axisArray[], int length){
+int sum(int axisArray[], int length){
+    int result = 0;
+    int i;
+    for (i = 0; i < length; i++)
+    {
+        result += axisArray[i];
+    }
+    return result;   
+}
+
+double sumDouble(double axisArray[], int length){
     double result = 0;
     int i;
     for (i = 0; i < length; i++)
@@ -127,7 +142,7 @@ double sum(double axisArray[], int length){
     return result;   
 }
 
-double absVariance(double axisArray[], int length){
+double absVariance(int axisArray[], int length){
     double abs_mean = absMean(axisArray, length);
     double differencesSquared[length];
     int i;
@@ -136,16 +151,17 @@ double absVariance(double axisArray[], int length){
         double difference = axisArray[i] - abs_mean;
         differencesSquared[i] = difference * difference;
     }
-    double variance = mean(differencesSquared, length);
+    
+    double variance = meanDouble(differencesSquared, length);
     return variance;
 }
 
-double absStd(double axisArray[], int length){
+double absStd(int axisArray[], int length){
     int abs_variance = (unsigned int) absVariance(axisArray, length);
     return (double) floorSqrt(abs_variance);
 }
 
-double absValue(double input){
+int absValue(int input){
     if(input < 0) {
         return input * -1;
     } else {

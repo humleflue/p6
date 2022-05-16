@@ -46,11 +46,11 @@ void dotProduct3dVector_givenVectorsOfIntegers_expectsTheCorrectDotProduct(CuTes
 void getBiggestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNegativeValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
-	double expected = -5;
+    int numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
+	int expected = -5;
 
 	/* Act */
-    double actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -60,11 +60,11 @@ void getBiggestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNe
 void getBiggestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestPositiveValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3};
-	double expected = 5;
+    int numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3};
+	int expected = 5;
 
 	/* Act */
-    double actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -74,11 +74,11 @@ void getBiggestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestP
 void getBiggestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithBiggestAbosluteValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
-	double expected = -5;
+    int numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
+	int expected = -5;
 
 	/* Act */
-    double actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -88,11 +88,11 @@ void getBiggestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberW
 void getSmallestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighestNegativeValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-2,-3,-1,-2};
-	double expected = -1;
+    int numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-2,-3,-1,-2};
+	int expected = -1;
 
 	/* Act */
-    double actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -102,11 +102,11 @@ void getSmallestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighest
 void getSmallestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestPositiveValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,3,1,2,3,1,2};
-	double expected = 1;
+    int numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,3,1,2,3,1,2};
+	int expected = 1;
 
 	/* Act */
-    double actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -116,11 +116,11 @@ void getSmallestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestP
 void getSmallestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
-	double expected = 1;
+    int numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
+	int expected = 1;
 
 	/* Act */
-    double actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -130,8 +130,8 @@ void getSmallestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumber
 void absMean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[3] = {1.5, 1.5, 3};
-	double expected = 2;
+    int numbers[3] = {1, 2, 3};
+	double expected = 2.0;
 
 	/* Act */
     double actual = absMean(numbers, 3);
@@ -144,8 +144,8 @@ void absMean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
 void absMean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[3] = {-1.5, 1.5, -3};
-	double expected = 2;
+    int numbers[3] = {-1, 2, -3};
+	double expected = 2.0;
 
 	/* Act */
     double actual = absMean(numbers, 3);
@@ -158,7 +158,7 @@ void absMean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
 void mean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[3] = {1.5, 1.5, 3};
+    int numbers[3] = {1, 2, 3};
 	double expected = 2;
 
 	/* Act */
@@ -172,7 +172,7 @@ void mean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
 void mean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[3] = {-1.5, 1.5, -3};
+    int numbers[3] = {-1, 1, -3};
 	double expected = -1;
 
 	/* Act */
@@ -186,65 +186,65 @@ void mean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
 void absSum_givenPositiveAndNegativeNumbers_shouldReturnCorrectSum(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[3] = {-1.5, 1.5, -3};
-	double expected = 6;
+    int numbers[3] = {-1, 1, -3};
+	int expected = 5;
 
 	/* Act */
-    double actual = absSum(numbers, 3);
+    int actual = absSum(numbers, 3);
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void absSum_givenPositiveNumbers_shouldReturnCorrectSum(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[3] = {1.5, 1.5, 3};
-	double expected = 6;
+    int numbers[3] = {1, 1, 3};
+	int expected = 5;
 
 	/* Act */
-    double actual = absSum(numbers, 3);
+    int actual = absSum(numbers, 3);
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void sum_givenPositiveAndNegativeNumbers_shouldReturnCorrectSum(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[3] = {-1.5, 1.5, -3};
-	double expected = -3;
+    int numbers[3] = {-1, 1, -3};
+	int expected = -3;
 
 	/* Act */
-    double actual = sum(numbers, 3);
+    int actual = sum(numbers, 3);
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void sum_givenPositiveNumbers_shouldReturnCorrectSum(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[3] = {1.5, 1.5, 3};
-	double expected = 6;
+    int numbers[3] = {1, 1, 3};
+	int expected = 5;
 
 	/* Act */
-    double actual = sum(numbers, 3);
+    int actual = sum(numbers, 3);
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuTest* tc)
 {
 	/* Arrange */
-    double x[3] = {1.0, 2.0, 3.0};
-    double y[3] = {5.0, 4.0, 3.0};
-    double z[3] = {2.0, 1.0, 1.0};
-	double expected = 5;
+    int x[3] = {1, 2, 3};
+    int y[3] = {5, 4, 3};
+    int z[3] = {2, 1, 1};
+	int expected = 5;
 
 	/* Act */
-    double actual = getBiggestNumberInRow(x, y, z, 3);
+    int actual = getBiggestNumberInRow(x, y, z, 3);
 
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
@@ -253,13 +253,13 @@ void getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuT
 void getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue(CuTest* tc)
 {
 	/* Arrange */
-    double x[3] = {-1.0, -2.0, -3.0};
-    double y[3] = {-5.0, 4.0, 3.0};
-    double z[3] = {-2.0, 1.0, 1.0};
-	double expected = -5;
+    int x[3] = {-1, -2, -3};
+    int y[3] = {-5, 4, 3};
+    int z[3] = {-2, 1, 1};
+	int expected = -5;
 
 	/* Act */
-    double actual = getBiggestNumberInRow(x, y, z, 3);
+    int actual = getBiggestNumberInRow(x, y, z, 3);
 
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
@@ -268,7 +268,7 @@ void getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_sho
 void absVariance_givenArrayOfPositiveNumber_shouldReturnCorrectVariance(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[5] = {600, 470, 170, 430, 300};
+    int numbers[5] = {600, 470, 170, 430, 300};
 	double expected = 21704;
 
 	/* Act */
@@ -281,12 +281,11 @@ void absVariance_givenArrayOfPositiveNumber_shouldReturnCorrectVariance(CuTest* 
 void absStd_givenArrayOfPositiveNumber_shouldReturnCorrectVariance(CuTest* tc)
 {
 	/* Arrange */
-    double numbers[5] = {600, 470, 170, 430, 300};
-	int expected = 147;
+    int numbers[5] = {600, 470, 170, 430, 300};
+	double expected = 147.0;
 
 	/* Act */
-    int actual = (int) absStd(numbers, 5);
-
+    double actual = (int) absStd(numbers, 5);
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
 }
