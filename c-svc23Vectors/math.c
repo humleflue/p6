@@ -50,7 +50,6 @@ double getBiggestNumber(double axisArray[], int length){
                 highestNumber = currentNumber;
                 negativeOrPositive = 1;
             }
-            
         } else
         {
             if (-1 * currentNumber > highestNumber)
@@ -58,7 +57,6 @@ double getBiggestNumber(double axisArray[], int length){
                 highestNumber = -1 * currentNumber;
                 negativeOrPositive = -1;
             }
-            
         }
     }
     return negativeOrPositive * highestNumber;
@@ -87,7 +85,6 @@ double getSmallestNumber(double axisArray[], int length){
                 smallestNumber = currentNumber;
                 negativeOrPositive = 1;
             }
-            
         } else
         {
             if (-1 * currentNumber < smallestNumber)
@@ -95,7 +92,6 @@ double getSmallestNumber(double axisArray[], int length){
                 smallestNumber = -1 * currentNumber;
                 negativeOrPositive = -1;
             }
-            
         }
     }
     return negativeOrPositive * smallestNumber;
