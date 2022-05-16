@@ -124,7 +124,7 @@ SL_WEAK void app_init(void)
 
   USTIMER_Init();
   USTIMER_Reset();
-  volatile char result = simulateThreshold();
+  volatile char result = simulateThreshold(7, 11);
   volatile uint32_t elapsed_time_us = USTIMER_GetElapsedTime();
   volatile uint32_t test = 0;
   test++;
