@@ -150,6 +150,11 @@ double absVariance(double axisArray[], int length){
     return variance;
 }
 
+double absStd(double axisArray[], int length){
+    int abs_variance = (unsigned int) absVariance(axisArray, length);
+    return (double) floorSqrt(abs_variance);
+}
+
 /* Returns floor of square root of x 
  * Found here: https://www.geeksforgeeks.org/square-root-of-an-integer/
  */
