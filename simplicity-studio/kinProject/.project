@@ -38,62 +38,72 @@
 		<link>
 			<name>svc/bool.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/bool.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/bool.h</locationURI>
 		</link>
 		<link>
 			<name>svc/kernels.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/kernels.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/kernels.c</locationURI>
 		</link>
 		<link>
 			<name>svc/kernels.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/kernels.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/kernels.h</locationURI>
 		</link>
 		<link>
 			<name>svc/math.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/math.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/math.c</locationURI>
 		</link>
 		<link>
 			<name>svc/math.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/math.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/math.h</locationURI>
 		</link>
 		<link>
 			<name>svc/predictor.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/predictor.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/predictor.c</locationURI>
 		</link>
 		<link>
 			<name>svc/predictor.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/predictor.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/predictor.h</locationURI>
 		</link>
 		<link>
 			<name>svc/svc.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/svc.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/svc.c</locationURI>
 		</link>
 		<link>
 			<name>svc/svc.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/svc.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/svc.h</locationURI>
+		</link>
+		<link>
+			<name>svc/threshold.c</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/threshold.c</locationURI>
+		</link>
+		<link>
+			<name>svc/threshold.h</name>
+			<type>1</type>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/threshold.h</locationURI>
 		</link>
 		<link>
 			<name>svc/transform.c</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/transform.c</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/transform.c</locationURI>
 		</link>
 		<link>
 			<name>svc/transform.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/transform.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/transform.h</locationURI>
 		</link>
 		<link>
 			<name>svc/types.h</name>
 			<type>1</type>
-			<locationURI>PARENT-2-PROJECT_LOC/c-svc/types.h</locationURI>
+			<locationURI>PARENT-2-PROJECT_LOC/c-svc23Vectors/types.h</locationURI>
 		</link>
 		<link>
 			<name>gecko_sdk_4.0.2/platform/CMSIS/Include/arm_common_tables.h</name>
