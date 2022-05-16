@@ -137,3 +137,16 @@ double sum(double axisArray[], int length){
     }
     return result;   
 }
+
+double absVariance(double axisArray[], int length){
+    double abs_mean = absMean(axisArray, length);
+    double differencesSquared[length];
+    int i;
+    for (i = 0; i < length; i++)
+    {   
+        double difference = axisArray[i] - abs_mean;
+        differencesSquared[i] = difference * difference;
+    }
+    double variance = mean(differencesSquared, length);
+    return variance;
+}

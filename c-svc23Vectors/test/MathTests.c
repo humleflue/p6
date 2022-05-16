@@ -266,6 +266,19 @@ void getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_sho
 	CuAssertTrue(tc, expected == actual);
 }
 
+void absVariance_givenArrayOfPositiveNumber_shouldReturnCorrectVariance(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[5] = {600, 470, 170, 430, 300};
+
+	/* Act */
+	double expected = 21704;
+    double actual = absVariance(numbers, 5);
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
 
 CuSuite* CuGetMathSuite(void)
 {
@@ -287,6 +300,7 @@ CuSuite* CuGetMathSuite(void)
 	SUITE_ADD_TEST(suite, sum_givenPositiveNumbers_shouldReturnCorrectSum);
 	SUITE_ADD_TEST(suite, getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll);
 	SUITE_ADD_TEST(suite, getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue);
+	SUITE_ADD_TEST(suite, absVariance_givenArrayOfPositiveNumber_shouldReturnCorrectVariance);
 	/* SUITE_ADD_TEST(suite, dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct); */
 
 	return suite;
