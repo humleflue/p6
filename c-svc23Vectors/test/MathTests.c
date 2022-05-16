@@ -169,6 +169,20 @@ void mean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
 	CuAssertTrue(tc, expected == actual);
 }
 
+void meanDouble_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[3] = {1, 2, 3};
+	double expected = 2;
+
+	/* Act */
+    double actual = meanDouble(numbers, 3);
+
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
 void mean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
 {
 	/* Arrange */
@@ -233,6 +247,19 @@ void sum_givenPositiveNumbers_shouldReturnCorrectSum(CuTest* tc)
 
 	/* Assert */
 	CuAssertIntEquals(tc, expected, actual);
+}
+
+void sumDouble_givenPositiveNumbers_shouldReturnCorrectSum(CuTest* tc)
+{
+	/* Arrange */
+    double numbers[3] = {1, 1, 3};
+	double expected = 5;
+
+	/* Act */
+    double actual = sumDouble(numbers, 3);
+
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
 }
 
 void getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuTest* tc)
@@ -313,6 +340,8 @@ CuSuite* CuGetMathSuite(void)
 	SUITE_ADD_TEST(suite, getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue);
 	SUITE_ADD_TEST(suite, absVariance_givenArrayOfPositiveNumber_shouldReturnCorrectVariance);
 	SUITE_ADD_TEST(suite, absStd_givenArrayOfPositiveNumber_shouldReturnCorrectVariance);
+	SUITE_ADD_TEST(suite, sumDouble_givenPositiveNumbers_shouldReturnCorrectSum);
+	SUITE_ADD_TEST(suite, meanDouble_givenAllPositives_shouldReturnCorrectMean);
 	/* SUITE_ADD_TEST(suite, dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct); */
 
 	return suite;
