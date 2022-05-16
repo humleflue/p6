@@ -1,4 +1,4 @@
-name: Test C Code
+name: Test C Code (3 vectors)
 on:
   push:
     paths:

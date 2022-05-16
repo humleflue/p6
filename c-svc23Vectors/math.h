@@ -15,5 +15,9 @@ double getBiggestNumberInRow(double xAxisArray[], double yAxisArray[], double zA
 double absVariance(double axisArray[], int length);
 int    roundDouble(double num);
 int    dotProduct3dVectors(const int input1[3], const int input2[3]);
+double       power(double base, int exponent);
+int          roundDouble(double num);
+int          dotProduct3dVectors(const int input1[3], const int input2[3]);
+unsigned int floorSqrt(unsigned int x);
 
 #endif /* END OF MATH_H */

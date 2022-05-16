@@ -149,3 +149,26 @@ double absVariance(double axisArray[], int length){
     double variance = mean(differencesSquared, length);
     return variance;
 }
+
+/* Returns floor of square root of x 
+ * Found here: https://www.geeksforgeeks.org/square-root-of-an-integer/
+ */
+unsigned int floorSqrt(unsigned int x) {
+    unsigned int i      = 1, 
+                 result = 1;
+
+    /* Base cases */
+    if (x == 0 || x == 1)
+        return x;
+ 
+    /* Starting from 1, try all numbers until
+     * i*i is greater than or equal to x.
+     */
+    while (result <= x)
+    {
+      i++;
+      result = i * i;
+    }
+
+    return i - 1;
+}
