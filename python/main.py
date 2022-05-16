@@ -5,6 +5,7 @@ from sklearn.model_selection import StratifiedKFold
 from sklearn.feature_selection import RFECV
 from sklearn.datasets import make_classification
 from SVC import create_and_fit_SVC_classifier, get_default_config, get_train_test_split, sample_flattened_dataset, average_sampling, feature_extraction
+from transform_to_c_array import transform_coef_and_intercept_to_c
 from dotenv import load_dotenv
 import pickle
 import numpy as np
@@ -37,6 +38,8 @@ def main(use_existing_model=True):
     print('config\n', model_config)
     print(' \n\ncoef\n', classifier.coef_)
     print(' \n\nintercept\n', classifier.intercept_)
+
+    transform_coef_and_intercept_to_c(classifier.coef_, classifier.intercept_, ["DRIVING", "STATIONARY", "USING", "WALKING"])
 
     # Get predictions and measure accuracy
     Y_pred = classifier.predict(X_test)
@@ -74,5 +77,5 @@ def create_new_model(X_train, Y_train, model_config, filename):
     return classifier
 
 if __name__ == '__main__':
-    main(False)
+    main()
     
