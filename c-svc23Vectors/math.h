@@ -11,6 +11,7 @@ double absMean(double axisArray[], int length);
 double mean(double axisArray[], int length);
 double absSum(double axisArray[], int length);
 double sum(double axisArray[], int length);
+double getBiggestNumberInRow(double xAxisArray[], double yAxisArray[], double zAxisArray[], int length);
 int    roundDouble(double num);
 int    dotProduct3dVectors(const int input1[3], const int input2[3]);
 

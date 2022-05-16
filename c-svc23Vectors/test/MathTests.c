@@ -234,6 +234,39 @@ void sum_givenPositiveNumbers_shouldReturnCorrectSum(CuTest* tc)
 	CuAssertTrue(tc, expected == actual);
 }
 
+void getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuTest* tc)
+{
+	/* Arrange */
+    double x[3] = {1.0, 2.0, 3.0};
+    double y[3] = {5.0, 4.0, 3.0};
+    double z[3] = {2.0, 1.0, 1.0};
+
+	/* Act */
+	double expected = 5;
+    double actual = getBiggestNumberInRow(x, y, z, 3);
+
+	printf("expected: %f, actual: %f", expected, actual);
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
+void getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue(CuTest* tc)
+{
+	/* Arrange */
+    double x[3] = {-1.0, -2.0, -3.0};
+    double y[3] = {-5.0, 4.0, 3.0};
+    double z[3] = {-2.0, 1.0, 1.0};
+
+	/* Act */
+	double expected = -5;
+    double actual = getBiggestNumberInRow(x, y, z, 3);
+
+	printf("expected: %f, actual: %f", expected, actual);
+	/* Assert */
+	CuAssertTrue(tc, expected == actual);
+}
+
+
 CuSuite* CuGetMathSuite(void)
 {
 	CuSuite* suite = CuSuiteNew();
@@ -252,6 +285,8 @@ CuSuite* CuGetMathSuite(void)
 	SUITE_ADD_TEST(suite, absSum_givenPositiveNumbers_shouldReturnCorrectSum);
 	SUITE_ADD_TEST(suite, sum_givenPositiveAndNegativeNumbers_shouldReturnCorrectSum);
 	SUITE_ADD_TEST(suite, sum_givenPositiveNumbers_shouldReturnCorrectSum);
+	SUITE_ADD_TEST(suite, getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll);
+	SUITE_ADD_TEST(suite, getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue);
 	/* SUITE_ADD_TEST(suite, dotProduct3dVector_givenVectorsOfDoubles_expectsTheCorrectDotProduct); */
 
 	return suite;

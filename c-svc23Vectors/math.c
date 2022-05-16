@@ -41,7 +41,7 @@ double getBiggestNumber(double axisArray[], int length){
     double highestNumber = 0;
     int negativeOrPositive = 1;
     int i;
-    for (i = 0; i < TIME_SERIES_VECTORS_AMOUNT; i++)
+    for (i = 0; i < length; i++)
     {
         double currentNumber = axisArray[i];
         if(currentNumber > 0)
@@ -65,11 +65,21 @@ double getBiggestNumber(double axisArray[], int length){
     return negativeOrPositive * highestNumber;
 }
 
+double getBiggestNumberInRow(double xAxisArray[], double yAxisArray[], double zAxisArray[], int length){
+    double biggestX = getBiggestNumber(xAxisArray, length);
+    double biggestY = getBiggestNumber(yAxisArray, length);
+    double biggestZ = getBiggestNumber(zAxisArray, length);
+    double xyz[3] = {biggestX, biggestY, biggestZ};
+    double result = getBiggestNumber(xyz, 3);
+    printf("biggestX: %f,\n biggestY: %f,\n biggestZ: %f,\n biggestXYZ %f\n", biggestX, biggestY, biggestZ, result);
+    return result;
+}
+
 double getSmallestNumber(double axisArray[], int length){
     double smallestNumber = 999999;
     int negativeOrPositive = 1;
     int i;
-    for (i = 0; i < TIME_SERIES_VECTORS_AMOUNT; i++)
+    for (i = 0; i < length; i++)
     {
         double currentNumber = axisArray[i];
         if(currentNumber > 0)
