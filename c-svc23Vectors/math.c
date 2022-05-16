@@ -1,6 +1,5 @@
 #include "math.h"
 #include "types.h"
-#include <stdio.h>
 
 double power(double base, int exponent) {
     double result = 1.0;
