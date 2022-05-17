@@ -63,21 +63,29 @@ int getBiggestNumber(int axisArray[], int length){
 }
 
 int getBiggestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
-    int biggestX = getBiggestNumber(xAxisArray, length);
-    int biggestY = getBiggestNumber(yAxisArray, length);
-    int biggestZ = getBiggestNumber(zAxisArray, length);
-    int xyz[3] = {biggestX, biggestY, biggestZ};
-    int result = getBiggestNumber(xyz, 3);
-    return result;
+    int biggestX = getBiggestNumber(xAxisArray, length),
+        biggestY = getBiggestNumber(yAxisArray, length),
+        biggestZ = getBiggestNumber(zAxisArray, length),
+        xyz[3];
+
+    xyz[0] = biggestX;
+    xyz[1] = biggestY;
+    xyz[2] = biggestZ;
+
+    return getBiggestNumber(xyz, 3);
 }
 
 int getSmallestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
-    int smallestX = getSmallestNumber(xAxisArray, length);
-    int smallestY = getSmallestNumber(yAxisArray, length);
-    int smallestZ = getSmallestNumber(zAxisArray, length);
-    int xyz[3] = {smallestX, smallestY, smallestZ};
-    int result = getSmallestNumber(xyz, 3);
-    return result;
+    int smallestX = getSmallestNumber(xAxisArray, length),
+        smallestY = getSmallestNumber(yAxisArray, length),
+        smallestZ = getSmallestNumber(zAxisArray, length),
+        xyz[3];
+
+    xyz[0] = smallestX;
+    xyz[1] = smallestY;
+    xyz[2] = smallestZ;
+        
+    return getSmallestNumber(xyz, 3);
 }
 
 int getSmallestNumber(int axisArray[], int length){
@@ -151,9 +159,9 @@ double sumDouble(double axisArray[], int length){
     return result;   
 }
 
-double absVariance(int axisArray[], int length){
-    double abs_mean = absMean(axisArray, length);
-    double differencesSquared[length];
+double absVariance(int axisArray[], double differencesSquared[], int length) {
+    double abs_mean = absMean(axisArray, length),
+           variance;
     int i;
     for (i = 0; i < length; i++)
     {   
@@ -161,12 +169,12 @@ double absVariance(int axisArray[], int length){
         differencesSquared[i] = difference * difference;
     }
     
-    double variance = meanDouble(differencesSquared, length);
+    variance = meanDouble(differencesSquared, length);
     return variance;
 }
 
-double absStd(int axisArray[], int length){
-    int abs_variance = (unsigned int) absVariance(axisArray, length);
+double absStd(int axisArray[], double differencesSquared[], int length) {
+    unsigned int abs_variance = (unsigned int) absVariance(axisArray, differencesSquared, length);
     return (double) floorSqrt(abs_variance);
 }
 

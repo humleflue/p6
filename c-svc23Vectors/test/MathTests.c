@@ -311,10 +311,11 @@ void absVariance_givenArrayOfPositiveNumber_shouldReturnCorrectVariance(CuTest* 
 {
 	/* Arrange */
     int numbers[5] = {600, 470, 170, 430, 300};
-	double expected = 21704;
+	double expected = 21704,
+		   differencesSquared[TIME_SERIES_VECTORS_AMOUNT];
 
 	/* Act */
-    double actual = absVariance(numbers, 5);
+    double actual = absVariance(numbers, differencesSquared, 5);
 
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
@@ -324,10 +325,11 @@ void absStd_givenArrayOfPositiveNumber_shouldReturnCorrectVariance(CuTest* tc)
 {
 	/* Arrange */
     int numbers[5] = {600, 470, 170, 430, 300};
-	double expected = 147.0;
+	double expected = 147.0,
+		   differencesSquared[TIME_SERIES_VECTORS_AMOUNT];
 
 	/* Act */
-    double actual = (int) absStd(numbers, 5);
+    double actual = (int) absStd(numbers, differencesSquared, 5);
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
 }
