@@ -55,9 +55,6 @@ void transformTo23Dimensions(TimeSeriesObservation tso, SampledObservation *out)
     int x[TIME_SERIES_VECTORS_AMOUNT],
         y[TIME_SERIES_VECTORS_AMOUNT],
         z[TIME_SERIES_VECTORS_AMOUNT];
-    /* This is used as an array for intermediate results */
-    double differencesSquared[TIME_SERIES_OBSERVATION_DIM];
-
     extractXYZ(tso, x, y, z);
     
     /*np.mean()*/
@@ -81,14 +78,14 @@ void transformTo23Dimensions(TimeSeriesObservation tso, SampledObservation *out)
     out->observation[11] = absSum(z, ACCELEROMETOR_VECTOR_DIM);
 
     /*np.mean([abs(num) for num in x])*/
-    out->observation[12]  = absMean(x, ACCELEROMETOR_VECTOR_DIM);
+    out->observation[12] = absMean(x, ACCELEROMETOR_VECTOR_DIM);
     out->observation[13] = absMean(y, ACCELEROMETOR_VECTOR_DIM);
     out->observation[14] = absMean(z, ACCELEROMETOR_VECTOR_DIM);
     
     /*np.std([abs(num) for num in x])*/
-    out->observation[15] = absStd(x, differencesSquared, ACCELEROMETOR_VECTOR_DIM);
-    out->observation[16] = absStd(y, differencesSquared, ACCELEROMETOR_VECTOR_DIM);
-    out->observation[17] = absStd(z, differencesSquared, ACCELEROMETOR_VECTOR_DIM);
+    out->observation[15] = absStd(x, ACCELEROMETOR_VECTOR_DIM);
+    out->observation[16] = absStd(y, ACCELEROMETOR_VECTOR_DIM);
+    out->observation[17] = absStd(z, ACCELEROMETOR_VECTOR_DIM);
 
     /*np.max(row)*/
     out->observation[18] = getBiggestNumberInRow(x, y, z, ACCELEROMETOR_VECTOR_DIM);
@@ -103,5 +100,5 @@ void transformTo23Dimensions(TimeSeriesObservation tso, SampledObservation *out)
     out->observation[21] = absMean(tso.observation, TIME_SERIES_OBSERVATION_DIM);
 
     /*np.std([abs(num) for num in row])*/
-    out->observation[22] = absStd(tso.observation, differencesSquared, TIME_SERIES_OBSERVATION_DIM);
+    out->observation[22] = absStd(tso.observation, TIME_SERIES_OBSERVATION_DIM);
 }
