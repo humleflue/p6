@@ -90,12 +90,12 @@ void extractXYZ_transformTso_xYZShouldBeSplitInArrays(CuTest* tc){
 	/* Arrange */
 	TimeSeriesObservation tso = {true, TIME_SERIES_OBSERVATION_INIT_108_VALUES, 0};
 	int i;
-	double x[TIME_SERIES_VECTORS_AMOUNT];
-	double y[TIME_SERIES_VECTORS_AMOUNT];
-	double z[TIME_SERIES_VECTORS_AMOUNT];
-	double expectedX[TIME_SERIES_VECTORS_AMOUNT] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
-	double expectedY[TIME_SERIES_VECTORS_AMOUNT] = {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2};
-	double expectedZ[TIME_SERIES_VECTORS_AMOUNT] = {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3};
+	int x[TIME_SERIES_VECTORS_AMOUNT];
+	int y[TIME_SERIES_VECTORS_AMOUNT];
+	int z[TIME_SERIES_VECTORS_AMOUNT];
+	int expectedX[TIME_SERIES_VECTORS_AMOUNT] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+	int expectedY[TIME_SERIES_VECTORS_AMOUNT] = {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2};
+	int expectedZ[TIME_SERIES_VECTORS_AMOUNT] = {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3};
 
 	/* Act */
 	extractXYZ(tso, x, y, z);
@@ -103,9 +103,9 @@ void extractXYZ_transformTso_xYZShouldBeSplitInArrays(CuTest* tc){
 	/* Assert */
 	for (i = 0; i < TIME_SERIES_VECTORS_AMOUNT; i++)
 	{
-		CuAssertTrue(tc, expectedX[i] == x[i]);
-		CuAssertTrue(tc, expectedY[i] == y[i]);
-		CuAssertTrue(tc, expectedZ[i] == z[i]);
+		CuAssertIntEquals(tc, expectedX[i], x[i]);
+		CuAssertIntEquals(tc, expectedY[i], y[i]);
+		CuAssertIntEquals(tc, expectedZ[i], z[i]);
 	}
 	
 }
