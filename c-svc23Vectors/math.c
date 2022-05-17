@@ -71,6 +71,15 @@ int getBiggestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], 
     return result;
 }
 
+int getSmallestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
+    int smallestX = getSmallestNumber(xAxisArray, length);
+    int smallestY = getSmallestNumber(yAxisArray, length);
+    int smallestZ = getSmallestNumber(zAxisArray, length);
+    int xyz[3] = {smallestX, smallestY, smallestZ};
+    int result = getSmallestNumber(xyz, 3);
+    return result;
+}
+
 int getSmallestNumber(int axisArray[], int length){
     int smallestNumber = 999999;
     int negativeOrPositive = 1;

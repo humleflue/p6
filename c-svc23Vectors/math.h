@@ -14,6 +14,7 @@ int absSum(int axisArray[], int length);
 int sum(int axisArray[], int length);
 double sumDouble(double axisArray[], int length);
 int getBiggestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length);
+int getSmallestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length);
 double absVariance(int axisArray[], int length);
 double absStd(int axisArray[], int length);
 int    roundDouble(double num);
