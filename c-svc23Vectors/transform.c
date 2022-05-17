@@ -56,7 +56,7 @@ void transformTo23Dimensions(TimeSeriesObservation tso, SampledObservation *out)
         y[TIME_SERIES_VECTORS_AMOUNT],
         z[TIME_SERIES_VECTORS_AMOUNT];
     /* This is used as an array for intermediate results */
-    double differencesSquared[TIME_SERIES_VECTORS_AMOUNT];
+    double differencesSquared[TIME_SERIES_OBSERVATION_DIM];
 
     extractXYZ(tso, x, y, z);
     
