@@ -1,8 +1,6 @@
 #include "math.h"
 #include "types.h"
 
-/* This is used as an array for intermediate results */
-double differencesSquared[TIME_SERIES_OBSERVATION_DIM];
 
 double power(double base, int exponent) {
     double result = 1.0;
@@ -161,6 +159,12 @@ double sumDouble(double axisArray[], int length){
     }
     return result;   
 }
+
+/* This is used as an array for intermediate results. 
+ * This is global and not given as a parameter because of a quirk in the used hardware (kin). 
+ * Change if fix is found. 
+ */
+double differencesSquared[TIME_SERIES_OBSERVATION_DIM];
 
 double absVariance(int axisArray[], int length) {
     double abs_mean = absMean(axisArray, length),
