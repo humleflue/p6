@@ -5,8 +5,8 @@
 #define EULER 2.71828
 
 double power(double base, int exponent);
-int getBiggestNumber(int axisArray[], int length);
-int getSmallestNumber(int axisArray[], int length);
+int getLargestAbsNumberAsSigned(int axisArray[], int length);
+int getSmallestAbsNumberAsSigned(int axisArray[], int length);
 double absMean(int axisArray[], int length);
 double mean(int axisArray[], int length);
 double meanDouble(double axisArray[], int length);
