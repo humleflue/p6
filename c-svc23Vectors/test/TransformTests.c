@@ -6,6 +6,7 @@
 #include "CuTest/CuTest.h"
 #include "../transform.h"
 
+#define TIME_SERIES_OBSERVATION_INIT_108_VALUES {1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3, 1, 2, 3}
 /*-------------------------------------------------------------------------*
  * Helper functions
  *-------------------------------------------------------------------------*/
@@ -85,6 +86,29 @@ void transform_transformTso_xYZShouldBeAverage(CuTest* tc)
 	CuAssertIntEquals(tc, expected, ao.observation[2]);
 }
 
+void extractXYZ_transformTso_xYZShouldBeSplitInArrays(CuTest* tc){
+	/* Arrange */
+	TimeSeriesObservation tso = {true, TIME_SERIES_OBSERVATION_INIT_108_VALUES, 0};
+	int i;
+	int x[TIME_SERIES_VECTORS_AMOUNT];
+	int y[TIME_SERIES_VECTORS_AMOUNT];
+	int z[TIME_SERIES_VECTORS_AMOUNT];
+	int expectedX[TIME_SERIES_VECTORS_AMOUNT] = {1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1,1};
+	int expectedY[TIME_SERIES_VECTORS_AMOUNT] = {2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2,2};
+	int expectedZ[TIME_SERIES_VECTORS_AMOUNT] = {3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3,3};
+
+	/* Act */
+	extractXYZ(tso, x, y, z);
+
+	/* Assert */
+	for (i = 0; i < TIME_SERIES_VECTORS_AMOUNT; i++)
+	{
+		CuAssertIntEquals(tc, expectedX[i], x[i]);
+		CuAssertIntEquals(tc, expectedY[i], y[i]);
+		CuAssertIntEquals(tc, expectedZ[i], z[i]);
+	}
+	
+}
 
 CuSuite* CuGetTransformSuite(void)
 {
@@ -94,6 +118,7 @@ CuSuite* CuGetTransformSuite(void)
 	SUITE_ADD_TEST(suite, addVectorToTimeSeriesObservation_fillUpObservations_shouldFillUpLastIndex);
 
 	SUITE_ADD_TEST(suite, transform_transformTso_xYZShouldBeAverage);
+	SUITE_ADD_TEST(suite, extractXYZ_transformTso_xYZShouldBeSplitInArrays);
 
 	return suite;
 }

@@ -2,7 +2,7 @@
 #include "predictor.h"
 
 char svc() {
-    int data[TIME_SERIES_OBSERVATION_DIM][ACCELEROMETOR_VECTOR_DIM] = {
+    int data[TIME_SERIES_VECTORS_AMOUNT][ACCELEROMETOR_VECTOR_DIM] = {
         {0, -1, 0},
         {-1, -6, -35},
         {0, 4, 32},
@@ -44,10 +44,10 @@ char svc() {
     TimeSeriesObservation timeSeriesObservation = TIME_SERIES_OBSERVATION_INIT;
     SampledObservation sampledObservation;
 
-    for(i = 0; i < TIME_SERIES_OBSERVATION_DIM; i++) {
+    for(i = 0; i < TIME_SERIES_VECTORS_AMOUNT; i++) {
         addVectorToTimeSeriesObservation(&timeSeriesObservation, data[i]);
     }
 
-    transform(timeSeriesObservation, &sampledObservation);
+    transformTo23Dimensions(timeSeriesObservation, &sampledObservation);
     return predict(sampledObservation);
 }

@@ -1,4 +1,6 @@
 #include "math.h"
+#include "types.h"
+
 
 double power(double base, int exponent) {
     double result = 1.0;
@@ -33,6 +35,162 @@ int dotProductVectors(const int *input1, const int *input2, int length) {
 
 int dotProduct3dVectors(const int input1[3], const int input2[3]) {
     return dotProductVectors((const int*)input1, (const int*)input2, 3);
+}
+
+int getLargestAbsNumberAsSigned(int axisArray[], int length){
+    int highestNumber = 0;
+    int negativeOrPositive = 1;
+    int i;
+    for (i = 0; i < length; i++)
+    {
+        int currentNumber = axisArray[i];
+        if(currentNumber > 0)
+        {
+            if (currentNumber > highestNumber)
+            {
+                highestNumber = currentNumber;
+                negativeOrPositive = 1;
+            }
+        } else
+        {
+            if (-1 * currentNumber > highestNumber)
+            {
+                highestNumber = -1 * currentNumber;
+                negativeOrPositive = -1;
+            }
+        }
+    }
+    return negativeOrPositive * highestNumber;
+}
+
+int getLargestAbsNumberAsSignedInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
+    int biggestX = getLargestAbsNumberAsSigned(xAxisArray, length),
+        biggestY = getLargestAbsNumberAsSigned(yAxisArray, length),
+        biggestZ = getLargestAbsNumberAsSigned(zAxisArray, length),
+        xyz[3];
+
+    xyz[0] = biggestX;
+    xyz[1] = biggestY;
+    xyz[2] = biggestZ;
+
+    return getLargestAbsNumberAsSigned(xyz, 3);
+}
+
+int getSmallestAbsNumberAsSignedInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
+    int smallestX = getSmallestAbsNumberAsSigned(xAxisArray, length),
+        smallestY = getSmallestAbsNumberAsSigned(yAxisArray, length),
+        smallestZ = getSmallestAbsNumberAsSigned(zAxisArray, length),
+        xyz[3];
+
+    xyz[0] = smallestX;
+    xyz[1] = smallestY;
+    xyz[2] = smallestZ;
+        
+    return getSmallestAbsNumberAsSigned(xyz, 3);
+}
+
+int getSmallestAbsNumberAsSigned(int axisArray[], int length){
+    int smallestNumber = INT_BIG;
+    int negativeOrPositive = 1;
+    int i;
+    for (i = 0; i < length; i++)
+    {
+        int currentNumber = axisArray[i];
+        if(currentNumber > 0)
+        {
+            if (currentNumber < smallestNumber)
+            {
+                smallestNumber = currentNumber;
+                negativeOrPositive = 1;
+            }
+        } else
+        {
+            if (-1 * currentNumber < smallestNumber)
+            {
+                smallestNumber = -1 * currentNumber;
+                negativeOrPositive = -1;
+            }
+        }
+    }
+    return negativeOrPositive * smallestNumber;
+}
+
+double absMean(int axisArray[], int length){
+    double result = absSum(axisArray, length);
+    return result / length;    
+}
+
+double mean(int axisArray[], int length){
+    double result = sum(axisArray, length);
+    return result / length;    
+}
+
+double meanDouble(double axisArray[], int length){
+    double result = sumDouble(axisArray, length);
+    return result / length;    
+}
+
+int absSum(int axisArray[], int length){
+    int result = 0;
+    int i;
+    for (i = 0; i < length; i++)
+    {
+        result += absValue(axisArray[i]);
+    }
+    return result;   
+}
+
+int sum(int axisArray[], int length){
+    int result = 0;
+    int i;
+    for (i = 0; i < length; i++)
+    {
+        result += axisArray[i];
+    }
+    return result;   
+}
+
+double sumDouble(double axisArray[], int length){
+    double result = 0;
+    int i;
+    for (i = 0; i < length; i++)
+    {
+        result += axisArray[i];
+    }
+    return result;   
+}
+
+/* This is used as an array for intermediate results. 
+ * This is global and not given as a parameter because of a quirk in the used hardware (kin). 
+ * Change if fix is found. 
+ */
+double differencesSquared[TIME_SERIES_OBSERVATION_DIM];
+
+double absVariance(int axisArray[], int length) {
+    double abs_mean = absMean(axisArray, length),
+           variance;
+    int i;
+    for (i = 0; i < length; i++)
+    {   
+        double difference = axisArray[i] - abs_mean;
+        differencesSquared[i] = difference * difference;
+    }
+    
+    variance = meanDouble(differencesSquared, length);
+    return variance;
+}
+
+double absStd(int axisArray[], int length) {
+    unsigned int abs_variance = (unsigned int) absVariance(axisArray, length);
+    return (double) floorSqrt(abs_variance);
+}
+
+int absValue(int input){
+    if(input < 0) {
+        return input * -1;
+    } else {
+        return input;
+    }
 }
 
 /* Returns floor of square root of x 
