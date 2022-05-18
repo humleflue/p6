@@ -43,84 +43,84 @@ void dotProduct3dVector_givenVectorsOfIntegers_expectsTheCorrectDotProduct(CuTes
 	}
 */
 
-void getBiggestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNegativeValue(CuTest* tc)
+void getLargestAbsNumberAsSigned_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNegativeValue(CuTest* tc)
 {
 	/* Arrange */
     int numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
 	int expected = -5;
 
 	/* Act */
-    int actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getLargestAbsNumberAsSigned(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
 }
 
-void getBiggestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestPositiveValue(CuTest* tc)
+void getLargestAbsNumberAsSigned_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestPositiveValue(CuTest* tc)
 {
 	/* Arrange */
     int numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3};
 	int expected = 5;
 
 	/* Act */
-    int actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getLargestAbsNumberAsSigned(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
 }
 
-void getBiggestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithBiggestAbosluteValue(CuTest* tc)
+void getLargestAbsNumberAsSigned_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithBiggestAbosluteValue(CuTest* tc)
 {
 	/* Arrange */
     int numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
 	int expected = -5;
 
 	/* Act */
-    int actual = getBiggestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getLargestAbsNumberAsSigned(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
 }
 
-void getSmallestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighestNegativeValue(CuTest* tc)
+void getSmallestAbsNumberAsSigned_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighestNegativeValue(CuTest* tc)
 {
 	/* Arrange */
     int numbers[TIME_SERIES_VECTORS_AMOUNT] = {-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-2,-3,-1,-2};
 	int expected = -1;
 
 	/* Act */
-    int actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getSmallestAbsNumberAsSigned(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
 }
 
-void getSmallestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestPositiveValue(CuTest* tc)
+void getSmallestAbsNumberAsSigned_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestPositiveValue(CuTest* tc)
 {
 	/* Arrange */
     int numbers[TIME_SERIES_VECTORS_AMOUNT] = {5,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,1,2,3,3,1,2,3,1,2};
 	int expected = 1;
 
 	/* Act */
-    int actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getSmallestAbsNumberAsSigned(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
 	CuAssertTrue(tc, expected == actual);
 }
 
-void getSmallestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue(CuTest* tc)
+void getSmallestAbsNumberAsSigned_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue(CuTest* tc)
 {
 	/* Arrange */
     int numbers[TIME_SERIES_VECTORS_AMOUNT] = {4,2,3,1,2,3,1,2,3,1,2,3,1,2,3,-5,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3,-1,-2,-3};
 	int expected = 1;
 
 	/* Act */
-    int actual = getSmallestNumber(numbers, TIME_SERIES_VECTORS_AMOUNT);
+    int actual = getSmallestAbsNumberAsSigned(numbers, TIME_SERIES_VECTORS_AMOUNT);
 
 
 	/* Assert */
@@ -337,12 +337,12 @@ CuSuite* CuGetMathSuite(void)
 {
 	CuSuite* suite = CuSuiteNew();
 
-	SUITE_ADD_TEST(suite, getBiggestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNegativeValue);
-	SUITE_ADD_TEST(suite, getBiggestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestPositiveValue);
-	SUITE_ADD_TEST(suite, getBiggestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithBiggestAbosluteValue);
-	SUITE_ADD_TEST(suite, getSmallestNumber_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighestNegativeValue);
-	SUITE_ADD_TEST(suite, getSmallestNumber_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestPositiveValue);
-	SUITE_ADD_TEST(suite, getSmallestNumber_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue);
+	SUITE_ADD_TEST(suite, getLargestAbsNumberAsSigned_givenArrayOfNegativeNumbers_ShouldReturnNumberWithLowestNegativeValue);
+	SUITE_ADD_TEST(suite, getLargestAbsNumberAsSigned_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestPositiveValue);
+	SUITE_ADD_TEST(suite, getLargestAbsNumberAsSigned_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithBiggestAbosluteValue);
+	SUITE_ADD_TEST(suite, getSmallestAbsNumberAsSigned_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighestNegativeValue);
+	SUITE_ADD_TEST(suite, getSmallestAbsNumberAsSigned_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestPositiveValue);
+	SUITE_ADD_TEST(suite, getSmallestAbsNumberAsSigned_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue);
 	SUITE_ADD_TEST(suite, absMean_givenAllPositives_shouldReturnCorrectMean);
 	SUITE_ADD_TEST(suite, absMean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean);
 	SUITE_ADD_TEST(suite, mean_givenAllPositives_shouldReturnCorrectMean);

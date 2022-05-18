@@ -91,7 +91,7 @@ int getSmallestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[],
     return getSmallestNumber(xyz, 3);
 }
 
-int getSmallestNumber(int axisArray[], int length){
+int getSmallestAbsNumberAsSigned(int axisArray[], int length){
     int smallestNumber = 999999;
     int negativeOrPositive = 1;
     int i;
