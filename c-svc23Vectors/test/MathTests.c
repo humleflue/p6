@@ -262,7 +262,7 @@ void sumDouble_givenPositiveNumbers_shouldReturnCorrectSum(CuTest* tc)
 	CuAssertDblEquals(tc, expected, actual, 0.01);
 }
 
-void getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuTest* tc)
+void getLargestAbsNumberAsSignedInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuTest* tc)
 {
 	/* Arrange */
     int x[3] = {1, 2, 3};
@@ -271,13 +271,13 @@ void getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuT
 	int expected = 5;
 
 	/* Act */
-    int actual = getBiggestNumberInRow(x, y, z, 3);
+    int actual = getLargestAbsNumberAsSignedInRow(x, y, z, 3);
 
 	/* Assert */
 	CuAssertIntEquals(tc, expected, actual);
 }
 
-void getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue(CuTest* tc)
+void getLargestAbsNumberAsSignedInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue(CuTest* tc)
 {
 	/* Arrange */
     int x[3] = {-1, -2, -3};
@@ -286,13 +286,13 @@ void getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_sho
 	int expected = -5;
 
 	/* Act */
-    int actual = getBiggestNumberInRow(x, y, z, 3);
+    int actual = getLargestAbsNumberAsSignedInRow(x, y, z, 3);
 
 	/* Assert */
 	CuAssertIntEquals(tc, expected, actual);
 }
 
-void getSmallestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithSmallestAbsoluteValue(CuTest* tc)
+void getSmallestAbsNumberAsSignedInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithSmallestAbsoluteValue(CuTest* tc)
 {
 	/* Arrange */
     int x[3] = {-1, -2, -3};
@@ -301,7 +301,7 @@ void getSmallestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_sh
 	int expected = -1;
 
 	/* Act */
-    int actual = getSmallestNumberInRow(x, y, z, 3);
+    int actual = getSmallestAbsNumberAsSignedInRow(x, y, z, 3);
 
 	/* Assert */
 	CuAssertIntEquals(tc, expected, actual);
@@ -351,9 +351,9 @@ CuSuite* CuGetMathSuite(void)
 	SUITE_ADD_TEST(suite, absSum_givenPositiveNumbers_shouldReturnCorrectSum);
 	SUITE_ADD_TEST(suite, sum_givenPositiveAndNegativeNumbers_shouldReturnCorrectSum);
 	SUITE_ADD_TEST(suite, sum_givenPositiveNumbers_shouldReturnCorrectSum);
-	SUITE_ADD_TEST(suite, getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll);
-	SUITE_ADD_TEST(suite, getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue);
-	SUITE_ADD_TEST(suite, getSmallestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithSmallestAbsoluteValue);
+	SUITE_ADD_TEST(suite, getLargestAbsNumberAsSignedInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll);
+	SUITE_ADD_TEST(suite, getLargestAbsNumberAsSignedInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue);
+	SUITE_ADD_TEST(suite, getSmallestAbsNumberAsSignedInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithSmallestAbsoluteValue);
 	SUITE_ADD_TEST(suite, absVariance_givenArrayOfPositiveNumber_shouldReturnCorrectVariance);
 	SUITE_ADD_TEST(suite, absStd_givenArrayOfPositiveNumber_shouldReturnCorrectVariance);
 	SUITE_ADD_TEST(suite, sumDouble_givenPositiveNumbers_shouldReturnCorrectSum);

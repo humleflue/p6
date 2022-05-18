@@ -3,6 +3,7 @@
 #include "types.h"
 
 #define EULER 2.71828
+#define INT_BIG 999999
 
 double power(double base, int exponent);
 int getLargestAbsNumberAsSigned(int axisArray[], int length);
@@ -13,8 +14,8 @@ double meanDouble(double axisArray[], int length);
 int absSum(int axisArray[], int length);
 int sum(int axisArray[], int length);
 double sumDouble(double axisArray[], int length);
-int getBiggestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length);
-int getSmallestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length);
+int getLargestAbsNumberAsSignedInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length);
+int getSmallestAbsNumberAsSignedInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length);
 double absVariance(int axisArray[], int length);
 double absStd(int axisArray[], int length);
 int roundDouble(double num);

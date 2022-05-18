@@ -63,7 +63,7 @@ int getLargestAbsNumberAsSigned(int axisArray[], int length){
     return negativeOrPositive * highestNumber;
 }
 
-int getBiggestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
+int getLargestAbsNumberAsSignedInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
     int biggestX = getLargestAbsNumberAsSigned(xAxisArray, length),
         biggestY = getLargestAbsNumberAsSigned(yAxisArray, length),
         biggestZ = getLargestAbsNumberAsSigned(zAxisArray, length),
@@ -76,7 +76,7 @@ int getBiggestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], 
     return getLargestAbsNumberAsSigned(xyz, 3);
 }
 
-int getSmallestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
+int getSmallestAbsNumberAsSignedInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
     int smallestX = getSmallestAbsNumberAsSigned(xAxisArray, length),
         smallestY = getSmallestAbsNumberAsSigned(yAxisArray, length),
         smallestZ = getSmallestAbsNumberAsSigned(zAxisArray, length),
@@ -90,7 +90,7 @@ int getSmallestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[],
 }
 
 int getSmallestAbsNumberAsSigned(int axisArray[], int length){
-    int smallestNumber = 999999;
+    int smallestNumber = INT_BIG;
     int negativeOrPositive = 1;
     int i;
     for (i = 0; i < length; i++)

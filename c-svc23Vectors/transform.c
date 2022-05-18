@@ -88,10 +88,10 @@ void transformTo23Dimensions(TimeSeriesObservation tso, SampledObservation *out)
     out->observation[17] = absStd(z, ACCELEROMETOR_VECTOR_DIM);
 
     /*np.max(row)*/
-    out->observation[18] = getBiggestNumberInRow(x, y, z, ACCELEROMETOR_VECTOR_DIM);
+    out->observation[18] = getLargestAbsNumberAsSignedInRow(x, y, z, ACCELEROMETOR_VECTOR_DIM);
 
     /*np.min(row)*/
-    out->observation[19] = getSmallestNumberInRow(x, y, z, ACCELEROMETOR_VECTOR_DIM);
+    out->observation[19] = getSmallestAbsNumberAsSignedInRow(x, y, z, ACCELEROMETOR_VECTOR_DIM);
 
     /*sum([abs(num) for num in row])*/
     out->observation[20] = absSum(tso.observation, TIME_SERIES_OBSERVATION_DIM);
