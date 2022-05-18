@@ -39,7 +39,7 @@ int dotProduct3dVectors(const int input1[3], const int input2[3]) {
     return dotProductVectors((const int*)input1, (const int*)input2, 3);
 }
 
-int getBiggestNumber(int axisArray[], int length){
+int getLargestAbsNumberAsSigned(int axisArray[], int length){
     int highestNumber = 0;
     int negativeOrPositive = 1;
     int i;
