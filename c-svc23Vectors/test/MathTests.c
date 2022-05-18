@@ -54,7 +54,7 @@ void getLargestAbsNumberAsSigned_givenArrayOfNegativeNumbers_ShouldReturnNumberW
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void getLargestAbsNumberAsSigned_givenArrayOfPositiveNumbers_ShouldReturnNumberWithHighestPositiveValue(CuTest* tc)
@@ -68,7 +68,7 @@ void getLargestAbsNumberAsSigned_givenArrayOfPositiveNumbers_ShouldReturnNumberW
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void getLargestAbsNumberAsSigned_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithBiggestAbosluteValue(CuTest* tc)
@@ -82,7 +82,7 @@ void getLargestAbsNumberAsSigned_givenArrayOfNegativeAndPositiveNumbers_ShouldRe
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void getSmallestAbsNumberAsSigned_givenArrayOfNegativeNumbers_ShouldReturnNumberWithHighestNegativeValue(CuTest* tc)
@@ -96,7 +96,7 @@ void getSmallestAbsNumberAsSigned_givenArrayOfNegativeNumbers_ShouldReturnNumber
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void getSmallestAbsNumberAsSigned_givenArrayOfPositiveNumbers_ShouldReturnNumberWithLowestPositiveValue(CuTest* tc)
@@ -110,7 +110,7 @@ void getSmallestAbsNumberAsSigned_givenArrayOfPositiveNumbers_ShouldReturnNumber
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void getSmallestAbsNumberAsSigned_givenArrayOfNegativeAndPositiveNumbers_ShouldReturnNumberWithSmallestAbosluteValue(CuTest* tc)
@@ -124,7 +124,7 @@ void getSmallestAbsNumberAsSigned_givenArrayOfNegativeAndPositiveNumbers_ShouldR
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void absMean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
@@ -138,7 +138,7 @@ void absMean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertDblEquals(tc, expected, actual, 0.01);
 }
 
 void absMean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
@@ -152,7 +152,7 @@ void absMean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertDblEquals(tc, expected, actual, 0.01);
 }
 
 void mean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
@@ -166,7 +166,7 @@ void mean_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertDblEquals(tc, expected, actual, 0.01);
 }
 
 void meanDouble_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
@@ -180,7 +180,7 @@ void meanDouble_givenAllPositives_shouldReturnCorrectMean(CuTest* tc)
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertDblEquals(tc, expected, actual, 0.01);
 }
 
 void mean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
@@ -194,7 +194,7 @@ void mean_givenPositiveAndNegativeNumbers_shouldReturnCorrectMean(CuTest* tc)
 
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertDblEquals(tc, expected, actual, 0.01);
 }
 
 void absSum_givenPositiveAndNegativeNumbers_shouldReturnCorrectSum(CuTest* tc)
@@ -259,7 +259,7 @@ void sumDouble_givenPositiveNumbers_shouldReturnCorrectSum(CuTest* tc)
     double actual = sumDouble(numbers, 3);
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertDblEquals(tc, expected, actual, 0.01);
 }
 
 void getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuTest* tc)
@@ -274,7 +274,7 @@ void getBiggestNumberInRow_givenRowWith3Arrays_shouldReturnBiggestValueOfAll(CuT
     int actual = getBiggestNumberInRow(x, y, z, 3);
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithBiggestAbsoluteValue(CuTest* tc)
@@ -289,7 +289,7 @@ void getBiggestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_sho
     int actual = getBiggestNumberInRow(x, y, z, 3);
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertIntEquals(tc, expected, actual);
 }
 
 void getSmallestNumberInRow_givenRowWith3ArraysWithPositiveAndNegativeNumbers_shouldReturnNumberWithSmallestAbsoluteValue(CuTest* tc)
@@ -317,7 +317,7 @@ void absVariance_givenArrayOfPositiveNumber_shouldReturnCorrectVariance(CuTest* 
     double actual = absVariance(numbers, 5);
 
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertDblEquals(tc, expected, actual, 0.01);
 }
 
 void absStd_givenArrayOfPositiveNumber_shouldReturnCorrectVariance(CuTest* tc)
@@ -329,7 +329,7 @@ void absStd_givenArrayOfPositiveNumber_shouldReturnCorrectVariance(CuTest* tc)
 	/* Act */
     double actual = (int) absStd(numbers, 5);
 	/* Assert */
-	CuAssertTrue(tc, expected == actual);
+	CuAssertDblEquals(tc, expected, actual, 0.01);
 }
 
 
