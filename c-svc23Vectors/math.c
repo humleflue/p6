@@ -66,29 +66,29 @@ int getLargestAbsNumberAsSigned(int axisArray[], int length){
 }
 
 int getBiggestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
-    int biggestX = getBiggestNumber(xAxisArray, length),
-        biggestY = getBiggestNumber(yAxisArray, length),
-        biggestZ = getBiggestNumber(zAxisArray, length),
+    int biggestX = getLargestAbsNumberAsSigned(xAxisArray, length),
+        biggestY = getLargestAbsNumberAsSigned(yAxisArray, length),
+        biggestZ = getLargestAbsNumberAsSigned(zAxisArray, length),
         xyz[3];
 
     xyz[0] = biggestX;
     xyz[1] = biggestY;
     xyz[2] = biggestZ;
 
-    return getBiggestNumber(xyz, 3);
+    return getLargestAbsNumberAsSigned(xyz, 3);
 }
 
 int getSmallestNumberInRow(int xAxisArray[], int yAxisArray[], int zAxisArray[], int length){
-    int smallestX = getSmallestNumber(xAxisArray, length),
-        smallestY = getSmallestNumber(yAxisArray, length),
-        smallestZ = getSmallestNumber(zAxisArray, length),
+    int smallestX = getSmallestAbsNumberAsSigned(xAxisArray, length),
+        smallestY = getSmallestAbsNumberAsSigned(yAxisArray, length),
+        smallestZ = getSmallestAbsNumberAsSigned(zAxisArray, length),
         xyz[3];
 
     xyz[0] = smallestX;
     xyz[1] = smallestY;
     xyz[2] = smallestZ;
         
-    return getSmallestNumber(xyz, 3);
+    return getSmallestAbsNumberAsSigned(xyz, 3);
 }
 
 int getSmallestAbsNumberAsSigned(int axisArray[], int length){
