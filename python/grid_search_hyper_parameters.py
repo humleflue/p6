@@ -2,9 +2,9 @@ import os
 import pandas as pd
 import numpy as np
 from dotenv import load_dotenv
-from sklearn.metrics import accuracy_score
+from sklearn.metrics import accuracy_score, precision_recall_fscore_support
 from typing import Final
-from SVC import SVCConfiguration, average_sampling, create_and_fit_SVC_classifier, get_train_test_split
+from SVC import SVCConfiguration, average_sampling, create_and_fit_SVC_classifier, get_train_test_split, feature_extraction
 from modules.grid_search_helper_functions import printNBestConfigs
 
 # BEST RESULT SO FAR #
@@ -37,13 +37,14 @@ def run_svm(X_train, X_test, Y_train, Y_test, conf: SVCConfiguration) -> SVCConf
     Y_pred = classifier.predict(X_test)
     accuracy = accuracy_score(Y_test.iloc[:,-1], Y_pred)
     conf.set_accuracy(accuracy)
+    conf.set_weighted(precision_recall_fscore_support(Y_test.iloc[:,-1], Y_pred, average='weighted'))
     return conf
 
 def run_grid_search_on_configurations(X_train, X_test, Y_train, Y_test):
     configs = []
     for kernel in KERNELS:
         print(kernel)
-        for margin in [1, 10, 100]:
+        for margin in SOFT_MARGIN:
             if kernel == 'linear':
                 config = SVCConfiguration(kernel, margin)
                 config = run_svm(X_train, X_test, Y_train, Y_test, config)
@@ -64,11 +65,12 @@ def run_grid_search_on_configurations(X_train, X_test, Y_train, Y_test):
                             configs.append(config)
     return configs
         
-def main(path_to_dataset="./datasets/flattened_datasets/flattened_1sec_with_broad_category.csv"):
+def main(path_to_dataset="./datasets/flattened_datasets/flattened_3.0sec_with_broad_category.csv"):
     # Setup
     df = pd.read_csv(path_to_dataset)
-    df_avg_data =  average_sampling(df)
-    X_train, X_test, Y_train, Y_test = get_train_test_split(df_avg_data)
+    #df_avg_data =  average_sampling(df)
+    df_many_features = feature_extraction(df)
+    X_train, X_test, Y_train, Y_test = get_train_test_split(df_many_features)
 
     configs = run_grid_search_on_configurations(X_train, X_test, Y_train, Y_test)
     printNBestConfigs(500, configs)
